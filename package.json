@@ -66,6 +66,5 @@
   },
   "optionalDependencies": {
     "typescript": "3.9.5"
-  },
-  "homepage": "http://brettsartain.org/hillcityreact/"
+  }
 }
