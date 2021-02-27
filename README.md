@@ -1,3 +1,3 @@
 
 
-Hill City Church REact App built using the Creative Tim Material UI Kit
+Hill City Church React App built using the Creative Tim Material UI Kit
