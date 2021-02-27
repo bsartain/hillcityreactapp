@@ -17,7 +17,7 @@
 */
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
-import { Route, Switch, HashRouter } from "react-router-dom";
+import { Route, Switch, HashRouter, Redirect } from "react-router-dom";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 // styles for this kit
@@ -119,8 +119,8 @@ ReactDOM.render(
             path="/single-sermon/:id"
             render={(props) => <SingleSermon {...props} />}
           />
-          {/* <Redirect to="/hillcityreact" />
-          <Redirect from="/" to="/hillcityreact" /> */}
+          <Redirect to="/" />
+          <Redirect from="/" to="/" />
         </Switch>
       </Switch>
       <DarkFooter />

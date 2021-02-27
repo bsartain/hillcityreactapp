@@ -16,7 +16,7 @@ function IndexHeader() {
   useEffect(() => {
 
     const getData = async () => {
-      const response = await fetch('http://hillcitysc.com/wp-json/acf/v3/posts/86')
+      const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/86')
       const data = await response.json();
       setHeaderData(data.acf)
     }
