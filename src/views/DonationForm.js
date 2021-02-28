@@ -29,7 +29,6 @@ var LoadCDScripts = function () {
 const DonationForm = () => {
     return (
         <div className="container">
-            <h4>Donation Form For Hill City</h4>
             { LoadCDScripts() }
             <div id="CustomDonationsForm"></div>
         </div>

@@ -42,11 +42,10 @@ function Give() {
                       <hr className="page-content-hr" />
                     </div>
                     <div className="container" dangerouslySetInnerHTML={{__html: page.content.rendered}} />;
-                    <DonationSection/>
+                    <DonationForm/>
                   </div>
             })
         }
-        <DonationForm/>
       </div>
     </>
   );
