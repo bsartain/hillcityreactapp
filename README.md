@@ -1,2 +1,3 @@
-# hillcityreactapp
-This is Hill City's new progressive web app
+
+
+Hill City Church React App built using the Creative Tim Material UI Kit
