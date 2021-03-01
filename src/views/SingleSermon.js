@@ -16,7 +16,7 @@ function SingleSermon() {
   const store = useContext(StoreContext);
   const [singleSermonData, setSingleSermonData] = useState([]);
   const [biblePassage, setBiblePassage] = useState([])
-  const [buttonClicked, setButtonClicked] = useState(false)
+  const [setButtonClicked] = useState(false)
 
   const history = useHistory()
   

@@ -18,6 +18,20 @@
     padding-top: 20vh;
 }
 
+.nav-tabs > .nav-item > .nav-link.active{
+    border-radius: 5px;
+    background-color: #caac5e;
+}
+
+.nav-tabs > .nav-item > .nav-link{
+    border-radius: 5px;
+    border: 1px solid #caac5e;
+}
+
+.nav-tabs{
+    padding: 25px 0rem;
+}
+
 .homepage-sections{
     .homepage-sections-service-info{
         padding: 50px;

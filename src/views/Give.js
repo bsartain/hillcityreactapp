@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js";
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
-import DonationSection from "views/DonationSection";
 import DonationForm from "views/DonationForm"
 
 function Give() {
   
   const [giveData, setGiveData] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     async function fetchData() {
       const response = await fetch('https://hillcitysc.com/wp-json/wp/v2/pages?per_page=30')
