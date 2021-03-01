@@ -2,6 +2,7 @@
 import React, { useEffect, useState, forwardRef } from 'react'
 import { esvApi } from 'utils/utils'
 import catechismData from 'data/catechismData'
+import { Link } from 'react-router-dom'
 import {
     NavItem,
     NavLink,
@@ -16,7 +17,7 @@ export const offeratory = () => {
         <h3>Offeratory</h3>
         <p>In response to what the Lord has done for us, let’s worship Him in the giving of our tithes and offerings.</p>
         <p>We do this as an expression of joy and gratitude, not obligation. Below you’ll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.</p>
-        <button className="btn btn-primary">Give Online</button>
+        <Link to="/give" className="btn btn-primary">Give Online</Link>
         <hr className="order-service-hr" />
     </div>
 }
@@ -143,7 +144,11 @@ export const setScriptureContent = (title, passage) => {
         return <div>
                     <h3>{ title }</h3>
                     { title === 'Confession Of Sin' 
-                        ? <p>You cannot out sin God’s grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your offenses toward Him……</p> 
+                        ? <p>This is the time in our service where we confess our sins before God. Cleansing and freedom begin with being honest with our sins and failures before God so that He can restore us back to Joy and peace. Take a few moments to confess sin before God. You can use this scripture to help you do that.</p> 
+                        : null 
+                    }
+                    { title === 'Assurance Of Grace' 
+                        ? <p>You cannot out sin God's grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your offenses toward Him.</p> 
                         : null 
                     }
                     <div className="order-service-div" dangerouslySetInnerHTML={{__html: passage[0].passages }} />

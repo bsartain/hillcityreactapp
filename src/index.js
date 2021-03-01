@@ -43,6 +43,7 @@ import DarkFooter from "components/Footers/DarkFooter.js"
 import FooterDrawer from 'components/Footers/FooterDrawer'
 import PaymentSuccess from "views/PaymentSuccess";
 import PaymentFailed from "views/PaymentFailed";
+import ConnectionSignup from 'views/ConnectionSignup'
 
 import { useLocalObservable } from "mobx-react";
 
@@ -118,6 +119,10 @@ ReactDOM.render(
           <Route
             path="/single-sermon/:id"
             render={(props) => <SingleSermon {...props} />}
+          />
+          <Route
+            path="/connection-signup"
+            render={(props) => <ConnectionSignup {...props} />}
           />
           <Redirect to="/" />
           <Redirect from="/" to="/" />

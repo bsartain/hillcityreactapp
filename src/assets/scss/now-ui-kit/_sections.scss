@@ -419,6 +419,9 @@
 }
 
 .live-stream-container{
+    .old-live-stream-title{
+        display: none!important;
+    }
     .order-service-container{
         .order-service-hr{
             border-top: 1px solid #eee;
@@ -431,6 +434,15 @@
             }
         }
     }
+}
+
+.woc{
+    color: #e50606;
+}
+
+.verse-num{
+    color: #757575;
+    font-weight: 800;
 }
 
 .single-sermon-container{
