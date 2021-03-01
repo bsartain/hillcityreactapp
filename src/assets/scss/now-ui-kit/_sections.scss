@@ -21,6 +21,12 @@
 .homepage-sections{
     .homepage-sections-service-info{
         padding: 50px;
+        @media (max-width: 768px) {
+            padding: 35px;
+            h2{
+                font-size: 30px;
+            }
+        }
     }
     .with-image{
         padding: 350px 0px;
@@ -32,6 +38,15 @@
         padding: 80px;
         h1{
             color: #ffffff;
+        }
+        p{
+            color: inherit;
+        }
+        @media (max-width: 768px) {
+            padding: 35px;
+            h1{
+                font-size: 30px;
+            }
         }
     }
     .with-content:nth-child(3){
