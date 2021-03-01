@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import {
   Carousel,
   CarouselItem,
@@ -61,13 +62,27 @@ const CarouselHomePage = ({headerData}) => {
       );
     });
 
+  const setHeaderText = () => {
+    const date = new Date()
+    const day = date.getDay()
+    const hours = date.getHours()
+    if(day === 0 && hours < 12){
+      return <div>
+                <h1>Join Our Live Stream</h1>
+                <Link to='/live-stream' className="btn btn-outline-primary" style={{color: '#ffffff', marginBottom: '38px', fontWeight: '600'}}>JOIN LIVESTREAM</Link>
+              </div>
+    } else {
+      return <h1>WELCOME</h1>
+    }
+  }
+
   return (
     <div className="homepage-carousel">
       <div className="homepage-carousel-title-container">
         <div className="homepage-carousel-header-content">
           <h5>HILL CITY CHURCH</h5>
           <hr className="hr-one"/>
-          <h1>WELCOME</h1>
+          { setHeaderText() }
           <h6>For the Truth, Goodness and Beauty of Jesus, For the Flourishing of Rock Hill</h6>  
         </div>
       </div>
