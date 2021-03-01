@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 import  Spinner from 'components/Spinner/Spinner'
+import { Link } from 'react-router-dom'
 
 // core components
 
@@ -31,7 +32,7 @@ function HomepageSections() {
             <h2>Sunday Gathering: 10:00AM</h2>
             <p>We are holding our Sunday morning gatherings in the Gettys Art Center in downtown Rock Hill. We ask that you bring a chair and a mask for safety reasons. There will not be refreshments served but feel free to bring your coffee and or a snack during service. Come join us as we worship.</p>
             <h2>Church Online</h2>
-            <p>You can also view our service live via Zoom by heading to our <a title="liveStream" href="https://hillcitysc.com/online-worship/">Live Stream page</a>.</p>
+            <p>You can also view our service live via Zoom by heading to our <Link to='live-stream' title="liveStream" href="https://hillcitysc.com/online-worship/">Live Stream page</Link>.</p>
           </div>
           </Col>
         </Row>
