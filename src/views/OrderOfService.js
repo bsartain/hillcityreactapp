@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState, forwardRef } from 'react'
 import { esvApi } from 'utils/utils'
+import { useHistory } from 'react-router-dom'
 import catechismData from 'data/catechismData'
 import {
     NavItem,
@@ -11,12 +12,12 @@ import {
     Container,
   } from "reactstrap";
 
-export const offeratory = () => {
+export const offeratory = (sendToGive) => {
     return <div>
         <h3>Offeratory</h3>
         <p>In response to what the Lord has done for us, let’s worship Him in the giving of our tithes and offerings.</p>
         <p>We do this as an expression of joy and gratitude, not obligation. Below you’ll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.</p>
-        <a href="https://app.hillcitysc.com/#/give" className="btn btn-primary">Give Online</a>
+        <button onClick={sendToGive} className="btn btn-primary">Give Online</button>
         <hr className="order-service-hr" />
     </div>
 }
@@ -178,6 +179,12 @@ let songThreeService
 let benedictionService
 
 export const OrderOfService = forwardRef(({acfData, printLogo}, ref) => {
+
+    const history = useHistory()
+
+    const sendToGive = () => {
+        history.push('/give')
+    }
     
     const [callToWorship, setCallToWorship] = useState([])
     const [confession, setConfession] = useState([])
@@ -265,7 +272,7 @@ export const OrderOfService = forwardRef(({acfData, printLogo}, ref) => {
                             { songOneService }
                             { confessionOfSinService }
                             { assuranceOfGraceService }
-                            { printLogo ? null : offeratory() }
+                            { printLogo ? null : offeratory(sendToGive) }
                             { songTwoService }
                             { scriptureReadingService }
                             { preacherService }
