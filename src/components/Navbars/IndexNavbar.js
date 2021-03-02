@@ -86,13 +86,13 @@ function IndexNavbar() {
                 <Link to="/faith" className="nav-link">Our Faith</Link>
               </NavItem>
               <NavItem>
+                <Link to="/sermons" className="nav-link">Sermons</Link>
+              </NavItem>
+              <NavItem>
                 <Link to="/live-stream" className="nav-link">Live Stream</Link>
               </NavItem>
               <NavItem>
                 <Link to="/contact" className="nav-link">Contact</Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/sermons" className="nav-link">Sermons</Link>
               </NavItem>
               <NavItem>
                 <Link to="/give" className="nav-link">Give</Link>

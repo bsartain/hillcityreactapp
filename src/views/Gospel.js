@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import PageHeader from "components/Headers/PageHeader.js";
+import PageHeader from "components/Headers/PageHeader.js"
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
+import { RefTagger } from 'react-reftagger'
 
 function Gospel() {
   
@@ -34,6 +35,7 @@ function Gospel() {
           ? <SpinnerFullPage/>
           : aboutData.filter((page) => page.id === 8497).map((page, index) => {
                 return <div key={index}>
+                        <RefTagger/>
                         <PageHeader headerData={page}/>
                         <div className="page-content-title">
                           <h2 className="container">{page.title.rendered}</h2>

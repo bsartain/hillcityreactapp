@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js"
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
+import { RefTagger } from 'react-reftagger'
 
 function Faith() {
   
@@ -34,6 +35,7 @@ function Faith() {
           ? <SpinnerFullPage/>
           : aboutData.filter((page) => page.id === 7674).map((page, index) => {
                 return <div key={index}>
+                        <RefTagger/>
                         <PageHeader headerData={page}/>
                         <div className="page-content-title">
                           <h2 className="container">{page.title.rendered}</h2>

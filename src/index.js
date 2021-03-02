@@ -69,16 +69,20 @@ ReactDOM.render(
         <Switch>
           <Route exact={true} path="/" render={(props) => <Index {...props} />} />
           <Route
-            path="/about"
-            render={(props) => <About {...props} />}
-          />
-          <Route
             path="/gospel"
             render={(props) => <Gospel {...props} />}
           />
           <Route
+            path="/about"
+            render={(props) => <About {...props} />}
+          />
+          <Route
             path="/faith"
             render={(props) => <Faith {...props} />}
+          />
+          <Route
+            path="/sermons"
+            render={(props) => <Sermons {...props} />}
           />
           <Route
             path="/contact"
@@ -91,10 +95,6 @@ ReactDOM.render(
           <Route
             path="/give"
             render={(props) => <Give {...props} />}
-          />
-          <Route
-            path="/sermons"
-            render={(props) => <Sermons {...props} />}
           />
           <Route
             path="/nucleo-icons"
