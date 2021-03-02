@@ -10,6 +10,7 @@ export const MetaDecorator = ({title, description, image, url}) => {
                 <meta property="og:description" content={ description }/>
                 <meta property="og:image" content={ image }/>
                 <meta property="og:url" content={ url }/>
+                <meta property="fb:app_id" content="1004092133118810" />
                 {/* Twitter Meta Tags */}
                 <meta name="twitter:title" content={`${ title } | Hill City Church`}/>
                 <meta name="twitter:description" content={ description }/>
