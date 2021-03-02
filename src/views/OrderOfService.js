@@ -2,7 +2,6 @@
 import React, { useEffect, useState, forwardRef } from 'react'
 import { esvApi } from 'utils/utils'
 import catechismData from 'data/catechismData'
-import { Link } from 'react-router-dom'
 import {
     NavItem,
     NavLink,
@@ -17,7 +16,7 @@ export const offeratory = () => {
         <h3>Offeratory</h3>
         <p>In response to what the Lord has done for us, let’s worship Him in the giving of our tithes and offerings.</p>
         <p>We do this as an expression of joy and gratitude, not obligation. Below you’ll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.</p>
-        <a to="https://app.hillcitysc.com/#/give" className="btn btn-primary">Give Online</a>
+        <a href="https://app.hillcitysc.com/#/give" className="btn btn-primary">Give Online</a>
         <hr className="order-service-hr" />
     </div>
 }
