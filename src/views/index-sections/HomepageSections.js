@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import  Spinner from 'components/Spinner/Spinner'
 import { Link } from 'react-router-dom'
+import { MetaDecorator } from "utils/utils";
 
 // core components
 
@@ -25,6 +26,12 @@ function HomepageSections() {
 
   return (
     <div className="homepage-sections">
+      <MetaDecorator 
+        title={'Welcome to Hill City Church'} 
+        description={'Hill City Church is about the Truth, Goodness and Beauty of Jesus For the Flourishing of Rock Hill'} 
+        image={'https://hillcitysc.com/wp-content/uploads/2018/07/IMG_0959.jpg'} 
+        url={'https://app.hillcitysc.com/#/'}
+      />
       <Container className="homepage-sections-service-info">
         <Row>
           <Col md="12">

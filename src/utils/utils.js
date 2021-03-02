@@ -1,4 +1,23 @@
-// Calls the ESV Bible API
+import React from "react";
+import { Helmet } from "react-helmet";
+
+
+export const MetaDecorator = ({title, description, image, url}) => {
+    return <Helmet>
+                {/* Facebook Meta Tags */}
+                <meta charSet="utf-8" />
+                <meta property="og:title" content={`${ title } | Hill City Church`}/>
+                <meta property="og:description" content={ description }/>
+                <meta property="og:image" content={ image }/>
+                <meta property="og:url" content={ url }/>
+                {/* Twitter Meta Tags */}
+                <meta name="twitter:title" content={`${ title } | Hill City Church`}/>
+                <meta name="twitter:description" content={ description }/>
+                <meta name="twitter:image" content={ image }/>
+                <meta name="twitter:card" content={ url }></meta>
+            </Helmet>   
+}
+
 export const esvApi = async(verse) => {
 
     const url = `https://api.esv.org/v3/passage/html/?q=${verse}&include-footnotes=false&include-audio-link=false&include-headings=false&include-short-copyright=false`
