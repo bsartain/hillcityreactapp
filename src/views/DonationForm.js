@@ -19,7 +19,7 @@ var LoadCDScripts = function () {
         loadingText: 'Loading Secure Form...',
         paymentVersion: 2, /*  1: for modal payment window. 2: for inline payment with Google/Apple Pay options */
         baseUrl: 'https://api.customdonations.com',
-        mode: 'test', /* change to 'test' to run in test mode. Use card 4242 4242 4242 4242 for testing. */
+        mode: 'live', /* change to 'test' to run in test mode. Use card 4242 4242 4242 4242 for testing. */
       });
     };
     cdscript.src = "https://api.customdonations.com/v1/js/form-builder.min.js?v=" + new Date().getTime();
