@@ -16,7 +16,6 @@
 
 */
 import React, { createContext } from "react";
-import ReactDOM from "react-dom";
 import { Route, Switch, HashRouter, Redirect } from "react-router-dom";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
@@ -46,6 +45,7 @@ import PaymentFailed from "views/PaymentFailed";
 import ConnectionSignup from 'views/ConnectionSignup'
 
 import { useLocalObservable } from "mobx-react";
+import { hydrate, render } from "react-dom";
 
 export const StoreContext = createContext();
 
@@ -61,79 +61,83 @@ const StoreProvider = ({ children }) => {
   );
 };
 
-ReactDOM.render(
-  <StoreProvider>
-    <HashRouter>
-      <IndexNavbar />
-      <Switch>
-        <Switch>
-          <Route exact={true} path="/" render={(props) => <Index {...props} />} />
-          <Route
-            path="/gospel"
-            render={(props) => <Gospel {...props} />}
-          />
-          <Route
-            path="/about"
-            render={(props) => <About {...props} />}
-          />
-          <Route
-            path="/faith"
-            render={(props) => <Faith {...props} />}
-          />
-          <Route
-            path="/sermons"
-            render={(props) => <Sermons {...props} />}
-          />
-          <Route
-            path="/contact"
-            render={(props) => <Contact {...props} />}
-          />
-          <Route
-            path="/live-stream"
-            render={(props) => <LiveStream {...props} />}
-          />
-          <Route
-            path="/give"
-            render={(props) => <Give {...props} />}
-          />
-          <Route
-            path="/nucleo-icons"
-            render={(props) => <NucleoIcons {...props} />}
-          />
-          <Route
-            path="/landing-page"
-            render={(props) => <LandingPage {...props} />}
-          />
-          <Route
-            path="/profile-page"
-            render={(props) => <ProfilePage {...props} />}
-          />
-          <Route
-            path="/payment-success"
-            render={(props) => <PaymentSuccess {...props} />}
-          />
-          <Route
-            path="/payment-failed"
-            render={(props) => <PaymentFailed {...props} />}
-          />
-          <Route
-            path="/single-sermon/:id"
-            render={(props) => <SingleSermon {...props} />}
-          />
-          <Route
-            path="/connection-signup"
-            render={(props) => <ConnectionSignup {...props} />}
-          />
-          <Redirect to="/" />
-          <Redirect from="/" to="/" />
-        </Switch>
-      </Switch>
-      <DarkFooter />
-      <FooterDrawer />
-    </HashRouter>
-  </StoreProvider>,
-  document.getElementById("root")
-);
+const APP = <StoreProvider>
+              <HashRouter>
+                <IndexNavbar />
+                <Switch>
+                  <Switch>
+                    <Route exact={true} path="/" render={(props) => <Index {...props} />} />
+                    <Route
+                      path="/gospel"
+                      render={(props) => <Gospel {...props} />}
+                    />
+                    <Route
+                      path="/about"
+                      render={(props) => <About {...props} />}
+                    />
+                    <Route
+                      path="/faith"
+                      render={(props) => <Faith {...props} />}
+                    />
+                    <Route
+                      path="/sermons"
+                      render={(props) => <Sermons {...props} />}
+                    />
+                    <Route
+                      path="/contact"
+                      render={(props) => <Contact {...props} />}
+                    />
+                    <Route
+                      path="/live-stream"
+                      render={(props) => <LiveStream {...props} />}
+                    />
+                    <Route
+                      path="/give"
+                      render={(props) => <Give {...props} />}
+                    />
+                    <Route
+                      path="/nucleo-icons"
+                      render={(props) => <NucleoIcons {...props} />}
+                    />
+                    <Route
+                      path="/landing-page"
+                      render={(props) => <LandingPage {...props} />}
+                    />
+                    <Route
+                      path="/profile-page"
+                      render={(props) => <ProfilePage {...props} />}
+                    />
+                    <Route
+                      path="/payment-success"
+                      render={(props) => <PaymentSuccess {...props} />}
+                    />
+                    <Route
+                      path="/payment-failed"
+                      render={(props) => <PaymentFailed {...props} />}
+                    />
+                    <Route
+                      path="/single-sermon/:id"
+                      render={(props) => <SingleSermon {...props} />}
+                    />
+                    <Route
+                      path="/connection-signup"
+                      render={(props) => <ConnectionSignup {...props} />}
+                    />
+                    <Redirect to="/" />
+                    <Redirect from="/" to="/" />
+                  </Switch>
+                </Switch>
+                <DarkFooter />
+                <FooterDrawer />
+              </HashRouter>
+            </StoreProvider>
+
+const rootElement = document.getElementById("root");
+if (rootElement.hasChildNodes()) {
+  hydrate(APP, rootElement);
+} else {
+  render(APP, rootElement);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
