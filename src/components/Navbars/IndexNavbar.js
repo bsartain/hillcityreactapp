@@ -38,7 +38,7 @@ function IndexNavbar() {
   });
   return (
     <>
-      {collapseOpen ? (
+      {/* {collapseOpen ? (
         <div
           id="bodyClick"
           onClick={() => {
@@ -46,7 +46,7 @@ function IndexNavbar() {
             setCollapseOpen(false);
           }}
         />
-      ) : null}
+      ) : null} */}
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
