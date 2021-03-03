@@ -77,7 +77,7 @@ function LiveStream() {
                     <div className="page-content-title">
                       <h2 className="container">{page.title.rendered}</h2>
                       <hr className="page-content-hr" />
-                      <h3>WELCOME! OUR SERVICE WILL BEGIN AT 10:00 AM ON { sundayDate }.</h3>
+                      <h3>WELCOME! OUR SERVICE WILL BEGIN AT 10:00 AM ON { sundayDate }</h3>
                     </div>
                     <div className="container" dangerouslySetInnerHTML={{__html: page.content.rendered}} />
                     <div className="container">
