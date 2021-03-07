@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js"
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
 import { RefTagger } from 'react-reftagger'
 
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
+ 
 function Gospel() {
   
-  const [aboutData, setAboutData] = useState([]);
+  const store = useContext(StoreContext);
 
   useEffect(() => {
-
-    async function fetchData() {
-      const response = await fetch('https://hillcitysc.com/wp-json/wp/v2/pages?per_page=30')
-      const myData = await response.json()
-      setAboutData(myData)
-    }
-    fetchData()
-
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -28,12 +23,13 @@ function Gospel() {
     };
     
   }, []);
-  return (
+
+  return useObserver(() => (
     <>
       <div className="wrapper page-content-container">
-        {aboutData.length === 0
+        {store.pagesData.length === 0
           ? <SpinnerFullPage/>
-          : aboutData.filter((page) => page.id === 8497).map((page, index) => {
+          : store.pagesData.filter((page) => page.id === 8497).map((page, index) => {
                 return <div key={index}>
                         <RefTagger/>
                         <PageHeader headerData={page}/>
@@ -47,7 +43,7 @@ function Gospel() {
         }
       </div>
     </>
-  );
+  ))
 }
 
 export default Gospel;

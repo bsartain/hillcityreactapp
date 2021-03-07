@@ -9,8 +9,7 @@ import {
     Nav,
     TabContent,
     TabPane,
-    Container,
-  } from "reactstrap";
+  } from "reactstrap"
 
 export const offeratory = (sendToGive) => {
     return <div>
@@ -202,91 +201,90 @@ export const OrderOfService = forwardRef(({acfData, printLogo}, ref) => {
             esvApi(item.benediction_verse).then(verseData => setBenediction([verseData]))
         })
         window.scrollTo(0, 0)
+        
     }, [acfData])
 
     return (
         <div className="order-service-container">
-            <Container>
-                  <Nav role="tablist" tabs>
-                    <NavItem>
-                      <NavLink
-                        className={iconPills === "1" ? "active" : ""}
-                        href="#pablo"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setIconPills("1");
-                        }}
-                      >
-                        Order Of Service
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={iconPills === "2" ? "active" : ""}
-                        href="#pablo"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setIconPills("2");
-                        }}
-                      >
-                        Announcements
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                  <TabContent
-                    activeTab={"iconPills" + iconPills}
-                  >
-                    <TabPane tabId="iconPills1">
-                        {acfData.length !== 0  
-                            ? acfData.map((item, index) => {
-                                callToWorshipService = setScriptureContent('Call To Worship', callToWorship)
-                                songOneService = setSongContent(item.song_one_title, item.song_one_lyrics)
-                                confessionOfSinService = setScriptureContent('Confession Of Sin', confession)
-                                assuranceOfGraceService = setScriptureContent('Assurance Of Grace', assurance)
-                                songTwoService = setSongContent(item.song_two_title, item.song_two_lyrics)
-                                scriptureReadingService = setScriptureContent('Scripture Reading', scripture)
-                                preacherService = <h3>Sermon: {item.preacher}<hr className="order-service-hr" /></h3>
-                                catechismService = catechismQuestion(acfData, catechismData)
-                                songThreeService = setSongContent(item.song_three_title, item.song_three_lyrics)
-                                benedictionService = setScriptureContent('Benediction', benediction)
-                            })
-                            : null
-                        }
-                        <div className="print-order-service" ref={ref}>
-                            {printLogo
-                                ? <div style={{ 
-                                    display:'flex', 
-                                    margin: '25px 0px', 
-                                    justifyContent: 'center',
-                                    borderBottom: '1px solid #eeeeee',
-                                    paddingBottom: '39px',
-                                    marginBottom: '39px'
-                                }}>
-                                    <img src="https://hillcitysc.com/wp-content/uploads/2021/02/HC-print-masthead-logo-e1612377440345.png" alt="Hill City Church: Rock Hill SC"/>
-                                </div>
-                                : null
-                            }
-                            
-
-                            { callToWorshipService }
-                            { songOneService }
-                            { confessionOfSinService }
-                            { assuranceOfGraceService }
-                            { printLogo ? null : offeratory(sendToGive) }
-                            { songTwoService }
-                            { scriptureReadingService }
-                            { preacherService }
-                            { catechismService }
-                            { songThreeService }
-                            { benedictionService }
-                            { printLogo ? null : miscellaneous(acfData) }
+            <Nav role="tablist" tabs>
+            <NavItem>
+                <NavLink
+                className={iconPills === "1" ? "active" : ""}
+                href="#pablo"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setIconPills("1");
+                }}
+                >
+                Order Of Service
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink
+                className={iconPills === "2" ? "active" : ""}
+                href="#pablo"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setIconPills("2");
+                }}
+                >
+                Announcements
+                </NavLink>
+            </NavItem>
+            </Nav>
+            <TabContent
+            activeTab={"iconPills" + iconPills}
+            >
+            <TabPane tabId="iconPills1">
+                {acfData.length !== 0  
+                    ? acfData.map((item, index) => {
+                        callToWorshipService = setScriptureContent('Call To Worship', callToWorship)
+                        songOneService = setSongContent(item.song_one_title, item.song_one_lyrics)
+                        confessionOfSinService = setScriptureContent('Confession Of Sin', confession)
+                        assuranceOfGraceService = setScriptureContent('Assurance Of Grace', assurance)
+                        songTwoService = setSongContent(item.song_two_title, item.song_two_lyrics)
+                        scriptureReadingService = setScriptureContent('Scripture Reading', scripture)
+                        preacherService = <h3>Sermon: {item.preacher}<hr className="order-service-hr" /></h3>
+                        catechismService = catechismQuestion(acfData, catechismData)
+                        songThreeService = setSongContent(item.song_three_title, item.song_three_lyrics)
+                        benedictionService = setScriptureContent('Benediction', benediction)
+                    })
+                    : null
+                }
+                <div className="print-order-service" ref={ref}>
+                    {printLogo
+                        ? <div style={{ 
+                            display:'flex', 
+                            margin: '25px 0px', 
+                            justifyContent: 'center',
+                            borderBottom: '1px solid #eeeeee',
+                            paddingBottom: '39px',
+                            marginBottom: '39px'
+                        }}>
+                            <img src="https://hillcitysc.com/wp-content/uploads/2021/02/HC-print-masthead-logo-e1612377440345.png" alt="Hill City Church: Rock Hill SC"/>
                         </div>
-                    </TabPane>
-                    <TabPane tabId="iconPills2">
-                        { announcements(acfData) }
-                    </TabPane>
-                  </TabContent>
-        </Container>
+                        : null
+                    }
+                    
+
+                    { callToWorshipService }
+                    { songOneService }
+                    { confessionOfSinService }
+                    { assuranceOfGraceService }
+                    { printLogo ? null : offeratory(sendToGive) }
+                    { songTwoService }
+                    { scriptureReadingService }
+                    { preacherService }
+                    { catechismService }
+                    { songThreeService }
+                    { benedictionService }
+                    { printLogo ? null : miscellaneous(acfData) }
+                </div>
+            </TabPane>
+            <TabPane tabId="iconPills2">
+                { announcements(acfData) }
+            </TabPane>
+            </TabContent>
         </div>
     )
 })

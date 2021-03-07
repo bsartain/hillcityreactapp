@@ -5,6 +5,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import { useObserver } from 'mobx-react'
 import { StoreContext } from 'index'
 import { setPreacher } from 'views/SermonContent' 
+import { runInAction } from "mobx";
 
 function FooterDrawer() {
 
@@ -35,6 +36,12 @@ function FooterDrawer() {
     const setMediaPlayerRemove = mediaPlayerHeight === '100%'
         ? { marginRight: '2px' }
         : { marginRight: '25px' }
+
+    const setTheMediaPlayer = () => {
+        runInAction(() => {
+            store.mediaPlayerIsDisplayed = false
+        })
+    } 
 
     return useObserver(() => (
         <>
@@ -73,7 +80,7 @@ function FooterDrawer() {
                                     customAdditionalControls={[]}
                                 />
 
-                                <div className="media-player-remove" onClick={() => store.mediaPlayerIsDisplayed = false} style={ setMediaPlayerRemove }>
+                                <div className="media-player-remove" onClick={() => setTheMediaPlayer()} style={ setMediaPlayerRemove }>
                                     <i className="now-ui-icons ui-1_simple-remove"></i>
                                 </div>
                             </div>

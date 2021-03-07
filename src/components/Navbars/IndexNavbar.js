@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -10,12 +12,40 @@ import {
   Nav,
   Container,
 } from "reactstrap";
+import { runInAction } from "mobx";
 
 function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
-  const [collapseOpen, setCollapseOpen] = React.useState(false);
-  const [logo, setLogo] = React.useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png')
-  React.useEffect(() => {
+  
+  const store = useContext(StoreContext)
+
+  const [navbarColor, setNavbarColor] = useState("navbar-transparent");
+  const [collapseOpen, setCollapseOpen] = useState(false);
+  const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png')
+
+  useEffect(() => {
+
+    async function getPageContent(){
+        
+        const pagesDataResponse = await store.getPagesData
+        const pagesData = await pagesDataResponse
+        runInAction(() => {
+          store.pagesData = pagesData
+        });
+
+        const homePageDataResponse = await store.getHomePageData
+        const homePageData = await homePageDataResponse
+        runInAction(() => {
+          store.homePageData = homePageData
+        });
+
+        const homepagePageDataResponse = await store.getHomePageData
+        const homepagePageData = await homepagePageDataResponse 
+        runInAction(() => {
+          store.homePageData = homepagePageData
+        });
+    }
+    getPageContent()
+    
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
@@ -36,7 +66,7 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
-  return (
+  return useObserver(() => (
     <>
       {/* {collapseOpen ? (
         <div
@@ -92,6 +122,9 @@ function IndexNavbar() {
                 <Link to="/live-stream" className="nav-link">Live Stream</Link>
               </NavItem>
               <NavItem>
+                <Link to="/devotional" className="nav-link">Devotional</Link>
+              </NavItem>
+              <NavItem>
                 <Link to="/contact" className="nav-link">Contact</Link>
               </NavItem>
               <NavItem>
@@ -112,7 +145,7 @@ function IndexNavbar() {
         </Container>
       </Navbar>
     </>
-  );
+  ))
 }
 
 export default IndexNavbar;

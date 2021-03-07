@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js";
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
 import emailjs from 'emailjs-com';
 import { Alert, Container } from "reactstrap";
 
-function Faith() {
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
+
+function Contact() {
   
-  const [aboutData, setAboutData] = useState([])
   const [emailSubmitted, setEmailSubmitted] = useState('')
   const [alert1, setAlert1] = useState(true);
   const [alert2, setAlert2] = useState(true);
 
-  React.useEffect(() => {
+  const store = useContext(StoreContext)
 
-    async function fetchData() {
-      const response = await fetch('https://hillcitysc.com/wp-json/wp/v2/pages?per_page=30')
-      const myData = await response.json()
-      setAboutData(myData)
-    }
-    fetchData()
+  useEffect(() => {
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -87,12 +84,12 @@ function Faith() {
     }
   }
 
-  return (
+  return useObserver(() => (
     <>
       <div className="wrapper page-content-container">
-        {aboutData.length === 0
+        {store.pagesData.length === 0
           ? <SpinnerFullPage/>
-          : aboutData.filter((page) => page.id === 41).map((page, index) => {
+          : store.pagesData.filter((page) => page.id === 41).map((page, index) => {
               return <div key={index}>
                       <PageHeader headerData={page}/>
                       <div className="page-content-title">
@@ -139,7 +136,7 @@ function Faith() {
         }
       </div>
     </>
-  );
+  ))
 }
 
-export default Faith;
+export default Contact;

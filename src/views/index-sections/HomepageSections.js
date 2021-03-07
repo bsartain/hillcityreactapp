@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap"
 import  Spinner from 'components/Spinner/Spinner'
 import { Link } from 'react-router-dom'
-import { MetaDecorator } from "utils/utils";
+import { MetaDecorator } from "utils/utils"
+
+
+import { StoreContext } from 'index'
+import { useObserver } from 'mobx-react'
 
 // core components
 
 function HomepageSections() {
-
-  const [homeSections, setHomeSections] = useState()
+  
+  const store = useContext(StoreContext)
 
   useEffect(() => {
 
-    async function fetchData(){
-      const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/86');
-      const data = await response.json()
-      setHomeSections(data.acf)
-    }
-    fetchData()
+    window.scroll(0, 0)
 
   }, [])
 
-
-  return (
+  return useObserver(() => (
     <div className="homepage-sections">
       <MetaDecorator 
         title={'Welcome to Hill City Church'} 
@@ -47,9 +45,9 @@ function HomepageSections() {
       <div>
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13085.041201354099!2d-81.0258453!3d34.9250082!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x64f7a6109e565477!2sTom%20S.%20Gettys%20Art%20Center!5e0!3m2!1sen!2sus!4v1603761252934!5m2!1sen!2sus" width="100%" height="450" frameBorder="0" style={{ border: 0 }} allowFullScreen="" aria-hidden="false" tabIndex="0" title="Hill City Church Map"></iframe>
       </div>
-      {!homeSections
+      {store.homePageData.length === 0
           ? <Spinner/>
-          : homeSections.homepage.map((item, index) => {
+          : store.homePageData.acf.homepage.map((item, index) => {
             const sectionStyles= {
               background: "url(" + item.image + ")",
               backgroundColor: `${item.background_color}`,
@@ -68,7 +66,7 @@ function HomepageSections() {
           })
         }
     </div>
-  );
+  ))
 }
 
 export default HomepageSections;

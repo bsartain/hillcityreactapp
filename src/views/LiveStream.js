@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useContext } from "react"
 
 import PageHeader from "components/Headers/PageHeader.js"
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
@@ -6,31 +6,39 @@ import { OrderOfService } from "views/OrderOfService"
 import { nextSundaysDate } from "utils/utils"
 import ReactToPrint from 'react-to-print'
 
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
+import { runInAction, toJS } from 'mobx'
+
 function LiveStream() {
+
+  const ref = useRef(true);
+
+  const store = useContext(StoreContext);
   
-  const [liveStreamData, setLiveStreamData] = useState([])
-  const [acfData, setAcfData] = useState([])
   const [sundayDate, setSundayDate] = useState('')
   const [printLogo, setPrintLogo] = useState(false)
 
-  const ref = useRef();
-
   useEffect(() => {
+    
+    // async function fetchLiveStreamData(){
+    //   const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
+    //   const myData = await response.json()
+    //   setAcfData([myData.acf])
 
-    async function fetchPageData() {
-      const response = await fetch('https://hillcitysc.com/wp-json/wp/v2/pages?per_page=30')
-      const myData = await response.json()
-      setLiveStreamData(myData)
+    // }
+    // fetchLiveStreamData()
+
+    async function getOrderOfService(){
+      console.log('ORDER USE EFFECT')
+      const orderOfServiceDataResponse = await store.getSermonData('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
+      const orderOfServiceData = await orderOfServiceDataResponse 
+      const { acf } = orderOfServiceData
+      runInAction(() => {
+        store.orderOfServiceData = [acf]
+      });
     }
-    fetchPageData()
-
-    async function fetchLiveStreamData(){
-      const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
-      const myData = await response.json()
-      setAcfData([myData.acf])
-
-    }
-    fetchLiveStreamData()
+    getOrderOfService()
 
     async function getSundaysDate(){
       const thisSundaysDate = await nextSundaysDate()
@@ -46,8 +54,10 @@ function LiveStream() {
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
+      ref.current = false
     };
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pageStyle = `
@@ -66,21 +76,21 @@ function LiveStream() {
   }
 `;
 
-  return (
+  return useObserver(() => (
     <>
       <div className="wrapper page-content-container live-stream-container">
-        {liveStreamData.length === 0
+        {store.pagesData.length === 0
           ? <SpinnerFullPage/>
-          : liveStreamData.filter((page) => page.id === 8857).map((page, index) => {
+          : store.pagesData.filter((page) => page.id === 8857).map((page, index) => {
             return <div key={index}>
                     <PageHeader headerData={page}/>
-                    <div className="page-content-title">
+                    <div className="page-content-title container">
                       <h2 className="container">{page.title.rendered}</h2>
                       <hr className="page-content-hr" />
                       <h3>WELCOME! OUR SERVICE WILL BEGIN AT 10:00 AM ON { sundayDate }</h3>
                     </div>
                     <div className="container" dangerouslySetInnerHTML={{__html: page.content.rendered}} />
-                    <div className="container">
+                    <div className="container react-print-container">
                       <ReactToPrint
                         trigger={() => <button className="btn btn-primary">
                                             <i className="now-ui-icons files_paper"></i> Print Order Of Service
@@ -91,9 +101,10 @@ function LiveStream() {
                         onAfterPrint={() => setPrintLogo(false)}
                         pageStyle={pageStyle}
                       />
-                      {acfData.length === 0
+                      { console.log('STORE ORDER: ', toJS(store.orderOfServiceData)) }
+                      {store.orderOfServiceData.length === 0
                         ? null
-                        : <OrderOfService acfData={acfData} ref={ref} printLogo={printLogo}/>
+                        : <OrderOfService acfData={store.orderOfServiceData} ref={ref} printLogo={printLogo}/>
                       }
                     </div>
                   </div>
@@ -101,7 +112,7 @@ function LiveStream() {
         }
       </div>
     </>
-  );
+  ))
 }
 
 export default LiveStream;

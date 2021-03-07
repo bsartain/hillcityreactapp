@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import IndexHeader from "components/Headers/IndexHeader.js";
 import HomePageSection from './index-sections/HomepageSections';
+import SpinnerFullPage from "components/Spinner/SpinnerFullPage"
+
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
 
 function Index() {
-  
-  const [headerData, setHeaderData] = useState([]);
 
-  React.useEffect(() => {
+  const store = useContext(StoreContext)
 
-    async function fetchData() {
-      const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/86')
-      const myData = await response.json()
-      setHeaderData(myData.acf)
-    }
-    fetchData()
+  useEffect(() => {
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -27,14 +24,17 @@ function Index() {
     };
     
   }, []);
-  return (
+  return useObserver(() => (
     <>
-      <div className="wrapper">
-        <IndexHeader headerData={headerData}/>
-        <HomePageSection/>
-      </div>
+    {store.homePageData.length === 0
+      ? <SpinnerFullPage/>
+      : <div className="wrapper">
+          <IndexHeader headerData={store.homePageData}/>
+          <HomePageSection/>
+        </div>
+    }
     </>
-  );
+  ))
 }
 
 export default Index;

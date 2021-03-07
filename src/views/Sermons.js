@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js";
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
 import { SermonContent } from 'views/SermonContent'
 import { Pagination } from 'views/Pagination'
+import SermonFilter from 'views/index-sections/SermonFilter'
+
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
+import { runInAction } from 'mobx'
 
 function Sermons() {
-  
-  const [sermonData, setSermonData] = useState([]);
-  const [loading, setLoading] = useState(false)
+
+  const store = useContext(StoreContext);
+
+  const [loading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(12)
 
-
-
   useEffect(() => {
 
-    async function fetchData() {
-      setLoading(true)
-      const response = await fetch('https://hillcitysc.com//wp-json/wp/v2/wpfc_sermon?per_page=100')
-      const myData = await response.json()
-      setSermonData(myData)
-      setLoading(false)
+    async function getSermonPageData(){
+      const sermonPageDataResponse = await store.getSermonData('https://hillcitysc.com//wp-json/wp/v2/wpfc_sermon?per_page=100')
+      const sermonPageData = await sermonPageDataResponse 
+      runInAction(() => {
+        store.sermonData = sermonPageData
+      });
     }
-    fetchData()
+    getSermonPageData()
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -35,48 +39,56 @@ function Sermons() {
       document.body.classList.remove("sidebar-collapse");
     };
     
-  }, []);
+  }, [store]);
+  
+  let currentSermons
 
-  const indexOfLastSermon = currentPage * postsPerPage;
-  const indexOfFirstSermon = indexOfLastSermon - postsPerPage;
-  const currentSermons = sermonData.slice(indexOfFirstSermon, indexOfLastSermon)
+  if(store && store.sermonData && store.sermonData.length > 0){
+    const indexOfLastSermon = currentPage * postsPerPage;
+    const indexOfFirstSermon = indexOfLastSermon - postsPerPage;
+    currentSermons = store.sermonData.slice(indexOfFirstSermon, indexOfLastSermon)
+  }
 
   const paginate = (number) => setCurrentPage(number)
 
-  return (
+  return useObserver(() => (
     <>
+      {!store || !store.sermonData || store.sermonData.length === 0
+        ? <SpinnerFullPage/>
+        : null
+      }
       <div className="wrapper page-content-container">
-        {sermonData.length === 0
-          ? <SpinnerFullPage/>
-          : <div>
-                <PageHeader headerData={null} sermonHeaderData={sermonData[0]}/>
-                <div className="page-content-title">
-                  <h2 className="container">Current Sermons</h2>
-                  <hr className="page-content-hr" />
-                </div>
-                {/* <div className="container" dangerouslySetInnerHTML={{__html: '<h2>Hello World</h2>' }} />; */}
-            </div>
-        }
-        {/* {sermonData.length === 0
-          ? <SpinnerFullPage/>
-          : sermonData.filter((page) => page.id === 12).map((page, index) => {
-            return <div key={index}>
-            <PageHeader headerData={page}/>
-            <div className="page-content-title">
-            <h2 className="container">{page.title.rendered}</h2>
-            <hr className="page-content-hr" />
-            </div>
-            <div className="container" dangerouslySetInnerHTML={{__html: page.content.rendered}} />;
-            </div>
-          })
-        } */}
-        <SermonContent sermonData={currentSermons} loading={loading}/>
-        <div className="container">
-          <Pagination sermonsPerPage={postsPerPage} totalSermons={sermonData.length} paginate={paginate}/>
-        </div>
+        <>
+          <div>
+              {store.sermonData.length > 0
+                ? <>
+                  <PageHeader headerData={null} sermonHeaderData={store.sermonData[0]}/>  
+                </>
+                : null
+              }              
+              <div className="page-content-title">
+                <h2 className="container">Current Sermons</h2>
+                <hr className="page-content-hr" />
+                <SermonFilter />
+                {store.sermonData.length === 0
+                  ? <h4>There are currently no results for this search</h4>
+                  : null
+                }
+              </div>
+          </div>
+          {store.sermonData.length > 0
+            ? <>
+              <SermonContent sermonData={currentSermons} loading={loading}/>
+              <div className="container">
+                <Pagination sermonsPerPage={postsPerPage} totalSermons={store.sermonData.length} paginate={paginate}/>
+              </div>
+            </>
+            : null
+          }
+        </> 
       </div>
     </>
-  );
+  ))
 }
 
 export default Sermons;

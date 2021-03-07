@@ -172,6 +172,51 @@
     margin-bottom: 50px;
 }
 
+.devotional-container{
+    line-height: 1.4em;
+    font-weight: 300;
+    font-size: 16px;
+    color: #737373;
+    line-height: 1.7em;
+    .devo-hr{
+        margin: 70px 0px;
+        border-top: 1px solid #e7e7e7;
+        width: 40%;
+    }
+    .devotional-content{
+        margin-bottom: 100px;
+        padding: 20px;
+        h2{
+            font-size: 28px;
+        }
+        h5{
+            font-size: 18px;
+            color: #848484;
+            text-transform: initial;
+            font-family: "Raleway", sans-serif;
+        }
+        .after-devo-verse{
+            margin: 25px 0px;
+            border-top: 1px solid #e7e7e7;
+            width: 40%;
+        }
+    }
+}
+
+
+.sermon-filter-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0px;
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+    }
+    .form-group{
+        margin-right: 10px;
+    }
+}
+
 .page-content-container{
     .page-content-title{
         width: 100%;
@@ -201,6 +246,9 @@
         padding: 5px;
         color: #ffffff;
         letter-spacing: normal;
+    }
+    h3{
+        text-align: left;
     }
     @media screen and (max-width: 768px){
         h1{

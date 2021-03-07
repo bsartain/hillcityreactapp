@@ -6,20 +6,24 @@ import { formatDate } from "utils/utils";
 import { setPreacher, setSermonSeries } from 'views/SermonContent'
 
 import { useObserver } from 'mobx-react'
+import { runInAction, observable } from "mobx";
 import { StoreContext } from 'index'
 import { esvApi } from 'utils/utils'
 import { RefTagger } from 'react-reftagger'
 import { useHistory } from 'react-router-dom'
 
-function SingleSermon() {
+function SingleSermon(props) {
 
   const store = useContext(StoreContext);
+  
   const [singleSermonData, setSingleSermonData] = useState([]);
   const [biblePassage, setBiblePassage] = useState([])
-  const [setButtonClicked] = useState(false)
 
   const history = useHistory()
-  
+
+  const pagesDataArr = observable(store.pagesData);
+  pagesDataArr.filter(todo => todo.id === 8497)
+
   useEffect(() => {
 
     async function fetchData() {
@@ -50,9 +54,11 @@ function SingleSermon() {
   }, [singleSermonData.bible_passage, history.location.pathname]);
 
   const getMediaPlayer = async () => {
-    store.mediaPlayerIsDisplayed = true
-    store.singleSermonData = singleSermonData
-    store.isPlaying = !store.isPlaying
+    runInAction(() => {
+      store.mediaPlayerIsDisplayed = true
+      store.singleSermonData = singleSermonData
+      store.isPlaying = !store.isPlaying
+    })
   }
 
   return useObserver(() => (
@@ -79,7 +85,7 @@ function SingleSermon() {
                     <p><span className="item-detail">Passage:</span> { singleSermonData.bible_passage }</p>
                   </div>
                 </div>
-                <div className="container single-sermon-play-button" onClick={() => {getMediaPlayer(); setButtonClicked(true)}}>
+                <div className="container single-sermon-play-button" onClick={() => {getMediaPlayer()}}>
                   <i className="now-ui-icons media-1_button-play"></i>
                 </div>
                 <hr/>

@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import PageHeader from "components/Headers/PageHeader.js";
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
 import DonationForm from "views/DonationForm"
 
+import { useObserver } from 'mobx-react'
+import { StoreContext } from 'index'
+
 function Give() {
   
-  const [giveData, setGiveData] = useState([]);
+  const store = useContext(StoreContext)
 
   useEffect(() => {
-
-    async function fetchData() {
-      const response = await fetch('https://hillcitysc.com/wp-json/wp/v2/pages?per_page=30')
-      const myData = await response.json()
-      setGiveData(myData)
-    }
-    fetchData()
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -28,12 +24,13 @@ function Give() {
     };
     
   }, []);
-  return (
+
+  return useObserver(() => (
     <>
       <div className="wrapper page-content-container">
-        {giveData.length === 0
+        {store.pagesData.length === 0
           ? <SpinnerFullPage/>
-          : giveData.filter((page) => page.id === 9135).map((page, index) => {
+          : store.pagesData.filter((page) => page.id === 9135).map((page, index) => {
             return <div key={index}>
                     <PageHeader headerData={page}/>
                     <div className="page-content-title">
@@ -47,7 +44,7 @@ function Give() {
         }
       </div>
     </>
-  );
+  ))
 }
 
 export default Give;

@@ -44,21 +44,59 @@ import FooterDrawer from 'components/Footers/FooterDrawer'
 import PaymentSuccess from "views/PaymentSuccess";
 import PaymentFailed from "views/PaymentFailed";
 import ConnectionSignup from 'views/ConnectionSignup'
+import Devotional from 'views/Devotional'
 
-import { useLocalObservable } from "mobx-react";
+import { useLocalObservable } from "mobx-react"
+import { 
+  getPagesData, 
+  getHomePageData, 
+  getSermonDataService,
+  getSermonPreacher,
+  getSermonSeries,
+  getSermonBibleBooks,
+  getOrderOfServiceData
+} from 'services/services'
 
 export const StoreContext = createContext();
 
 const StoreProvider = ({ children }) => {
+
   const store = useLocalObservable(() => ({
     mediaPlayerIsDisplayed: false,
     singleSermonData: null,
-    isPlaying: false
-  }));
+    isPlaying: false,
+    pagesData: [],
+    homePageData: [],
+    sermonData: [],
+    getPagesData: getPagesData(),
+    getHomePageData: getHomePageData(),
+    getSermonData: (url) => {
+      return getSermonDataService(url)
+    }, 
+    sliceSermonData: (sermonData, indexOfFirstSermon, indexOfLastSermon) => {
+      let slicedData
+      if(sermonData.length !== 0){
+        slicedData = sermonData.slice(indexOfFirstSermon, indexOfLastSermon)
+      }
+      return slicedData
+    },
+    getSermonPreacher: getSermonPreacher(),
+    getSermonSeries: getSermonSeries(),
+    getSermonBibleBooks: getSermonBibleBooks(),
+    sermonPreacher: [],
+    sermonSeries: [],
+    sermonBibleBooks: [],
+    selectedPreacherId: '',
+    selectedSeriesId: '',
+    selectedBookId: '',
+    getOrderOfServiceData: getOrderOfServiceData(),
+    orderOfServiceData: []
+  }))
 
   return (
     <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
   );
+
 };
 
 ReactDOM.render(
@@ -118,11 +156,15 @@ ReactDOM.render(
           />
           <Route
             path="/single-sermon/:id"
-            render={(props) => <SingleSermon {...props} />}
+            render={(props) => <SingleSermon {...props}/>}
           />
           <Route
             path="/connection-signup"
             render={(props) => <ConnectionSignup {...props} />}
+          />
+          <Route
+            path="/devotional"
+            render={(props) => <Devotional {...props} />}
           />
           <Redirect to="/" />
           <Redirect from="/" to="/" />
