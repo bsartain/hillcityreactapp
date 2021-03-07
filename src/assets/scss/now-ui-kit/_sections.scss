@@ -221,6 +221,7 @@
     .page-content-title{
         width: 100%;
         text-align: center;
+        padding: 0px 25px;
         .page-content-hr{
             border-top: 2px solid #000000;
             padding-bottom: 10px;
@@ -495,6 +496,10 @@
     }
 }
 
+.live-stream-content{
+    padding: 0px 25px;
+}
+
 .live-stream-container{
     .old-live-stream-title{
         display: none!important;
@@ -710,6 +715,10 @@
     &[filter-color="orange"]{
         @include linear-gradient(rgba($black-color,.20), rgba(224, 23, 3, 0.6));
     }
+}
+
+.tab-content>.active{
+    padding: 0px 20px;
 }
 
 .section-story-overview{

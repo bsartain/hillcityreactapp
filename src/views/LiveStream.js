@@ -30,7 +30,6 @@ function LiveStream() {
     // fetchLiveStreamData()
 
     async function getOrderOfService(){
-      console.log('ORDER USE EFFECT')
       const orderOfServiceDataResponse = await store.getSermonData('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
       const orderOfServiceData = await orderOfServiceDataResponse 
       const { acf } = orderOfServiceData
@@ -89,7 +88,7 @@ function LiveStream() {
                       <hr className="page-content-hr" />
                       <h3>WELCOME! OUR SERVICE WILL BEGIN AT 10:00 AM ON { sundayDate }</h3>
                     </div>
-                    <div className="container" dangerouslySetInnerHTML={{__html: page.content.rendered}} />
+                    <div className="container live-stream-content" dangerouslySetInnerHTML={{__html: page.content.rendered}} />
                     <div className="container react-print-container">
                       <ReactToPrint
                         trigger={() => <button className="btn btn-primary">
@@ -101,7 +100,6 @@ function LiveStream() {
                         onAfterPrint={() => setPrintLogo(false)}
                         pageStyle={pageStyle}
                       />
-                      { console.log('STORE ORDER: ', toJS(store.orderOfServiceData)) }
                       {store.orderOfServiceData.length === 0
                         ? null
                         : <OrderOfService acfData={store.orderOfServiceData} ref={ref} printLogo={printLogo}/>
