@@ -8,7 +8,7 @@ import ReactToPrint from 'react-to-print'
 
 import { useObserver } from 'mobx-react'
 import { StoreContext } from 'index'
-import { runInAction, toJS } from 'mobx'
+import { runInAction } from 'mobx'
 
 function LiveStream() {
 
@@ -20,14 +20,6 @@ function LiveStream() {
   const [printLogo, setPrintLogo] = useState(false)
 
   useEffect(() => {
-    
-    // async function fetchLiveStreamData(){
-    //   const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
-    //   const myData = await response.json()
-    //   setAcfData([myData.acf])
-
-    // }
-    // fetchLiveStreamData()
 
     async function getOrderOfService(){
       const orderOfServiceDataResponse = await store.getSermonData('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
