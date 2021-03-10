@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState, forwardRef } from 'react'
 import { esvApi } from 'utils/utils'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import catechismData from 'data/catechismData'
 import {
     NavItem,
@@ -231,6 +231,18 @@ export const OrderOfService = forwardRef(({acfData, printLogo}, ref) => {
                 Announcements
                 </NavLink>
             </NavItem>
+            <NavItem>
+                <NavLink
+                className={iconPills === "3" ? "active" : ""}
+                href="#pablo"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setIconPills("3");
+                }}
+                >
+                Prayer Requests/Praises
+                </NavLink>
+            </NavItem>
             </Nav>
             <TabContent
             activeTab={"iconPills" + iconPills}
@@ -283,6 +295,32 @@ export const OrderOfService = forwardRef(({acfData, printLogo}, ref) => {
             </TabPane>
             <TabPane tabId="iconPills2">
                 { announcements(acfData) }
+            </TabPane>
+            <TabPane tabId="iconPills3">
+                <div>
+                    <p>If you would like to submit a prayer request fill out our contact form and we would love to pray for you.</p>
+                    <Link to="/contact" className="btn btn-primary btn-sm">Submit Prayer request</Link>
+                    <hr className="order-service-hr"></hr>
+                </div>
+                {acfData.length === 0
+                    ? <h4>Loading...</h4>
+                    : acfData.map((item, index) => {
+                        if(item && item.prayer_requests_section){
+                            return item.prayer_requests_section.map((item, index) => {
+                                return <div key={index} className="show-prayer-requests">
+                                    <h3><span style={{color: '#caac5e'}}>{ item.request_type }:</span> { item.title }</h3>
+                                    <p style={{fontWeight: 900}}>Submitted By: { item.name }</p>
+                                    <p>{ item.prayer_request }</p>
+                                    <hr className="order-service-hr"></hr>
+                                </div>
+                            })
+                        } else {
+                            return <div key={index}>
+                                        <h3>There are currently no prayer requests.</h3>
+                                    </div>
+                        }
+                    })
+                }
             </TabPane>
             </TabContent>
         </div>
