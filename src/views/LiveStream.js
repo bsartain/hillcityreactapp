@@ -94,7 +94,7 @@ function LiveStream() {
                       />
                       {store.orderOfServiceData.length === 0
                         ? null
-                        : <OrderOfService acfData={store.orderOfServiceData} ref={ref} printLogo={printLogo}/>
+                        : <OrderOfService ref={ref} printLogo={printLogo}/>
                       }
                     </div>
                   </div>
