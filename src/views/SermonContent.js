@@ -43,8 +43,10 @@ export const SermonContent = ({ sermonData, loading }) => {
         <div className="container sermon-content-container"> 
                 <RefTagger noSearchTagNames={["h1","h2","h3","h4","h5"]} bibleVersion={'ESV'}/>           
                  <div className="card-deck">
-                    {sermonData.map((sermon, index) => {          
-                        return <div key={index} className="card-outer-container col-md-6 col-lg-4">
+                    {!sermonData
+                        ? null
+                        : sermonData.map((sermon, index) => {          
+                            return <div key={index} className="card-outer-container col-md-6 col-lg-4">
                                     <div key={index} className="card">
                                         <div className="card-background" style={{ backgroundImage: "url(" + sermon._featured_url + ")" }}></div>
                                         <div className="card-body">

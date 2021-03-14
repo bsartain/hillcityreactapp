@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { runInAction } from 'mobx'
 import { StoreContext } from 'index'
 import { useObserver } from 'mobx-react'
@@ -8,38 +8,6 @@ export default function SermonFilter({ sermonData }) {
 
     const store = useContext(StoreContext)
     const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-
-        async function getPreachers(){
-            const preacherDataResponse = await store.getSermonPreacher
-            const preacherData = await preacherDataResponse 
-            runInAction(() => {
-              store.sermonPreacher = preacherData
-            })
-        }
-        getPreachers()
-
-        async function getSeries(){
-            const sermonSeriesDataResponse = await store.getSermonSeries
-            const sermonSeriesData = await sermonSeriesDataResponse 
-            runInAction(() => {
-              store.sermonSeries = sermonSeriesData
-            })
-        }
-        getSeries()
-
-        async function getBibleBook(){
-            const bibleBooksDataResponse = await store.getSermonBibleBooks
-            const bibleBooksData = await bibleBooksDataResponse 
-            runInAction(() => {
-              store.sermonBibleBooks = bibleBooksData
-            })
-        }
-        getBibleBook()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     const handleChange = async (e) => {
 

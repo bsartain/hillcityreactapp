@@ -217,6 +217,25 @@
     }
 }
 
+.special-announcement-container{
+    .modal-content{
+        background-color: #caac5e;
+    }
+    .modal-body{
+        p{
+            color: #ffffff;
+        }
+    }
+    .modal-header{
+        .title-up{
+            color: #ffffff;
+        }
+        .now-ui-icons{
+            color: #ffffff;
+        }
+    }
+}
+
 .page-content-container{
     .page-content-title{
         width: 100%;

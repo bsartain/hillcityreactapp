@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useObserver } from 'mobx-react'
-import { StoreContext } from 'index'
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -12,41 +10,21 @@ import {
   Nav,
   Container,
 } from "reactstrap";
-import { runInAction } from "mobx";
+
+import { useObserver } from 'mobx-react'
+import SpecialAnnouncement from 'views/SpecialAnnouncement'
 
 function IndexNavbar() {
-  
-  const store = useContext(StoreContext)
 
   const [navbarColor, setNavbarColor] = useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = useState(false);
   const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png')
+  
 
   useEffect(() => {
 
-    async function getPageContent(){
-        
-        const pagesDataResponse = await store.getPagesData
-        const pagesData = await pagesDataResponse
-        runInAction(() => {
-          store.pagesData = pagesData
-        });
+      const updateNavbarColor = () => {
 
-        const homePageDataResponse = await store.getHomePageData
-        const homePageData = await homePageDataResponse
-        runInAction(() => {
-          store.homePageData = homePageData
-        });
-
-        const homepagePageDataResponse = await store.getHomePageData
-        const homepagePageData = await homepagePageDataResponse 
-        runInAction(() => {
-          store.homePageData = homepagePageData
-        });
-    }
-    getPageContent()
-    
-    const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
@@ -65,7 +43,10 @@ function IndexNavbar() {
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  });
+
+  }, []);
+
+
   return useObserver(() => (
     <>
       {/* {collapseOpen ? (
@@ -77,6 +58,7 @@ function IndexNavbar() {
           }}
         />
       ) : null} */}
+      <SpecialAnnouncement/>
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">

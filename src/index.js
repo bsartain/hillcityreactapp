@@ -48,13 +48,10 @@ import Devotional from 'views/Devotional'
 
 import { useLocalObservable } from "mobx-react"
 import { 
-  getPagesData, 
-  getHomePageData, 
   getSermonDataService,
   getSermonPreacher,
   getSermonSeries,
-  getSermonBibleBooks,
-  getOrderOfServiceData
+  getSermonBibleBooks
 } from 'services/services'
 
 export const StoreContext = createContext();
@@ -68,8 +65,6 @@ const StoreProvider = ({ children }) => {
     pagesData: [],
     homePageData: [],
     sermonData: [],
-    getPagesData: getPagesData(),
-    getHomePageData: getHomePageData(),
     getSermonData: (url) => {
       return getSermonDataService(url)
     }, 
@@ -89,8 +84,8 @@ const StoreProvider = ({ children }) => {
     selectedPreacherId: '',
     selectedSeriesId: '',
     selectedBookId: '',
-    getOrderOfServiceData: getOrderOfServiceData(),
-    orderOfServiceData: []
+    orderOfServiceData: [],
+    isSpecialAnnouncement: false
   }))
 
   return (
