@@ -617,6 +617,12 @@
 
 .show-announcements{
     display: block;
+    span{
+        color: #757575;
+    }
+    span:first-child{
+        font-weight: 900;
+    }
 }
 
 .show-prayer-requests{

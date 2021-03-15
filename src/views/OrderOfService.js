@@ -65,29 +65,36 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                             <p><span style={{fontWeight: '900'}}>QUESTION: </span>{ catechismQuestion }</p>
                             <p><span style={{fontWeight: '900'}}>ANSWER: </span>{ catechismAnswer }</p>
                         </div>
-        } else if(title === 'announcementOne' || title === 'announcementTwo' || title === 'announcementThree' || title === 'announcementFour'){
-            let announcementTitle = content.announcement_one_title || content.announcement_two_title || content.announcement_three_title || content.announcement_four_title 
-            let announcementContent = content.announcement_one_content || content.announcement_two_content || content.announcement_three_content || content.announcement_four_content
-            let announcementBegin = content.announcement_one_start || content.announcement_two_start || content.announcement_three_start || content.announcement_four_start
-            let announcementEnd = content.announcement_one_end || content.announcement_two_end || content.announcement_three_end || content.announcement_four_end
-            let announcementLocation = content.announcement_one_location || content.announcement_two_location || content.announcement_three_location || content.announcement_four_location           
-            
-            header = announcementTitle
-            
-            contentDiv = <div className={ header && content ? 'show-announcements' : 'hide-announcements' }>
-                            <div dangerouslySetInnerHTML={{__html: announcementContent }}/>
-                            <div className="date-time-container">
-                                <div className={ announcementBegin ? 'show-announcements' : 'hide-announcements' }>
-                                    <span>Begin: </span>{ announcementBegin }
-                                </div>
-                                <div className={ announcementEnd ? 'show-announcements' : 'hide-announcements' }>
-                                    <span>End: </span>{ announcementEnd }
-                                </div>
-                                <div className={ announcementLocation ? 'show-announcements' : 'hide-announcements' }>
-                                    <span>Location: </span>{ announcementLocation }
-                                </div>
+        } else if(title === 'Announcements'){
+            return <div>
+                {content.map((item, index) => {
+                    return <div key={index}>
+                                <h3>{ item.announcement_title }</h3>
+                                <div dangerouslySetInnerHTML={{__html: item.announcement_content }}/>
+                                {item.announcement_start
+                                    ? <div className="show-announcements">
+                                        <span>Begin: </span><span>{ item.announcement_start }</span>
+                                    </div>
+                                    : null
+                                }
+                                {item.announcement_end
+                                    ? <div className="show-announcements">
+                                        <span>End: </span><span>{ item.announcement_end }</span>
+                                    </div>
+                                    : null
+                                }
+                                {item.announcement_location
+                                    ? <div className="show-announcements">
+                                        <span>Location: </span><span>{ item.announcement_location }</span>
+                                    </div>
+                                    : null
+                                }
+                                <hr className="order-service-hr" />
                             </div>
-                        </div>
+                })
+
+                }
+            </div>
         } else if(title === 'prayerRequests'){
             title = null
             return content.map((item, index) => {
@@ -102,18 +109,18 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
 
         return <div>
                     <h3>{ header }</h3>
-                    { title === 'Confession Of Sin' 
+                    { title === 'Confession of Sin' 
                         ? <p>This is the time in our service where we confess our sins before God. Cleansing and freedom begin with being honest with our sins and failures before God so that He can restore us back to Joy and peace. Take a few moments to confess sin before God. You can use this scripture to help you do that.</p> 
                         : null 
                     }
-                    { title === 'Assurance Of Grace' 
+                    { title === 'Assurance of Grace' 
                         ? <p>You cannot out sin God's grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your offenses toward Him.</p> 
                         : null 
                     }
                     {title === 'Offertory'
                         ? <div>
-                            <p>In response to what the Lord has done for us, letâs worship Him in the giving of our tithes and offerings.</p>
-                            <p>We do this as an expression of joy and gratitude, not obligation. Below youâll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.</p>
+                            <p>In response to what the Lord has done for us, let's worship Him in the giving of our tithes and offerings.</p>
+                            <p>We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.</p>
                         </div>
                         : null
                     }
@@ -134,10 +141,7 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
     let songTwo
     let songThree
     let miscellaneousContent
-    let announcementOne
-    let announcementTwo
-    let announcementThree
-    let announcementFour
+    let announcements
     let prayerRequests
 
     return (
@@ -203,10 +207,7 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                                 songThree = setContent(`Song - ${item['song_three_title']}`, item['song_three_lyrics'])
                                 benedictionContent = setContent('Benediction', benediction)
                                 miscellaneousContent = setContent(null, item['miscellaneous_info'])
-                                announcementOne = setContent('announcementOne', item['announcement_one'])
-                                announcementTwo = setContent('announcementTwo', item['announcement_two'])
-                                announcementThree = setContent('announcementThree', item['announcement_three'])
-                                announcementFour = setContent('announcementFour', item['announcement_four'])
+                                announcements = setContent('Announcements', item['announcements_section'])
                                 prayerRequests = setContent('prayerRequests', item['prayer_requests_section'])
                             }
                         })
@@ -238,28 +239,10 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                         { benedictionContent }
                         { miscellaneousContent }
                     </div>
-                    
-                    
-
-                    {/* { callToWorshipService }
-                    { songOneService }
-                    { confessionOfSinService }
-                    { assuranceOfGraceService }
-                    { printLogo ? null : offeratory(sendToGive) }
-                    { songTwoService }
-                    { scriptureReadingService }
-                    { preacherService }
-                    { catechismService }
-                    { songThreeService }
-                    { benedictionService }
-                    { printLogo ? null : miscellaneous(acfData) } */}
                 </div>
             </TabPane>
             <TabPane tabId="iconPills2">
-                { announcementOne }
-                { announcementTwo }
-                { announcementThree }
-                { announcementFour }
+                { announcements }
             </TabPane>
             <TabPane tabId="iconPills3">
                 { prayerRequests }
