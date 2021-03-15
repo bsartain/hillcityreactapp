@@ -156,7 +156,10 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                     setIconPills("1");
                 }}
                 >
-                Order of Service
+                <div className="nav-pill">
+                    <i className="fas fa-th-list"></i>
+                    <div className="pill-title">Order of Service</div>
+                </div>
                 </NavLink>
             </NavItem>
             <NavItem>
@@ -168,7 +171,10 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                     setIconPills("2");
                 }}
                 >
-                Announcements
+                <div className="nav-pill">
+                    <i className="fas fa-calendar-plus"></i>
+                    <div className="pill-title">Calendar</div>
+                </div>
                 </NavLink>
             </NavItem>
             <NavItem>
@@ -180,7 +186,10 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                     setIconPills("3");
                 }}
                 >
-                Prayer Requests/Praises
+                <div className="nav-pill">
+                    <i className="fas fa-praying-hands"></i>
+                    <div className="pill-title">Prayer Requests</div>
+                </div>
                 </NavLink>
             </NavItem>
             </Nav>
