@@ -10,8 +10,7 @@ import {
   getSermonDataService,
   getSermonPreacher,
   getSermonSeries,
-  getSermonBibleBooks,
-  getOrderOfServiceData
+  getSermonBibleBooks
 } from 'services/services'
  
 function DarkFooter() {

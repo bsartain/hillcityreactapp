@@ -28,7 +28,21 @@ export default function SermonFilter({ sermonData }) {
         }
         
         runInAction(async() => {
-            const response = await store.getSermonData(`https://hillcitysc.com//wp-json/wp/v2/wpfc_sermon?per_page=100&wpfc_preacher=${store.selectedPreacherId}&wpfc_sermon_series=${store.selectedSeriesId}&wpfc_bible_book=${store.selectedBookId}`)
+
+            const sermonUrl = new URL('https://hillcitysc.com//wp-json/wp/v2/wpfc_sermon?per_page=100')            
+            const urlParams = [store.selectedPreacherId, store.selectedSeriesId, store.selectedBookId]
+
+            urlParams.forEach(param => {
+                if(param === store.selectedPreacherId && store.selectedPreacherId !== ''){
+                    sermonUrl.searchParams.append("wpfc_preacher", `${param}`)
+                } else if(param === store.selectedSeriesId && store.selectedSeriesId !== ''){
+                    sermonUrl.searchParams.append("wpfc_sermon_series", `${param}`)
+                } else if(param === store.selectedBookId && store.selectedBookId !== ''){
+                    sermonUrl.searchParams.append("wpfc_bible_book", `${param}`)
+                }
+            })
+
+            const response = await store.getSermonData(sermonUrl)
             store.sermonData = response
             setLoading(false)
         })
