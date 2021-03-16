@@ -100,6 +100,7 @@ function Contact() {
                       <div className="container" style={{marginBottom: '50px'}}>
                       { setMessage() }                 
                       <form onSubmit={sendEmail} className="container">
+                          <p>If you need prayer or would like to learn more about Hill City and how we can serve you please fill out the form and someone will contact you shortly.</p>
                           <div className="form-group row">
                             <label htmlFor="name" className="col-2 col-form-label">Name</label> 
                             <div className="col-8">

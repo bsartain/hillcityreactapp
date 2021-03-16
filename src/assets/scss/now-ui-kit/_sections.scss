@@ -569,13 +569,14 @@
         }
 
         .tab-content > .active{
-            animation: slide-right 0.2s ease-out;
+            animation: slide-right 0.1s ease-out;
         }
         
         @keyframes slide-right {
             0% { opacity: 0; transform: translateX(100%); }
             100% { opacity: 1; transform: translateX(0); }
         }
+        
         @media screen and (max-width: 768px){
             .nav-tabs{
                 display: flex;
