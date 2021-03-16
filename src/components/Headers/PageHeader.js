@@ -2,11 +2,17 @@
 import React, { useEffect, useState } from "react";
 
 import { Container } from "reactstrap";
+import { useHistory, Link } from 'react-router-dom' 
+
 
 function PageHeader({ headerData, sermonHeaderData }) {
 
   let setImage
   let setTitle
+  const history = useHistory()
+  const str = history.location.pathname
+  const urlStringPart = str.substr(0, 15)
+
 
   if(headerData !== null){
     setImage = headerData.better_featured_image.media_details.sizes.medium_large.source_url
@@ -39,6 +45,10 @@ function PageHeader({ headerData, sermonHeaderData }) {
                 <h5>HILL CITY CHURCH</h5>
                 <hr className="hr-one"/>
                 <h1 dangerouslySetInnerHTML={{__html: setTitle }}/>
+                {urlStringPart === '/single-sermon/'
+                    ? <Link to="/sermons" className="btn btn-outline-primary" style={{color: '#ffffff'}}>BACK TO SERMONS</Link>
+                    : null
+                }
                 <div className="page-header-arrow" onClick={() => window.scrollTo({top: 926, behavior: 'smooth' })}>
                   <i className="now-ui-icons  arrows-1_minimal-down"></i>
                 </div>
