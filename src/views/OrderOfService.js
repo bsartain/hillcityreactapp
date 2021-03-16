@@ -157,7 +157,7 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                 }}
                 >
                 <div className="nav-pill">
-                    <i className="fas fa-th-list"></i>
+                    <i className="fas fa-bible"></i>
                     <div className="pill-title">Order of Service</div>
                 </div>
                 </NavLink>
@@ -172,7 +172,7 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
                 }}
                 >
                 <div className="nav-pill">
-                    <i className="fas fa-calendar-plus"></i>
+                    <i className="fas fa-calendar-alt"></i>
                     <div className="pill-title">Calendar</div>
                 </div>
                 </NavLink>
@@ -195,6 +195,7 @@ export const OrderOfService = forwardRef(({printLogo}, ref) => {
             </Nav>
             <TabContent
             activeTab={"iconPills" + iconPills}
+            className="tab-pane-swipe"
             >
             <TabPane tabId="iconPills1">
                 <div className="print-order-service" ref={ref}>
