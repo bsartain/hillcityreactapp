@@ -614,6 +614,16 @@
 	font-weight: 800;
 }
 
+.chapter-num {
+	font-weight: 800;
+}
+
+.scripture-reading-container {
+	h2 {
+		font-size: 20px;
+	}
+}
+
 .single-sermon-container {
 	hr {
 		border-top: 1px solid #757575;
@@ -1081,14 +1091,7 @@
 	}
 
 	//inputs
-	@include input-coloured-bg(
-		$opacity-5,
-		$white-color,
-		$white-color,
-		$transparent-bg,
-		$opacity-1,
-		$opacity-2
-	);
+	@include input-coloured-bg($opacity-5, $white-color, $white-color, $transparent-bg, $opacity-1, $opacity-2);
 
 	//buttons
 	.btn[class*='btn-outline-'] {

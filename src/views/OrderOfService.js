@@ -19,26 +19,14 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 
 	useEffect(() => {
 		const call = async () => {
-			const response = await fetch(
-				'https://hillcitysc.com/wp-json/acf/v3/posts/8857'
-			);
+			const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857');
 			const data = await response.json();
 			setOrderOfServiceData([data.acf]);
-			esvApi(data.acf.call_to_worship_verse).then((data) =>
-				setCallToWorship(data.passages[0])
-			);
-			esvApi(data.acf.confession_of_sin_verse).then((data) =>
-				setConfessionOfSins(data.passages[0])
-			);
-			esvApi(data.acf.assurance_of_grace_verse).then((data) =>
-				setAssuranceOfGrace(data.passages[0])
-			);
-			esvApi(data.acf.scripture_reading).then((data) =>
-				setScriptureReading(data.passages[0])
-			);
-			esvApi(data.acf.benediction_verse).then((data) =>
-				setBenediction(data.passages[0])
-			);
+			esvApi(data.acf.call_to_worship_verse).then((data) => setCallToWorship(data.passages[0]));
+			esvApi(data.acf.confession_of_sin_verse).then((data) => setConfessionOfSins(data.passages[0]));
+			esvApi(data.acf.assurance_of_grace_verse).then((data) => setAssuranceOfGrace(data.passages[0]));
+			esvApi(data.acf.scripture_reading).then((data) => setScriptureReading(data.passages));
+			esvApi(data.acf.benediction_verse).then((data) => setBenediction(data.passages[0]));
 		};
 		call();
 	}, []);
@@ -46,12 +34,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 	const setContent = (title, content) => {
 		let catechismQuestion;
 		let catechismAnswer;
-		let contentDiv = (
-			<div
-				className='order-service-div'
-				dangerouslySetInnerHTML={{ __html: content }}
-			/>
-		);
+		let contentDiv = <div className='order-service-div' dangerouslySetInnerHTML={{ __html: content }} />;
 		let header = title;
 
 		if (title === 'Offertory') {
@@ -135,6 +118,20 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 					</div>
 				);
 			});
+		} else if (title === 'Scripture Reading') {
+			return (
+				<div className='scripture-reading-container'>
+					<h3>Scripture reading</h3>
+					{content.map((item, index) => {
+						return (
+							<div key={index}>
+								<div dangerouslySetInnerHTML={{ __html: item }} />
+							</div>
+						);
+					})}
+					<hr className='order-service-hr' />
+				</div>
+			);
 		}
 
 		return (
@@ -142,30 +139,23 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 				<h3>{header}</h3>
 				{title === 'Confession of Sin' ? (
 					<p>
-						This is the time in our service where we confess our sins before
-						God. Cleansing and freedom begin with being honest with our sins and
-						failures before God so that He can restore us back to Joy and peace.
-						Take a few moments to confess sin before God. You can use this
+						This is the time in our service where we confess our sins before God. Cleansing and freedom begin with being honest with our sins and
+						failures before God so that He can restore us back to Joy and peace. Take a few moments to confess sin before God. You can use this
 						scripture to help you do that.
 					</p>
 				) : null}
 				{title === 'Assurance of Grace' ? (
 					<p>
-						You cannot out sin God's grace. The power of the cross is such that
-						Jesus made His love and forgiveness more powerful toward you than
-						your offenses toward Him.
+						You cannot out sin God's grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your
+						offenses toward Him.
 					</p>
 				) : null}
 				{title === 'Offertory' ? (
 					<div>
+						<p>In response to what the Lord has done for us, let's worship Him in the giving of our tithes and offerings.</p>
 						<p>
-							In response to what the Lord has done for us, let's worship Him in
-							the giving of our tithes and offerings.
-						</p>
-						<p>
-							We do this as an expression of joy and gratitude, not obligation.
-							Below you'll find a link to our giving page. If you are a member
-							of Hill City Church please give joyously and generously.
+							We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of
+							Hill City Church please give joyously and generously.
 						</p>
 					</div>
 				) : null}
@@ -236,9 +226,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 					</NavLink>
 				</NavItem>
 			</Nav>
-			<TabContent
-				activeTab={'iconPills' + iconPills}
-				className='tab-pane-swipe'>
+			<TabContent activeTab={'iconPills' + iconPills} className='tab-pane-swipe'>
 				<TabPane tabId='iconPills1'>
 					<div className='print-order-service' ref={ref}>
 						{orderOfServiceData.length === 0
@@ -247,56 +235,20 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 							  orderOfServiceData.map((item) => {
 									// eslint-disable-next-line no-unused-vars
 									for (const property in item) {
-										callToWorshipVerse = setContent(
-											'Call To Worship',
-											callToWorship
-										);
-										songOne = setContent(
-											`Song - ${item['song_one_title']}`,
-											item['song_one_lyrics']
-										);
-										confessionOfSinVerse = setContent(
-											'Confession of Sin',
-											confessionOfSins
-										);
-										assuranceOfGraceVerse = setContent(
-											'Assurance of Grace',
-											assuranceOfGrace
-										);
+										callToWorshipVerse = setContent('Call To Worship', callToWorship);
+										songOne = setContent(`Song - ${item['song_one_title']}`, item['song_one_lyrics']);
+										confessionOfSinVerse = setContent('Confession of Sin', confessionOfSins);
+										assuranceOfGraceVerse = setContent('Assurance of Grace', assuranceOfGrace);
 										offertory = setContent('Offertory', null);
-										songTwo = setContent(
-											`Song - ${item['song_two_title']}`,
-											item['song_two_lyrics']
-										);
-										scriptureVerses = setContent(
-											'Scripture Reading',
-											scriptureReading
-										);
-										preacherTitle = setContent(
-											`Sermon: ${item['preacher']}`,
-											null
-										);
-										catechism = setContent(
-											'Catechism',
-											item['catechism_question_number']
-										);
-										songThree = setContent(
-											`Song - ${item['song_three_title']}`,
-											item['song_three_lyrics']
-										);
+										songTwo = setContent(`Song - ${item['song_two_title']}`, item['song_two_lyrics']);
+										scriptureVerses = setContent('Scripture Reading', scriptureReading);
+										preacherTitle = setContent(`Sermon: ${item['preacher']}`, null);
+										catechism = setContent('Catechism', item['catechism_question_number']);
+										songThree = setContent(`Song - ${item['song_three_title']}`, item['song_three_lyrics']);
 										benedictionContent = setContent('Benediction', benediction);
-										miscellaneousContent = setContent(
-											null,
-											item['miscellaneous_info']
-										);
-										announcements = setContent(
-											'Announcements',
-											item['announcements_section']
-										);
-										prayerRequests = setContent(
-											'prayerRequests',
-											item['prayer_requests_section']
-										);
+										miscellaneousContent = setContent(null, item['miscellaneous_info']);
+										announcements = setContent('Announcements', item['announcements_section']);
+										prayerRequests = setContent('prayerRequests', item['prayer_requests_section']);
 									}
 							  })}
 						<div className='print-order-service' ref={ref}>
