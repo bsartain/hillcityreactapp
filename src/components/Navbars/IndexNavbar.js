@@ -11,41 +11,41 @@ import {
   Container,
 } from "reactstrap";
 
-import { useObserver } from 'mobx-react'
-import SpecialAnnouncement from 'views/SpecialAnnouncement'
+import { useObserver } from "mobx-react";
+import SpecialAnnouncement from "views/SpecialAnnouncement";
 
 function IndexNavbar() {
-
   const [navbarColor, setNavbarColor] = useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png')
-  
+  const [logo, setLogo] = useState(
+    "https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png"
+  );
 
   useEffect(() => {
-
-      const updateNavbarColor = () => {
-
+    const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
         setNavbarColor("navbar-white");
-        setLogo('https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png')
+        setLogo(
+          "https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png"
+        );
       } else if (
         document.documentElement.scrollTop < 400 ||
         document.body.scrollTop < 400
       ) {
         setNavbarColor("navbar-transparent");
-        setLogo('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png')
+        setLogo(
+          "https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png"
+        );
       }
     };
     window.addEventListener("scroll", updateNavbarColor);
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-
   }, []);
-
 
   return useObserver(() => (
     <>
@@ -58,12 +58,16 @@ function IndexNavbar() {
           }}
         />
       ) : null} */}
-      <SpecialAnnouncement/>
+      <SpecialAnnouncement />
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/">
-                <img src={logo} className="hc-logo" alt="Hill City Church: Rock Hill SC" />
+              <img
+                src={logo}
+                className="hc-logo"
+                alt="Hill City Church: Rock Hill SC"
+              />
             </NavbarBrand>
             <button
               className="navbar-toggler navbar-toggler"
@@ -86,31 +90,49 @@ function IndexNavbar() {
           >
             <Nav navbar>
               <NavItem>
-                <Link exact="true" to="/" className="nav-link">Home</Link>
+                <Link exact="true" to="/" className="nav-link">
+                  Home
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/gospel" className="nav-link">The Gospel</Link>
+                <Link to="/gospel" className="nav-link">
+                  The Gospel
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/about" className="nav-link">About</Link>
+                <Link to="/about" className="nav-link">
+                  About
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/faith" className="nav-link">Our Faith</Link>
+                <Link to="/faith" className="nav-link">
+                  Our Faith
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/sermons" className="nav-link">Sermons</Link>
+                <Link to="/sermons" className="nav-link">
+                  Sermons
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/live-stream" className="nav-link">Live Stream</Link>
+                <Link to="/live-stream" className="nav-link">
+                  Live Stream
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/devotional" className="nav-link">Devotional</Link>
+                <Link to="/devotional" className="nav-link">
+                  Devotional
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/contact" className="nav-link">Contact</Link>
+                <Link to="/contact" className="nav-link">
+                  Service Times/Contact
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/give" className="nav-link">Give</Link>
+                <Link to="/give" className="nav-link">
+                  Give
+                </Link>
               </NavItem>
               <NavItem>
                 <NavLink
@@ -127,7 +149,7 @@ function IndexNavbar() {
         </Container>
       </Navbar>
     </>
-  ))
+  ));
 }
 
 export default IndexNavbar;
