@@ -669,6 +669,7 @@
   .single-sermon-play-button {
     display: flex;
     justify-content: center;
+    cursor: pointer;
     .media-1_button-play {
       font-size: 30px;
       margin-top: 25px;
@@ -1105,14 +1106,7 @@
   }
 
   //inputs
-  @include input-coloured-bg(
-    $opacity-5,
-    $white-color,
-    $white-color,
-    $transparent-bg,
-    $opacity-1,
-    $opacity-2
-  );
+  @include input-coloured-bg($opacity-5, $white-color, $white-color, $transparent-bg, $opacity-1, $opacity-2);
 
   //buttons
   .btn[class*="btn-outline-"] {

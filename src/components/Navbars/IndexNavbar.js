@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-} from "reactstrap";
+import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from "reactstrap";
 
 import { useObserver } from "mobx-react";
 import SpecialAnnouncement from "views/SpecialAnnouncement";
@@ -17,28 +9,16 @@ import SpecialAnnouncement from "views/SpecialAnnouncement";
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const [logo, setLogo] = useState(
-    "https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png"
-  );
+  const [logo, setLogo] = useState("https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png");
 
   useEffect(() => {
     const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 399 ||
-        document.body.scrollTop > 399
-      ) {
+      if (document.documentElement.scrollTop > 399 || document.body.scrollTop > 399) {
         setNavbarColor("navbar-white");
-        setLogo(
-          "https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png"
-        );
-      } else if (
-        document.documentElement.scrollTop < 400 ||
-        document.body.scrollTop < 400
-      ) {
+        setLogo("https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png");
+      } else if (document.documentElement.scrollTop < 400 || document.body.scrollTop < 400) {
         setNavbarColor("navbar-transparent");
-        setLogo(
-          "https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png"
-        );
+        setLogo("https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png");
       }
     };
     window.addEventListener("scroll", updateNavbarColor);
@@ -49,25 +29,12 @@ function IndexNavbar() {
 
   return useObserver(() => (
     <>
-      {/* {collapseOpen ? (
-        <div
-          id="bodyClick"
-          onClick={() => {
-            document.documentElement.classList.toggle("nav-open");
-            setCollapseOpen(false);
-          }}
-        />
-      ) : null} */}
       <SpecialAnnouncement />
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/">
-              <img
-                src={logo}
-                className="hc-logo"
-                alt="Hill City Church: Rock Hill SC"
-              />
+              <img src={logo} className="hc-logo" alt="Hill City Church: Rock Hill SC" />
             </NavbarBrand>
             <button
               className="navbar-toggler navbar-toggler"
@@ -83,11 +50,7 @@ function IndexNavbar() {
               <span className="navbar-toggler-bar bottom-bar"></span>
             </button>
           </div>
-          <Collapse
-            className="justify-content-end"
-            isOpen={collapseOpen}
-            navbar
-          >
+          <Collapse className="justify-content-end" isOpen={collapseOpen} navbar>
             <Nav navbar>
               <NavItem>
                 <Link exact="true" to="/" className="nav-link">
@@ -135,11 +98,7 @@ function IndexNavbar() {
                 </Link>
               </NavItem>
               <NavItem>
-                <NavLink
-                  href="https://www.facebook.com/hillcitysc"
-                  target="_blank"
-                  id="facebook-tooltip"
-                >
+                <NavLink href="https://www.facebook.com/hillcitysc" target="_blank" id="facebook-tooltip">
                   <i className="fab fa-facebook-square"></i>
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>

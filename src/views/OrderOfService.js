@@ -32,8 +32,6 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   }, []);
 
   const setContent = (title, content) => {
-    let catechismQuestion;
-    let catechismAnswer;
     let contentDiv = <div className="order-service-div" dangerouslySetInnerHTML={{ __html: content }} />;
     let header = title;
 
@@ -44,25 +42,26 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </Link>
       );
     } else if (title === "Catechism") {
-      header = `Catechism Question ${content}`;
-      contentDiv = (
+      return (
         <div>
-          {catechismData
-            ? catechismData.forEach((item, index) => {
-                if (content - 1 === index) {
-                  catechismQuestion = item.question;
-                  catechismAnswer = item.answer.adult;
-                }
-              })
-            : null}
-          <p>
-            <span style={{ fontWeight: "900" }}>QUESTION: </span>
-            {catechismQuestion}
-          </p>
-          <p>
-            <span style={{ fontWeight: "900" }}>ANSWER: </span>
-            {catechismAnswer}
-          </p>
+          <h3>Catechism Question {content}</h3>
+          {catechismData.map((item, index) => {
+            if (content - 1 === index) {
+              return (
+                <div key={index}>
+                  <p>
+                    <span style={{ fontWeight: 900 }}>Question: </span>
+                    {item.question}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: 900 }}>Answer: </span>
+                    {item.answer.adult}
+                  </p>
+                </div>
+              );
+            }
+          })}
+          <hr className="order-service-hr" />
         </div>
       );
     } else if (title === "Announcements") {

@@ -1,55 +1,52 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from "react";
 
-import PageHeader from 'components/Headers/PageHeader.js';
-import SpinnerFullPage from 'components/Spinner/SpinnerFullPage';
-import DonationForm from 'views/DonationForm';
+import PageHeader from "components/Headers/PageHeader.js";
+import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
+import DonationForm from "views/DonationForm";
 
-import { useObserver } from 'mobx-react';
-import { StoreContext } from 'index';
+import { useObserver } from "mobx-react";
+import { StoreContext } from "stores/StoreContext";
 
 function Give() {
-	const store = useContext(StoreContext);
+  const store = useContext(StoreContext);
 
-	useEffect(() => {
-		document.body.classList.add('index-page');
-		document.body.classList.add('sidebar-collapse');
-		document.documentElement.classList.remove('nav-open');
-		window.scrollTo(0, 0);
-		document.body.scrollTop = 0;
-		return function cleanup() {
-			document.body.classList.remove('index-page');
-			document.body.classList.remove('sidebar-collapse');
-		};
-	}, []);
+  useEffect(() => {
+    document.body.classList.add("index-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    return function cleanup() {
+      document.body.classList.remove("index-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
 
-	return useObserver(() => (
-		<>
-			<div className='wrapper page-content-container'>
-				{store.pagesData.length === 0 ? (
-					<SpinnerFullPage />
-				) : (
-					store.pagesData
-						.filter((page) => page.id === 9135)
-						.map((page, index) => {
-							return (
-								<div key={index}>
-									<PageHeader headerData={page} />
-									<div className='page-content-title'>
-										<h2 className='container'>{page.title.rendered}</h2>
-										<hr className='page-content-hr' />
-									</div>
-									<div
-										className='container'
-										dangerouslySetInnerHTML={{ __html: page.content.rendered }}
-									/>
-									<DonationForm />
-								</div>
-							);
-						})
-				)}
-			</div>
-		</>
-	));
+  return useObserver(() => (
+    <>
+      <div className="wrapper page-content-container">
+        {store.pagesStore.pagesData.length === 0 ? (
+          <SpinnerFullPage />
+        ) : (
+          store.pagesStore.pagesData
+            .filter((page) => page.id === 9135)
+            .map((page, index) => {
+              return (
+                <div key={index}>
+                  <PageHeader headerData={page} />
+                  <div className="page-content-title">
+                    <h2 className="container">{page.title.rendered}</h2>
+                    <hr className="page-content-hr" />
+                  </div>
+                  <div className="container" dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+                  <DonationForm />
+                </div>
+              );
+            })
+        )}
+      </div>
+    </>
+  ));
 }
 
 export default Give;

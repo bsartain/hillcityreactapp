@@ -1,11 +1,22 @@
-import { createContext } from 'react'
-import { getPagesData2 } from 'services/services'
+import { getSermonDataService } from "services/services";
 
-export default function PagesStore(){
-    return{
-        pagesData: [],
-        fetchData: getPagesData2()
-    }
+export function PagesStore() {
+  return {
+    mediaPlayerIsDisplayed: false,
+    isPlaying: false,
+    pagesData: [],
+    homePageData: [],
+    getSermonData: (url) => {
+      return getSermonDataService(url);
+    },
+    sliceSermonData: (sermonData, indexOfFirstSermon, indexOfLastSermon) => {
+      let slicedData;
+      if (sermonData.length !== 0) {
+        slicedData = sermonData.slice(indexOfFirstSermon, indexOfLastSermon);
+      }
+      return slicedData;
+    },
+    orderOfServiceData: [],
+    isSpecialAnnouncement: false,
+  };
 }
-
-export const PagesStoreContext = createContext(new PagesStore())

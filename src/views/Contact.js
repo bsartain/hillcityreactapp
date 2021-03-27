@@ -6,7 +6,7 @@ import emailjs from "emailjs-com";
 import { Alert, Container } from "reactstrap";
 
 import { useObserver } from "mobx-react";
-import { StoreContext } from "index";
+import { StoreContext } from "stores/StoreContext";
 
 function Contact() {
   const [emailSubmitted, setEmailSubmitted] = useState("");
@@ -41,23 +41,16 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_stlh02s",
-        "template_c9wem4a",
-        e.target,
-        "user_if8ZOwuPyLPg85M92qvCw"
-      )
-      .then(
-        (result) => {
-          console.log(result);
-          setEmailSubmitted("success");
-        },
-        (error) => {
-          console.log(error);
-          setEmailSubmitted("failed");
-        }
-      );
+    emailjs.sendForm("service_stlh02s", "template_c9wem4a", e.target, "user_if8ZOwuPyLPg85M92qvCw").then(
+      (result) => {
+        console.log(result);
+        setEmailSubmitted("success");
+      },
+      (error) => {
+        console.log(error);
+        setEmailSubmitted("failed");
+      }
+    );
     e.target.reset();
   };
 
@@ -69,14 +62,8 @@ function Contact() {
             <div className="alert-icon">
               <i className="now-ui-icons ui-2_like"></i>
             </div>
-            <strong>Your message was sent.</strong> Thank you for contacting
-            Hill City Church. Your message is important to us and one of our
-            leadership servants will respond in a timely manner.
-            <button
-              type="button"
-              className="close"
-              onClick={() => setAlert1(false)}
-            >
+            <strong>Your message was sent.</strong> Thank you for contacting Hill City Church. Your message is important to us and one of our leadership servants will respond in a timely manner.
+            <button type="button" className="close" onClick={() => setAlert1(false)}>
               <span aria-hidden="true">
                 <i className="now-ui-icons ui-1_simple-remove"></i>
               </span>
@@ -91,13 +78,8 @@ function Contact() {
             <div className="alert-icon">
               <i className="now-ui-icons objects_support-17"></i>
             </div>
-            <strong>Message submission failed.</strong> Something went wrong.
-            please check the information and try again.
-            <button
-              type="button"
-              className="close"
-              onClick={() => setAlert2(false)}
-            >
+            <strong>Message submission failed.</strong> Something went wrong. please check the information and try again.
+            <button type="button" className="close" onClick={() => setAlert2(false)}>
               <span aria-hidden="true">
                 <i className="now-ui-icons ui-1_simple-remove"></i>
               </span>
@@ -111,10 +93,10 @@ function Contact() {
   return useObserver(() => (
     <>
       <div className="wrapper page-content-container">
-        {store.pagesData.length === 0 ? (
+        {store.pagesStore.pagesData.length === 0 ? (
           <SpinnerFullPage />
         ) : (
-          store.pagesData
+          store.pagesStore.pagesData
             .filter((page) => page.id === 41)
             .map((page, index) => {
               return (
@@ -128,23 +110,13 @@ function Contact() {
                   <div className="container" style={{ marginBottom: "50px" }}>
                     {setMessage()}
                     <form onSubmit={sendEmail} className="container">
-                      <p>
-                        If you need prayer or would like to learn more about
-                        Hill City and how we can serve you please fill out the
-                        form and someone will contact you shortly.
-                      </p>
+                      <p>If you need prayer or would like to learn more about Hill City and how we can serve you please fill out the form and someone will contact you shortly.</p>
                       <div className="form-group row">
                         <label htmlFor="name" className="col-2 col-form-label">
                           Name
                         </label>
                         <div className="col-8">
-                          <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            className="form-control"
-                            required="required"
-                          />
+                          <input id="name" name="name" type="text" className="form-control" required="required" />
                         </div>
                       </div>
                       <div className="form-group row">
@@ -152,57 +124,28 @@ function Contact() {
                           Email
                         </label>
                         <div className="col-8">
-                          <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            className="form-control"
-                            required="required"
-                          />
+                          <input id="email" name="email" type="email" className="form-control" required="required" />
                         </div>
                       </div>
                       <div className="form-group row">
-                        <label
-                          htmlFor="subject"
-                          className="col-2 col-form-label"
-                        >
+                        <label htmlFor="subject" className="col-2 col-form-label">
                           Subject
                         </label>
                         <div className="col-8">
-                          <input
-                            id="subject"
-                            name="subject"
-                            type="text"
-                            className="form-control"
-                            required="required"
-                          />
+                          <input id="subject" name="subject" type="text" className="form-control" required="required" />
                         </div>
                       </div>
                       <div className="form-group row">
-                        <label
-                          htmlFor="message"
-                          className="col-2 col-form-label"
-                        >
+                        <label htmlFor="message" className="col-2 col-form-label">
                           Message
                         </label>
                         <div className="col-8">
-                          <textarea
-                            id="message"
-                            name="message"
-                            cols="40"
-                            rows="5"
-                            className="form-control"
-                            required="required"
-                          ></textarea>
+                          <textarea id="message" name="message" cols="40" rows="5" className="form-control" required="required"></textarea>
                         </div>
                       </div>
                       <div className="form-group row">
                         <div className="col-12">
-                          <button
-                            name="submit"
-                            type="submit"
-                            className="btn btn-primary"
-                          >
+                          <button name="submit" type="submit" className="btn btn-primary">
                             Submit
                           </button>
                         </div>
@@ -226,9 +169,7 @@ function Contact() {
         </div>
         {footerContent.length === 0 ? null : (
           <iframe
-            src={
-              footerContent.length === 0 ? null : footerContent.acf.footer_map
-            }
+            src={footerContent.length === 0 ? null : footerContent.acf.footer_map}
             width="100%"
             height="600px"
             frameBorder="0"
