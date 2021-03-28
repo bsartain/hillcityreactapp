@@ -1,6 +1,6 @@
 import { getSermonDataService } from "services/services";
 
-export function PagesStore() {
+export function MainStore() {
   return {
     mediaPlayerIsDisplayed: false,
     isPlaying: false,
