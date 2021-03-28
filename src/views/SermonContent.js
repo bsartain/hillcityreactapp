@@ -13,6 +13,8 @@ export const setPreacher = (preacher) => {
     return "Fred Shope";
   } else if (preacher[0] === 46) {
     return "Kirk Irwin";
+  } else if (preacher[0] === 99) {
+    return "Mark Hill";
   }
 };
 
@@ -23,6 +25,8 @@ export const setSermonSeries = (sermonSeries) => {
     return "Advent in Isaiah";
   } else if (sermonSeries[0] === 28) {
     return "The Apostles Creed";
+  } else if (sermonSeries[0] === 100) {
+    return "Palm Sunday";
   }
 };
 

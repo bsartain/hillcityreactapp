@@ -1,6 +1,6 @@
 import React, { useContext, createContext } from "react";
-import { PagesStore } from "stores/pagesStore";
-import { SermonStore } from "stores/SermonStore";
+import { PagesStore } from "./PagesStore";
+import { SermonStore } from "./SermonStore";
 import { useLocalObservable } from "mobx-react";
 
 export const StoreContext = createContext(null);

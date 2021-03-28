@@ -35,13 +35,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
     let contentDiv = <div className="order-service-div" dangerouslySetInnerHTML={{ __html: content }} />;
     let header = title;
 
-    if (title === "Offertory") {
-      contentDiv = (
-        <Link to="/give" className="btn btn-primary">
-          Give Online
-        </Link>
-      );
-    } else if (title === "Catechism") {
+    if (title === "Catechism") {
       return (
         <div>
           <h3>Catechism Question {content}</h3>
@@ -100,6 +94,20 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           })}
         </div>
       );
+    } else if (title === "Offertory") {
+      return (
+        <div>
+          <h3>Offertory</h3>
+          <p>In response to what the Lord has done for us, let's worship Him in the giving of our tithes and offerings.</p>
+          <p>
+            We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.
+          </p>
+          <Link to="/give" className="btn btn-primary">
+            Give Online
+          </Link>
+          <hr className="order-service-hr" />
+        </div>
+      );
     } else if (title === "prayerRequests" || title === "") {
       title = null;
       return content.map((item, index) => {
@@ -129,15 +137,6 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           ) : null}
           {title === "Assurance of Grace" ? (
             <p>You cannot out sin God's grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your offenses toward Him.</p>
-          ) : null}
-          {title === "Offertory" ? (
-            <div>
-              <p>In response to what the Lord has done for us, let's worship Him in the giving of our tithes and offerings.</p>
-              <p>
-                We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of Hill City Church please give joyously and
-                generously.
-              </p>
-            </div>
           ) : null}
           {content.map((item, index) => {
             return (
