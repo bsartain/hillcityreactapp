@@ -39,8 +39,9 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
       return (
         <div>
           <h3>Catechism Question {content}</h3>
-          {catechismData.map((item, index) => {
-            if (content - 1 === index) {
+          {catechismData
+            .filter((item, index) => content - 1 === index)
+            .map((item, index) => {
               return (
                 <div key={index}>
                   <p>
@@ -53,8 +54,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                   </p>
                 </div>
               );
-            }
-          })}
+            })}
           <hr className="order-service-hr" />
         </div>
       );
