@@ -151,7 +151,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
       );
     } else {
       return (
-        <div>
+        <div className="content-order-service">
           <h3>{header}</h3>
           {contentDiv}
           <hr className="order-service-hr" />
