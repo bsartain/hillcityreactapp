@@ -50,7 +50,7 @@ const CarouselHomePage = ({ headerData }) => {
         </div>
       );
     } else {
-      return <h1>WELCOME</h1>;
+      return <h1>EASTER AT THE FARM</h1>;
     }
   };
 
@@ -61,7 +61,11 @@ const CarouselHomePage = ({ headerData }) => {
           <h5>HILL CITY CHURCH</h5>
           <hr className="hr-one" />
           {setHeaderText()}
-          <h6>For the Truth, Goodness and Beauty of Jesus, For the Flourishing of Rock Hill</h6>
+          {/* <h6>For the Truth, Goodness and Beauty of Jesus, For the Flourishing of Rock Hill</h6> */}
+          <h6>Join us as we celebrate the Risen Lord Jesus at the Olson Farm with worship, fellowship and feasting. See details below.</h6>
+          <div className="page-header-arrow-home-page" onClick={() => window.scrollTo({ top: 926, behavior: "smooth" })}>
+            <i className="now-ui-icons  arrows-1_minimal-down"></i>
+          </div>
         </div>
       </div>
       <style>
