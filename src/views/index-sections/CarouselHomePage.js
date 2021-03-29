@@ -35,7 +35,6 @@ const CarouselHomePage = ({ headerData }) => {
           </CarouselItem>
         );
       });
-  console.log("HEADER DATA: ", headerData);
   const setHeaderText = () => {
     const date = new Date();
     const day = date.getDay();
