@@ -602,10 +602,6 @@
       width: 93px;
     }
 
-    .tab-content > .active {
-      animation: slide-right 0.1s ease-out;
-    }
-
     @keyframes slide-right {
       0% {
         opacity: 0;
