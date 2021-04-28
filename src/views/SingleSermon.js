@@ -45,7 +45,7 @@ function SingleSermon(props) {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, [store.sermonStore.singleSermonData, history.location.pathname, store.sermonStore]);
+  }, [history.location.pathname, store.sermonStore]);
 
   const getMediaPlayer = async () => {
     runInAction(() => {
