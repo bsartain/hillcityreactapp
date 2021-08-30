@@ -4,32 +4,6 @@ import { formatDate } from "utils/utils";
 import { useHistory } from "react-router-dom";
 import { RefTagger } from "react-reftagger";
 
-export const setPreacher = (preacher) => {
-  if (preacher[0] === 35) {
-    return "Brett Sartain";
-  } else if (preacher[0] === 27) {
-    return "Buzzy Elder";
-  } else if (preacher[0] === 32) {
-    return "Fred Shope";
-  } else if (preacher[0] === 46) {
-    return "Kirk Irwin";
-  } else if (preacher[0] === 99) {
-    return "Mark Hill";
-  }
-};
-
-export const setSermonSeries = (sermonSeries) => {
-  if (sermonSeries[0] === 86) {
-    return "Kingdom Manifesto - The Sermon On The Mount";
-  } else if (sermonSeries[0] === 79) {
-    return "Advent in Isaiah";
-  } else if (sermonSeries[0] === 28) {
-    return "The Apostles Creed";
-  } else if (sermonSeries[0] === 100) {
-    return "Palm Sunday";
-  }
-};
-
 export const SermonContent = ({ sermonData, loading }) => {
   let history = useHistory();
 
@@ -53,13 +27,13 @@ export const SermonContent = ({ sermonData, loading }) => {
                   <div key={index} className="card">
                     <div className="card-background" style={{ backgroundImage: "url(" + sermon._featured_url + ")" }}></div>
                     <div className="card-body">
-                      <p className="card-sermon-series">{setSermonSeries(sermon.wpfc_sermon_series)}</p>
+                      <p className="card-sermon-series">{sermon.wpfc_sermon_series[1]}</p>
                       <h4 className="card-title" dangerouslySetInnerHTML={{ __html: sermon.title.rendered }} onClick={() => getSingleSermon(sermon)} />
                       <p className="card-date">{formatDate(sermon.date)}</p>
                       <hr className="card-hr" />
                       <div className="card-text card-date-passage">
                         <p className="card-preacher">
-                          Preacher: <span className="card-detail-color">{setPreacher(sermon.wpfc_preacher)}</span>{" "}
+                          Preacher: <span className="card-detail-color">{sermon.wpfc_preacher[1]}</span>{" "}
                         </p>
                         <span className="card-detail-divider">|</span>
                         <p className="card-passage">

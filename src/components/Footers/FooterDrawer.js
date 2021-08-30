@@ -4,7 +4,6 @@ import "react-h5-audio-player/lib/styles.css";
 
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
-import { setPreacher } from "views/SermonContent";
 import { runInAction } from "mobx";
 
 function FooterDrawer() {
@@ -59,7 +58,7 @@ function FooterDrawer() {
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: store.sermonStore.singleSermonData.title.rendered }} />
                     <hr />
-                    <div>{setPreacher(store.sermonStore.singleSermonData.wpfc_preacher)}</div>
+                    <div>{store.sermonStore.singleSermonData.wpfc_preacher[1]}</div>
                   </div>
                 </div>
                 <AudioPlayer

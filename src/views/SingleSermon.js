@@ -3,7 +3,6 @@ import React, { useState, useContext, useEffect } from "react";
 import PageHeader from "components/Headers/PageHeader.js";
 import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
 import { formatDate } from "utils/utils";
-import { setPreacher, setSermonSeries } from "views/SermonContent";
 
 import { useObserver } from "mobx-react";
 import { runInAction, observable } from "mobx";
@@ -28,6 +27,23 @@ function SingleSermon(props) {
       const sermonId = await url.substring(url.lastIndexOf("/") + 1);
       const response = await fetch(`https://hillcitysc.com/wp-json/wp/v2/wpfc_sermon/${sermonId}`);
       const singleSermonData = await response.json();
+      const preacherResponse = await fetch("https://hillcitysc.com/wp-json/wp/v2/wpfc_preacher");
+      const preacherData = await preacherResponse.json();
+      const sermonSeriesResponse = await fetch("https://hillcitysc.com/wp-json/wp/v2/wpfc_sermon_series");
+      const sermonSeriesData = await sermonSeriesResponse.json();
+
+      preacherData.forEach((preacher) => {
+        if (singleSermonData.wpfc_preacher[0] === preacher.id) {
+          singleSermonData.wpfc_preacher.push(preacher.name);
+        }
+      });
+
+      sermonSeriesData.forEach((series) => {
+        if (singleSermonData.wpfc_sermon_series[0] === series.id) {
+          singleSermonData.wpfc_sermon_series.push(series.name);
+        }
+      });
+
       await runInAction(() => {
         store.sermonStore.singleSermonData = singleSermonData;
       });
@@ -77,12 +93,12 @@ function SingleSermon(props) {
               <div>
                 <p>
                   <span className="item-detail">Preacher: </span>
-                  {setPreacher(store.sermonStore.singleSermonData.wpfc_preacher)}{" "}
+                  {store.sermonStore.singleSermonData.wpfc_preacher[1]}{" "}
                 </p>
               </div>
               <div>
                 <p>
-                  <span className="item-detail">Series:</span> {setSermonSeries(store.sermonStore.singleSermonData.wpfc_sermon_series)}
+                  <span className="item-detail">Series:</span> {store.sermonStore.singleSermonData.wpfc_sermon_series[1]}
                 </p>
               </div>
               <div>
