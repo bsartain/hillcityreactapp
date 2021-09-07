@@ -74,6 +74,8 @@ function LiveStream() {
           store.pagesStore.pagesData
             .filter((page) => page.id === 8857)
             .map((page, index) => {
+              const youtubeLink = page.acf.youtube_link;
+              const parsedLink = youtubeLink.substring(17);
               return (
                 <div key={index}>
                   <PageHeader headerData={page} />
@@ -83,6 +85,19 @@ function LiveStream() {
                     <h3>WELCOME! OUR SERVICE WILL BEGIN AT 10:00 AM ON {sundayDate}</h3>
                   </div>
                   <div className="container live-stream-content" dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+                  <div className="youtube">
+                    {page.acf.youtube_link ? (
+                      <iframe
+                        width="100%"
+                        height="500"
+                        src={`https://www.youtube.com/embed/${parsedLink}`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    ) : null}
+                  </div>
                   <div className="container react-print-container">
                     <ReactToPrint
                       trigger={() => (
