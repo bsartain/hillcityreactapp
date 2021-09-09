@@ -38,7 +38,13 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
     if (title === "Catechism") {
       return (
         <div>
-          <h3>Catechism Question {content}</h3>
+          <h3 style={{ marginBottom: "0px" }}>Catechism Question {content}</h3>
+          <p style={{ marginBottom: "30px", fontSize: "9px", fontWeight: 700, marginLeft: "4px" }}>
+            All questions are from the{" "}
+            <a href="http://newcitycatechism.com/" target="_blank" rel="noopener noreferrer">
+              New City Catechism
+            </a>
+          </p>
           {catechismData
             .filter((item, index) => content - 1 === index)
             .map((item, index) => {
