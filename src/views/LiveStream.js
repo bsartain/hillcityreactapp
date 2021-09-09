@@ -99,17 +99,24 @@ function LiveStream() {
                     ) : null}
                   </div>
                   <div className="container react-print-container">
-                    <ReactToPrint
-                      trigger={() => (
-                        <button className="btn btn-primary">
-                          <i className="now-ui-icons files_paper"></i> Print Order Of Service
-                        </button>
-                      )}
-                      content={() => ref.current}
-                      onBeforeGetContent={() => setPrintLogo(true)}
-                      onAfterPrint={() => setPrintLogo(false)}
-                      pageStyle={pageStyle}
-                    />
+                    <div className="media-buttons-container">
+                      {page.acf.youtube_link ? (
+                        <a className="btn btn-primary youtube-btn media-button" target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${parsedLink}`}>
+                          <i className="fab fa-youtube"></i> Watch On YouTube
+                        </a>
+                      ) : null}
+                      <ReactToPrint
+                        trigger={() => (
+                          <button className="btn btn-primary media-button">
+                            <i className="fas fa-print"></i> Print Order Of Service
+                          </button>
+                        )}
+                        content={() => ref.current}
+                        onBeforeGetContent={() => setPrintLogo(true)}
+                        onAfterPrint={() => setPrintLogo(false)}
+                        pageStyle={pageStyle}
+                      />
+                    </div>
                     {store.pagesStore.orderOfServiceData.length === 0 ? null : <OrderOfService ref={ref} printLogo={printLogo} />}
                   </div>
                 </div>

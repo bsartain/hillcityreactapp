@@ -554,6 +554,42 @@
   padding: 0px 25px;
 }
 
+.fa-youtube {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.fa-print {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.media-button {
+  display: flex;
+  flex-direction: column;
+  width: 93px;
+  border-radius: 4px;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.media-buttons-container {
+  display: flex;
+  margin-bottom: -25px;
+  @media (max-width: 768px) {
+    margin-left: 10px;
+  }
+}
+
+.youtube-btn {
+  font-weight: 600;
+}
+
+.react-print-container .btn {
+  font-weight: 600;
+}
+
 .live-stream-container {
   .old-live-stream-title {
     display: none !important;
