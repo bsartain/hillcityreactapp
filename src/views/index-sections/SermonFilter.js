@@ -3,6 +3,7 @@ import { runInAction } from "mobx";
 import { StoreContext } from "stores/StoreContext";
 import { useObserver } from "mobx-react";
 import Spinner from "components/Spinner/Spinner";
+import { getSermonDataService } from "services/services";
 
 export default function SermonFilter({ sermonData }) {
   const store = useContext(StoreContext);
@@ -39,9 +40,8 @@ export default function SermonFilter({ sermonData }) {
         }
       });
 
-      const response = await fetch(sermonUrl.href);
-      const json = await response.json();
-      store.sermonStore.sermonData = json;
+      const response = await getSermonDataService(sermonUrl.href);
+      store.sermonStore.sermonData = response;
       setLoading(false);
     });
   };
