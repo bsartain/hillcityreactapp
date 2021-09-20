@@ -62,6 +62,21 @@ function LiveStream() {
     .pagebreak {
       page-break-before: always;
     }
+    .scripture-reading-container p{
+      font-size: 25px;
+    }
+    .show-announcements span{
+      font-size: 25px;
+    }
+    .content-order-service p{
+      font-size: 25px;
+    }
+    .print-order-service{
+      margin-left: 25px
+    }
+    .order-service-hr{
+      margin: 50px 50px;
+    }
   }
 `;
 

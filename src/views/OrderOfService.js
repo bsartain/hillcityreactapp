@@ -37,7 +37,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
 
     if (title === "Catechism") {
       return (
-        <div>
+        <div className="scripture-reading-container">
           <h3 style={{ marginBottom: "0px" }}>Catechism Question {content}</h3>
           <p style={{ marginBottom: "30px", fontSize: "9px", fontWeight: 700, marginLeft: "4px" }}>
             All questions are from the{" "}
@@ -94,7 +94,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                     <span>{item.announcement_location}</span>
                   </div>
                 ) : null}
-                <hr className="order-service-hr" />
+                {item.announcement_title ? <hr className="order-service-hr" /> : null}
               </div>
             );
           })}
@@ -102,7 +102,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
       );
     } else if (title === "Offertory") {
       return (
-        <div>
+        <div className="scripture-reading-container ">
           <h3>Offertory</h3>
           <p>In response to what the Lord has done for us, let's worship Him in the giving of our tithes and offerings.</p>
           <p>
@@ -280,7 +280,15 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
               {catechism}
               {songThree}
               {benedictionContent}
-              {miscellaneousContent}
+              {printLogo ? null : miscellaneousContent}
+              {printLogo ? (
+                <div className="scripture-reading-container">
+                  <h3>Announcements</h3>
+                  {announcements}
+                  <h3>Prayer Requests</h3>
+                  {prayerRequests}
+                </div>
+              ) : null}
             </div>
           </div>
         </TabPane>
