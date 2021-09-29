@@ -122,12 +122,15 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </div>
       );
     } else if (title === "Children's Sermon") {
-      return (
-        <div>
-          <h3 className="children-sermon">{title}</h3>;
-          <hr className="order-service-hr" />
-        </div>
-      );
+      console.log("CONTENT: ", content);
+      if (content === "yes") {
+        return (
+          <div>
+            <h3 className="children-sermon">{title}</h3>;
+            <hr className="order-service-hr" />
+          </div>
+        );
+      }
     } else if (title === "prayerRequests" || title === "") {
       title = null;
       return content.map((item, index) => {
@@ -265,6 +268,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                 orderOfServiceData.map((item) => {
                   // eslint-disable-next-line no-unused-vars
                   for (const property in item) {
+                    console.log("ITEM: ", item);
                     callToWorshipVerse = setContent("Call To Worship", callToWorship);
                     songOne = setContent(`Song - ${item["song_one_title"]}`, item["song_one_lyrics"]);
                     confessionOfSinVerse = setContent("Confession of Sin", confessionOfSins);
