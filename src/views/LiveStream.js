@@ -9,9 +9,13 @@ import ReactToPrint from "react-to-print";
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
 import { runInAction } from "mobx";
+import { useHistory } from "react-router-dom";
+import { googleAnalyticsTrackPage } from "utils/utils";
+import ReactGA from "react-ga";
 
 function LiveStream() {
   const ref = useRef(true);
+  const history = useHistory();
 
   const store = useContext(StoreContext);
 
@@ -35,6 +39,8 @@ function LiveStream() {
     }
     getSundaysDate();
 
+    googleAnalyticsTrackPage(history.location.pathname);
+
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -47,7 +53,7 @@ function LiveStream() {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history.location.pathname]);
 
   const pageStyle = `
   @page {
@@ -79,6 +85,20 @@ function LiveStream() {
     }
   }
 `;
+
+  const gaClickPrintBulletin = () => {
+    ReactGA.event({
+      category: "Live Stream Page",
+      action: "User clicked button to print order of service",
+    });
+  };
+
+  const gaClickYoutube = () => {
+    ReactGA.event({
+      category: "Live Stream Page",
+      action: "User clicked watch live on YouTube",
+    });
+  };
 
   return useObserver(() => (
     <>
@@ -116,7 +136,13 @@ function LiveStream() {
                   <div className="container react-print-container">
                     <div className="media-buttons-container">
                       {page.acf.youtube_link ? (
-                        <a className="btn btn-primary youtube-btn media-button" target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${parsedLink}`}>
+                        <a
+                          className="btn btn-primary youtube-btn media-button"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={`https://www.youtube.com/watch?v=${parsedLink}`}
+                          onClick={() => gaClickYoutube()}
+                        >
                           <i className="fab fa-youtube"></i> Watch On YouTube
                         </a>
                       ) : null}
@@ -127,7 +153,10 @@ function LiveStream() {
                           </button>
                         )}
                         content={() => ref.current}
-                        onBeforeGetContent={() => setPrintLogo(true)}
+                        onBeforeGetContent={() => {
+                          setPrintLogo(true);
+                          gaClickPrintBulletin();
+                        }}
                         onAfterPrint={() => setPrintLogo(false)}
                         pageStyle={pageStyle}
                       />

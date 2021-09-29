@@ -5,6 +5,7 @@ import { esvApi } from "utils/utils";
 
 import { NavItem, NavLink, Nav, TabContent, TabPane } from "reactstrap";
 import catechismData from "data/catechismData";
+import ReactGA from "react-ga";
 
 export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   const [orderOfServiceData, setOrderOfServiceData] = useState([]);
@@ -39,7 +40,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
       return (
         <div className="scripture-reading-container">
           <h3 style={{ marginBottom: "0px" }}>Catechism Question {content}</h3>
-          <p style={{ marginBottom: "30px", fontSize: "9px", fontWeight: 700, marginLeft: "4px" }}>
+          <p className="catechism-blurb">
             All questions are from the{" "}
             <a href="http://newcitycatechism.com/" target="_blank" rel="noopener noreferrer">
               New City Catechism
@@ -101,6 +102,12 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </div>
       );
     } else if (title === "Offertory") {
+      const gaClickGiveButton = () => {
+        ReactGA.event({
+          category: "Live Stream Page",
+          action: "User clicked the give button",
+        });
+      };
       return (
         <div className="scripture-reading-container ">
           <h3>Offertory</h3>
@@ -108,9 +115,16 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           <p>
             We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.
           </p>
-          <Link to="/give" className="btn btn-primary">
+          <Link to="/give" className="btn btn-primary" onClick={() => gaClickGiveButton()}>
             Give Online
           </Link>
+          <hr className="order-service-hr" />
+        </div>
+      );
+    } else if (title === "Children's Sermon") {
+      return (
+        <div>
+          <h3 className="children-sermon">{title}</h3>;
           <hr className="order-service-hr" />
         </div>
       );
@@ -179,6 +193,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   let miscellaneousContent;
   let announcements;
   let prayerRequests;
+  let childrensSermon;
 
   return (
     <div className="order-service-container">
@@ -190,6 +205,10 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
             onClick={(e) => {
               e.preventDefault();
               setIconPills("1");
+              ReactGA.event({
+                category: "Live Stream Page",
+                action: "User clicked the Order of Service Tab",
+              });
             }}
           >
             <div className="nav-pill">
@@ -205,6 +224,10 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
             onClick={(e) => {
               e.preventDefault();
               setIconPills("2");
+              ReactGA.event({
+                category: "Live Stream Page",
+                action: "User clicked the calendar Tab",
+              });
             }}
           >
             <div className="nav-pill">
@@ -220,6 +243,10 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
             onClick={(e) => {
               e.preventDefault();
               setIconPills("3");
+              ReactGA.event({
+                category: "Live Stream Page",
+                action: "User clicked the Prayer Requests Tab",
+              });
             }}
           >
             <div className="nav-pill">
@@ -252,6 +279,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                     miscellaneousContent = setContent(null, item["miscellaneous_info"]);
                     announcements = setContent("Announcements", item["announcements_section"]);
                     prayerRequests = setContent("prayerRequests", item["prayer_requests_section"]);
+                    childrensSermon = setContent("Children's Sermon", item["childrens_sermon"]);
                   }
                 })}
             <div className="print-order-service" ref={ref}>
@@ -275,6 +303,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
               {assuranceOfGraceVerse}
               {offertory}
               {songTwo}
+              {childrensSermon}
               {scriptureVerses}
               {preacherTitle}
               {catechism}

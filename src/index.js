@@ -47,10 +47,28 @@ import ConnectionSignup from "views/ConnectionSignup";
 import Devotional from "views/Devotional";
 
 import { StoreProvider } from "stores/StoreContext";
+import ReactGA from "react-ga";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
+// Initialize google analytics page view tracking using react router dom
+history.listen((location) => {
+  ReactGA.set({ page: location.pathname });
+  ReactGA.pageview(location.pathname);
+});
+
+ReactGA.initialize("UA-142492876-1", {
+  debug: true,
+  titleCase: false,
+  gaOptions: {
+    userId: "tozw6yxn",
+  },
+});
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
   <StoreProvider>
-    <HashRouter>
+    <HashRouter history={history}>
       <IndexNavbar />
       <Switch>
         <Switch>

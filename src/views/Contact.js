@@ -7,8 +7,11 @@ import { Alert, Container } from "reactstrap";
 
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
+import { useHistory } from "react-router-dom";
+import { googleAnalyticsTrackPage } from "utils/utils";
 
 function Contact() {
+  const history = useHistory();
   const [emailSubmitted, setEmailSubmitted] = useState("");
   const [alert1, setAlert1] = useState(true);
   const [alert2, setAlert2] = useState(true);
@@ -17,6 +20,8 @@ function Contact() {
   const store = useContext(StoreContext);
 
   useEffect(() => {
+    googleAnalyticsTrackPage(history.location.pathname);
+
     async function getFooterContent() {
       fetch("https://hillcitysc.com/wp-json/acf/v3/posts/9262")
         .then((res) => {
@@ -36,7 +41,7 @@ function Contact() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [history.location.pathname]);
 
   const sendEmail = (e) => {
     e.preventDefault();

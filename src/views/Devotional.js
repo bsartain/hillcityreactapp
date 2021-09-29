@@ -7,11 +7,16 @@ import { RefTagger } from "react-reftagger";
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
 import spurgeon from "data/spurgeon";
+import { useHistory } from "react-router-dom";
+import { googleAnalyticsTrackPage } from "utils/utils";
 
 function Devotional() {
   const store = useContext(StoreContext);
+  const history = useHistory();
 
   useEffect(() => {
+    googleAnalyticsTrackPage(history.location.pathname);
+
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -21,7 +26,7 @@ function Devotional() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [history.location.pathname]);
 
   const setTodaysDevo = () => {
     // eslint-disable-next-line array-callback-return

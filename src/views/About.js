@@ -5,11 +5,16 @@ import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
 
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
+import { useHistory } from "react-router-dom";
+import { googleAnalyticsTrackPage } from "utils/utils";
 
 function About() {
   const store = useContext(StoreContext);
+  const history = useHistory();
 
   useEffect(() => {
+    googleAnalyticsTrackPage(history.location.pathname);
+
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -19,7 +24,7 @@ function About() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [history.location.pathname]);
   return useObserver(() => (
     <>
       <div className="wrapper page-content-container">

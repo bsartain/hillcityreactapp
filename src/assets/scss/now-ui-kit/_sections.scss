@@ -590,6 +590,23 @@
   font-weight: 600;
 }
 
+.catechism-blurb {
+  margin-bottom: 30px;
+  font-size: 9px;
+  font-weight: 700;
+  margin-left: 4px;
+  color: #ddd;
+}
+
+.children-sermon {
+  margin-bottom: -15px;
+}
+
+.catechism-blurb a {
+  color: #ddd;
+  text-decoration: underline;
+}
+
 .live-stream-container {
   .old-live-stream-title {
     display: none !important;

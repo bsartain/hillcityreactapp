@@ -9,15 +9,20 @@ import SermonFilter from "views/index-sections/SermonFilter";
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
 import { toJS } from "mobx";
+import { useHistory } from "react-router-dom";
+import { googleAnalyticsTrackPage } from "utils/utils";
 
 function Sermons() {
   const store = useContext(StoreContext);
+  const history = useHistory();
 
   const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
   useEffect(() => {
+    googleAnalyticsTrackPage(history.location.pathname);
+
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -27,7 +32,7 @@ function Sermons() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, [store]);
+  }, [store, history.location.pathname]);
 
   let currentSermons;
 
