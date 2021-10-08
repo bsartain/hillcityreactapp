@@ -267,7 +267,6 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                 orderOfServiceData.map((item) => {
                   // eslint-disable-next-line no-unused-vars
                   for (const property in item) {
-                    console.log("ITEM: ", item);
                     callToWorshipVerse = setContent("Call To Worship", callToWorship);
                     songOne = setContent(`Song - ${item["song_one_title"]}`, item["song_one_lyrics"]);
                     confessionOfSinVerse = setContent("Confession of Sin", confessionOfSins);
