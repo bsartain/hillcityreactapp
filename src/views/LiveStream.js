@@ -161,7 +161,7 @@ function LiveStream() {
                         pageStyle={pageStyle}
                       />
                     </div>
-                    {store.pagesStore.orderOfServiceData.length === 0 ? null : <OrderOfService ref={ref} printLogo={printLogo} />}
+                    {store.pagesStore.orderOfServiceData.length === 0 ? <SpinnerFullPage /> : <OrderOfService ref={ref} printLogo={printLogo} />}
                   </div>
                 </div>
               );

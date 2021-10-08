@@ -122,7 +122,6 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </div>
       );
     } else if (title === "Children's Sermon") {
-      console.log("CONTENT: ", content);
       if (content === "yes") {
         return (
           <div>
