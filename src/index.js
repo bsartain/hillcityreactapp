@@ -58,7 +58,7 @@ history.listen((location) => {
 });
 
 ReactGA.initialize("UA-142492876-1", {
-  debug: true,
+  debug: false,
   titleCase: false,
   gaOptions: {
     userId: "tozw6yxn",
