@@ -170,6 +170,20 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           <hr className="order-service-hr" />
         </div>
       );
+    } else if (title === "Special Reading") {
+      if (content) {
+        return content.map((item, index) => {
+          if (item.special_reading_title && item.special_reading_content) {
+            return (
+              <div key={index} style={{ marginTop: "50px" }}>
+                <h3>{item.special_reading_title}</h3>
+                <div dangerouslySetInnerHTML={{ __html: item.special_reading_content }} />
+                <hr className="order-service-hr" />
+              </div>
+            );
+          }
+        });
+      }
     } else {
       return (
         <div className="content-order-service">
@@ -181,6 +195,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
     }
   };
 
+  let specialReading;
   let callToWorshipVerse;
   let confessionOfSinVerse;
   let assuranceOfGraceVerse;
@@ -267,6 +282,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                 orderOfServiceData.map((item) => {
                   // eslint-disable-next-line no-unused-vars
                   for (const property in item) {
+                    specialReading = setContent("Special Reading", item["special_reading_fields"]);
                     callToWorshipVerse = setContent("Call To Worship", callToWorship);
                     songOne = setContent(`Song - ${item["song_one_title"]}`, item["song_one_lyrics"]);
                     confessionOfSinVerse = setContent("Confession of Sin", confessionOfSins);
@@ -299,6 +315,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                   <img src="https://hillcitysc.com/wp-content/uploads/2021/02/HC-print-masthead-logo-e1612377440345.png" alt="Hill City Church: Rock Hill SC" />
                 </div>
               ) : null}
+              {specialReading}
               {callToWorshipVerse}
               {songOne}
               {confessionOfSinVerse}
