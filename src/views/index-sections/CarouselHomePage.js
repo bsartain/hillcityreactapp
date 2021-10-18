@@ -60,7 +60,6 @@ const CarouselHomePage = ({ headerData }) => {
           <h5>HILL CITY CHURCH</h5>
           <hr className="hr-one" />
           {setHeaderText()}
-          {/* <h6>For the Truth, Goodness and Beauty of Jesus, For the Flourishing of Rock Hill</h6> */}
           <h6 dangerouslySetInnerHTML={{ __html: headerData.homepage_excerpt }} />
           <div className="page-header-arrow-home-page" onClick={() => window.scrollTo({ top: 926, behavior: "smooth" })}>
             <i className="now-ui-icons  arrows-1_minimal-down"></i>
