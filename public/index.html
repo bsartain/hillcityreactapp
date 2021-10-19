@@ -85,5 +85,17 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          let fbDescription = document.querySelector('meta[property="og:description"]')
+          let fbImage = document.querySelector('meta[property="og:image"]')
+          let fbUrl = document.querySelector('meta[property="og:url"]')
+          if(window.location.hash === '#/devotional'){
+            fbDescription.setAttribute("content", "Daily Devotion");
+            fbImage.setAttribute("content", "https://hillcitysc.com/wp-content/uploads/2021/10/daily-devotion.jpeg");
+            fbUrl.setAttribute("content", "https://app.hillcitysc.com/#/devotional");
+          }
+      }); 
+    </script>
   </body>
 </html>
