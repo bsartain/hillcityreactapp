@@ -28,7 +28,6 @@
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "^4.0.3",
-    "react-snap": "^1.23.0",
     "react-to-print": "^2.12.3",
     "reactstrap": "8.4.1",
     "workbox-background-sync": "^5.1.4",
@@ -53,8 +52,7 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css",
     "minify-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css --source-map true",
-    "postbuild": "react-snap"
+    "map-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css --source-map true"
   },
   "eslintConfig": {
     "extends": "react-app"
