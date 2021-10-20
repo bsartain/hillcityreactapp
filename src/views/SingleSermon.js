@@ -10,6 +10,7 @@ import { StoreContext } from "stores/StoreContext";
 import { esvApi } from "utils/utils";
 import { RefTagger } from "react-reftagger";
 import { useHistory } from "react-router-dom";
+import Meta from "components/Meta";
 
 function SingleSermon(props) {
   const store = useContext(StoreContext);
@@ -77,6 +78,12 @@ function SingleSermon(props) {
           <SpinnerFullPage />
         ) : (
           <div>
+            <Meta
+              title={store.sermonStore.singleSermonData.title.rendered}
+              description={store.sermonStore.singleSermonData.wpfc_sermon_series[1]}
+              image={store.sermonStore.singleSermonData._featured_url}
+              url={window.location.href}
+            />
             <RefTagger noSearchTagNames={["h1", "h2", "h3", "h4", "h5"]} bibleVersion={"ESV"} />
             <PageHeader headerData={store.sermonStore.singleSermonData} />
             <div className="page-content-title">

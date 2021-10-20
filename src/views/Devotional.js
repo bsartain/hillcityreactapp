@@ -9,6 +9,7 @@ import { StoreContext } from "stores/StoreContext";
 import spurgeon from "data/spurgeon";
 import { useHistory } from "react-router-dom";
 import { googleAnalyticsTrackPage } from "utils/utils";
+import Meta from "components/Meta";
 
 function Devotional() {
   const store = useContext(StoreContext);
@@ -58,6 +59,12 @@ function Devotional() {
             .map((page, index) => {
               return (
                 <div key={index}>
+                  <Meta
+                    title={page.title.rendered}
+                    description={"Be encoureged and enriched in your walk with Jesus with this daily devotional from Charles Hadden Spurgeon"}
+                    image={"https://hillcitysc.com/wp-content/uploads/2021/10/daily-devotion.jpeg"}
+                    url={window.location.href}
+                  />
                   <RefTagger />
                   <PageHeader headerData={page} />
                   <div className="page-content-title">

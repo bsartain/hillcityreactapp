@@ -6,6 +6,7 @@ import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
 
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
+import Meta from "components/Meta";
 
 function Index() {
   const store = useContext(StoreContext);
@@ -27,6 +28,12 @@ function Index() {
         <SpinnerFullPage />
       ) : (
         <div className="wrapper">
+          <Meta
+            title={"Hill City Church | Rock Hill SC"}
+            description={"Following Jesus For the Flourishing of Rock Hill"}
+            image={"https://hillcitysc.com/wp-content/uploads/2018/07/shope.jpg"}
+            url={window.location.href}
+          />
           <IndexHeader headerData={store.pagesStore.homePageData} />
           <HomePageSection />
         </div>

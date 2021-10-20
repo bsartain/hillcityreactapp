@@ -12,6 +12,7 @@ import { runInAction } from "mobx";
 import { useHistory } from "react-router-dom";
 import { googleAnalyticsTrackPage } from "utils/utils";
 import ReactGA from "react-ga";
+import Meta from "components/Meta";
 
 function LiveStream() {
   const ref = useRef(true);
@@ -113,6 +114,7 @@ function LiveStream() {
               const parsedLink = youtubeLink.substring(17);
               return (
                 <div key={index}>
+                  <Meta title={page.title.rendered} description={page.content.rendered} image={page.better_featured_image.source_url} url={window.location.href} />
                   <PageHeader headerData={page} />
                   <div className="page-content-title container">
                     <h2 className="container">{page.title.rendered}</h2>

@@ -11,6 +11,7 @@ import { StoreContext } from "stores/StoreContext";
 import { toJS } from "mobx";
 import { useHistory } from "react-router-dom";
 import { googleAnalyticsTrackPage } from "utils/utils";
+import Meta from "components/Meta";
 
 function Sermons() {
   const store = useContext(StoreContext);
@@ -53,6 +54,12 @@ function Sermons() {
           <div>
             {store.sermonStore.sermonData.length > 0 ? <PageHeader headerData={null} sermonHeaderData={store.sermonStore.sermonData[0]} /> : null}
             <div className="page-content-title">
+              <Meta
+                title={"Sermons | Hill City Church | Rock Hill SC"}
+                description={"Hill City Church delivers relevent sermons directly from the scriptures to highlight what God has done for us through Jesus Christ"}
+                image={store.sermonStore.sermonData[0]._featured_url}
+                url={window.location.href}
+              />
               <h2 className="container">Current Sermons</h2>
               <hr className="page-content-hr" />
               <SermonFilter />
