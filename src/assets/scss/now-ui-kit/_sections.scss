@@ -255,6 +255,124 @@
   }
 }
 
+.plan-visit-top {
+  display: flex;
+  max-width: 1100px;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0px;
+  div {
+    margin: 25px;
+    flex: 1;
+  }
+  button {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  @media (max-width: 992px) {
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.plan-visit-map {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 85px 300px;
+  background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3)), url("https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg") no-repeat left;
+  p {
+    color: #fff;
+  }
+  h2 {
+    color: #ffffff !important;
+  }
+  .plan-visit-map-content {
+    width: 100%;
+    max-width: 450px;
+  }
+  button {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  @media (max-width: 992px) {
+    padding: 85px 20px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg") no-repeat left;
+  }
+}
+
+.plan-visit-section {
+  display: flex;
+  height: auto;
+  width: 100%;
+  min-height: 500px;
+  div {
+    flex: 1;
+    padding: 50px;
+  }
+}
+
+.plan-visit-what-to-expect-title-container {
+  width: 500px;
+  margin: auto;
+  .plan-visit-what-to-expect-title {
+    color: #737373 !important;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 50px;
+    @media (max-width: 992px) {
+      font-size: 35px;
+    }
+  }
+
+  .plan-visit-what-to-expect-border {
+    border-bottom: 2px solid #737373;
+    padding-bottom: 0;
+    width: 150px;
+    margin: auto;
+  }
+}
+
+.plan-visit-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  form {
+    border: 1px solid #f2f2f2;
+    padding: 25px;
+  }
+  .form-group {
+    margin-bottom: 35px;
+  }
+  .form-group-button {
+    display: flex;
+    justify-content: left;
+    margin-top: 25px;
+  }
+  .form-check {
+    margin: 0 0 0 25px;
+    p {
+      margin-left: -25px;
+      margin-top: 25px;
+    }
+  }
+}
+
+.plan-visit-overlay {
+  position: absolute;
+  background-color: #000000;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+}
+
+.light-gray {
+  background-color: #f2f2f2;
+}
+
 .page-content-container {
   .page-content-title {
     width: 100%;

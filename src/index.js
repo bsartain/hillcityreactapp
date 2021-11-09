@@ -45,6 +45,8 @@ import PaymentSuccess from "views/PaymentSuccess";
 import PaymentFailed from "views/PaymentFailed";
 import ConnectionSignup from "views/ConnectionSignup";
 import Devotional from "views/Devotional";
+import PlanVisit from "views/PlanVisit";
+import SmallGroups from "views/SmallGroups";
 
 import { StoreProvider } from "stores/StoreContext";
 import ReactGA from "react-ga";
@@ -88,6 +90,8 @@ ReactDOM.render(
           <Route path="/single-sermon/:id" render={(props) => <SingleSermon {...props} />} />
           <Route path="/connection-signup" render={(props) => <ConnectionSignup {...props} />} />
           <Route path="/devotional" render={(props) => <Devotional {...props} />} />
+          <Route path="/plan-your-visit" render={(props) => <PlanVisit {...props} />} />
+          <Route path="/small-groups" render={(props) => <SmallGroups {...props} />} />
           <Redirect to="/" />
           <Redirect from="/" to="/" />
         </Switch>

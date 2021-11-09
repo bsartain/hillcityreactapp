@@ -93,6 +93,11 @@ function IndexNavbar() {
                 </Link>
               </NavItem>
               <NavItem>
+                <Link to="/small-groups" className="nav-link">
+                  Small Groups
+                </Link>
+              </NavItem>
+              <NavItem>
                 <Link to="/give" className="nav-link">
                   Give
                 </Link>

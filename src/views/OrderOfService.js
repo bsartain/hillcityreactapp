@@ -181,6 +181,8 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                 <hr className="order-service-hr" />
               </div>
             );
+          } else {
+            return null;
           }
         });
       }
