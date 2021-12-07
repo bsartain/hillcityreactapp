@@ -40,7 +40,7 @@ import Give from "views/Give";
 import Sermons from "views/Sermons";
 import SingleSermon from "views/SingleSermon";
 import DarkFooter from "components/Footers/DarkFooter.js";
-import FooterDrawer from "components/Footers/FooterDrawer";
+import MediaDrawer from "components/Footers/MediaDrawer";
 import PaymentSuccess from "views/PaymentSuccess";
 import PaymentFailed from "views/PaymentFailed";
 import ConnectionSignup from "views/ConnectionSignup";
@@ -97,7 +97,7 @@ ReactDOM.render(
         </Switch>
       </Switch>
       <DarkFooter />
-      <FooterDrawer />
+      <MediaDrawer />
     </HashRouter>
   </StoreProvider>,
   document.getElementById("root")
