@@ -13,10 +13,10 @@ function PageHeader({ headerData, sermonHeaderData }) {
   const urlStringPart = str.substr(0, 15);
 
   if (headerData !== null) {
-    setImage = headerData.better_featured_image.media_details.sizes.medium_large.source_url;
+    setImage = headerData.better_featured_image.source_url;
     setTitle = headerData.title.rendered;
-  } else {
-    setImage = sermonHeaderData._featured_url;
+  } else if (sermonHeaderData) {
+    setImage = sermonHeaderData.featured_image.large;
     setTitle = "Sermons";
   }
 

@@ -498,6 +498,16 @@
   text-transform: uppercase;
 }
 
+.spinner-sermons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  div {
+    text-align: center;
+  }
+}
+
 .spinner-full-container {
   width: 100%;
   height: 900px;
@@ -677,6 +687,11 @@
   margin-bottom: 15px;
 }
 
+.fa-address-card {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
 .fa-print {
   font-size: 30px;
   margin-bottom: 15px;
@@ -702,6 +717,11 @@
 
 .youtube-btn {
   font-weight: 600;
+}
+
+.connect-card-btn {
+  font-weight: 600;
+  color: #ffffff !important;
 }
 
 .react-print-container .btn {

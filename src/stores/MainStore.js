@@ -1,4 +1,4 @@
-import { getSermonDataService } from "services/services";
+import { getSermonDataServiceTwo } from "services/services";
 
 export function MainStore() {
   return {
@@ -7,7 +7,7 @@ export function MainStore() {
     pagesData: [],
     homePageData: [],
     getSermonData: (url) => {
-      return getSermonDataService(url);
+      return getSermonDataServiceTwo(url);
     },
     sliceSermonData: (sermonData, indexOfFirstSermon, indexOfLastSermon) => {
       let slicedData;

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useObserver } from "mobx-react";
 import { StoreContext } from "stores/StoreContext";
 import { runInAction } from "mobx";
-import { getPagesData, getHomePageData, getSermonDataService, getSermonPreacher, getSermonSeries, getSermonBibleBooks } from "services/services";
+import { getPagesData, getHomePageData, getSermonDataServiceTwo, getSermonPreacher, getSermonSeries, getSermonBibleBooks } from "services/services";
 
 function DarkFooter() {
   const store = useContext(StoreContext);
@@ -27,18 +27,19 @@ function DarkFooter() {
     }
     homePageData();
 
-    async function sermonData() {
-      const sermonDataResponse = await getSermonDataService("https://hillcitysc.com//wp-json/wp/v2/wpfc_sermon?per_page=100");
+    async function sermonDataTwo() {
+      const sermonDataResponse = await getSermonDataServiceTwo("https://hillcitysc.com/wp-json/hc/v1/hc-sermons");
       runInAction(() => {
-        store.sermonStore.sermonData = sermonDataResponse;
+        store.sermonStoreTwo.sermonData = sermonDataResponse;
+        store.sermonStoreTwo.sermonFilterData = sermonDataResponse;
       });
     }
-    sermonData();
+    sermonDataTwo();
 
     async function preachers() {
       const sermonPreacherDataResponse = await getSermonPreacher();
       runInAction(() => {
-        store.sermonStore.sermonPreacher = sermonPreacherDataResponse;
+        store.sermonStoreTwo.sermonPreacher = sermonPreacherDataResponse;
       });
     }
     preachers();
@@ -46,7 +47,7 @@ function DarkFooter() {
     async function sermonSeries() {
       const sermonSeriesDataResponse = await getSermonSeries();
       runInAction(() => {
-        store.sermonStore.sermonSeries = sermonSeriesDataResponse;
+        store.sermonStoreTwo.sermonSeries = sermonSeriesDataResponse;
       });
     }
     sermonSeries();
@@ -54,7 +55,7 @@ function DarkFooter() {
     async function bibleBooks() {
       const sermonBibleBooksDataResponse = await getSermonBibleBooks();
       runInAction(() => {
-        store.sermonStore.sermonBibleBooks = sermonBibleBooksDataResponse;
+        store.sermonStoreTwo.sermonBibleBooks = sermonBibleBooksDataResponse;
       });
     }
     bibleBooks();

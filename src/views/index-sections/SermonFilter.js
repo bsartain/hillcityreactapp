@@ -1,49 +1,78 @@
 import React, { useContext, useState } from "react";
-import { runInAction } from "mobx";
 import { StoreContext } from "stores/StoreContext";
 import { useObserver } from "mobx-react";
 import Spinner from "components/Spinner/Spinner";
-import { getSermonDataService } from "services/services";
+import { getSermonDataServiceTwo } from "services/services";
 
-export default function SermonFilter({ sermonData }) {
+const sermonUrl = new URL("https://hillcitysc.com/wp-json/hc/v1/hc-sermons");
+
+export default function SermonFilter() {
   const store = useContext(StoreContext);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = async (e) => {
-    setLoading(true);
-
-    if (e.target.id === "wpfc_preacher") {
-      runInAction(() => {
-        store.sermonStore.selectedPreacherId = e.target.value;
-      });
-    } else if (e.target.id === "wpfc_sermon_series") {
-      runInAction(() => {
-        store.sermonStore.selectedSeriesId = e.target.value;
-      });
-    } else if (e.target.id === "wpfc_bible_book") {
-      runInAction(() => {
-        store.sermonStore.selectedBookId = e.target.value;
+  const preacherList = [];
+  const seriesList = [];
+  const bibleBookList = [];
+  store.sermonStoreTwo.sermonFilterData.forEach((item) => {
+    if (item.preacher) {
+      item.preacher.map((item) => {
+        return preacherList.push(item.name);
       });
     }
-
-    runInAction(async () => {
-      const sermonUrl = new URL("https://hillcitysc.com/wp-json/wp/v2/wpfc_sermon?per_page=100");
-      const urlParams = [store.sermonStore.selectedPreacherId, store.sermonStore.selectedSeriesId, store.sermonStore.selectedBookId];
-
-      urlParams.forEach((param) => {
-        if (param === store.sermonStore.selectedPreacherId && store.sermonStore.selectedPreacherId !== "") {
-          sermonUrl.searchParams.append("wpfc_preacher", `${param}`);
-        } else if (param === store.sermonStore.selectedSeriesId && store.sermonStore.selectedSeriesId !== "") {
-          sermonUrl.searchParams.append("wpfc_sermon_series", `${param}`);
-        } else if (param === store.sermonStore.selectedBookId && store.sermonStore.selectedBookId !== "") {
-          sermonUrl.searchParams.append("wpfc_bible_book", `${param}`);
-        }
+    if (item.sermon_series) {
+      item.sermon_series.map((item) => {
+        return seriesList.push(item.name);
       });
+    }
+    if (item.bible_book) {
+      item.bible_book.map((item) => {
+        return bibleBookList.push(item.name);
+      });
+    }
+  });
+  const preacherListReduced = new Set(preacherList);
+  const preacherListArray = [...preacherListReduced];
+  const seriesListReduced = new Set(seriesList);
+  const seriesListArray = [...seriesListReduced];
+  const bibleBookListListReduced = new Set(bibleBookList);
+  const bibleBookListListArray = [...bibleBookListListReduced];
 
-      const response = await getSermonDataService(sermonUrl.href);
-      store.sermonStore.sermonData = response;
-      setLoading(false);
-    });
+  let valueSlug;
+
+  const formatValueToSlug = (value) => {
+    return value.toLowerCase().replace(" ", "-");
+  };
+
+  const handleChange = async (e) => {
+    setLoading(true);
+    if (e.target.id === "preacher") {
+      valueSlug = await formatValueToSlug(e.target.value);
+      sermonUrl.searchParams.delete("preacher");
+      if (valueSlug) {
+        sermonUrl.searchParams.append("preacher", `${valueSlug}`);
+      }
+    } else if (e.target.id === "sermon_series") {
+      valueSlug = await formatValueToSlug(e.target.value);
+      sermonUrl.searchParams.delete("series");
+      if (valueSlug) {
+        sermonUrl.searchParams.append("series", `${valueSlug}`);
+      }
+    } else if (e.target.id === "bible_book") {
+      valueSlug = await formatValueToSlug(e.target.value);
+      sermonUrl.searchParams.delete("book");
+      if (valueSlug) {
+        sermonUrl.searchParams.append("book", `${valueSlug}`);
+      }
+    }
+
+    const response = await getSermonDataServiceTwo(sermonUrl.href);
+    if (response.length === 0) {
+      store.sermonStoreTwo.sermonsEmpty = true;
+    } else {
+      store.sermonStoreTwo.sermonsEmpty = false;
+      store.sermonStoreTwo.sermonData = response;
+    }
+    setLoading(false);
   };
 
   return useObserver(() => (
@@ -51,15 +80,15 @@ export default function SermonFilter({ sermonData }) {
       <form className="sermon-filter-form-container">
         <div className="form-group">
           <label htmlFor="wpfc_preacher">Preacher</label>
-          <select className="form-control" id="wpfc_preacher" onChange={handleChange}>
+          <select className="form-control" id="preacher" onChange={handleChange}>
             <option value={null}></option>
-            {!store.sermonStore.sermonPreacher.length === 0 ? (
+            {!preacherListArray ? (
               <h4>Loading...</h4>
             ) : (
-              store.sermonStore.sermonPreacher.map((item) => {
+              preacherListArray.map((item, index) => {
                 return (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
+                  <option key={index} value={item}>
+                    {item}
                   </option>
                 );
               })
@@ -68,15 +97,15 @@ export default function SermonFilter({ sermonData }) {
         </div>
         <div className="form-group">
           <label htmlFor="wpfc_sermon_series">Sermon Series</label>
-          <select className="form-control" id="wpfc_sermon_series" onChange={handleChange}>
+          <select className="form-control" id="sermon_series" onChange={handleChange}>
             <option value={null}></option>
-            {!store.sermonStore.sermonSeries.length === 0 ? (
+            {!seriesListArray ? (
               <h4>Loading...</h4>
             ) : (
-              store.sermonStore.sermonSeries.map((item) => {
+              seriesListArray.map((item, index) => {
                 return (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
+                  <option key={index} value={item}>
+                    {item}
                   </option>
                 );
               })
@@ -85,15 +114,15 @@ export default function SermonFilter({ sermonData }) {
         </div>
         <div className="form-group">
           <label htmlFor="wpfc_bible_book">Bible Books</label>
-          <select className="form-control" id="wpfc_bible_book" onChange={handleChange}>
+          <select className="form-control" id="bible_book" onChange={handleChange}>
             <option value={null}></option>
-            {!store.sermonStore.sermonBibleBooks.length === 0 ? (
+            {!bibleBookListListArray ? (
               <h4>Loading...</h4>
             ) : (
-              store.sermonStore.sermonBibleBooks.map((item) => {
+              bibleBookListListArray.map((item, index) => {
                 return (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
+                  <option key={index} value={item}>
+                    {item}
                   </option>
                 );
               })
