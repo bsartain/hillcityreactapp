@@ -199,7 +199,7 @@
       font-size: 18px;
       color: #848484;
       text-transform: initial;
-      font-family: "Raleway", sans-serif;
+      font-family: 'Raleway', sans-serif;
     }
     .after-devo-verse {
       margin: 25px 0px;
@@ -222,16 +222,20 @@
   }
 }
 
-.special-announcement-container {
-  .modal-content {
-    background-color: #caac5e;
+.connect-card-header {
+  h4 {
+    color: #caac5e;
   }
+}
+
+.special-announcement-container {
   .modal-body {
     p {
       color: #ffffff;
     }
   }
   .modal-header {
+    background-color: #caac5e;
     .title-up {
       color: #ffffff;
     }
@@ -282,7 +286,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding: 85px 300px;
-  background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3)), url("https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg") no-repeat left;
+  background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3)), url('https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg') no-repeat left;
   p {
     color: #fff;
   }
@@ -299,7 +303,7 @@
   }
   @media (max-width: 992px) {
     padding: 85px 20px;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg") no-repeat left;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://hillcitysc.com/wp-content/uploads/2021/04/hc-easter-2021-6-scaled.jpg') no-repeat left;
   }
 }
 
@@ -494,7 +498,7 @@
   display: block;
   font-weight: bold;
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 
@@ -726,6 +730,10 @@
 
 .react-print-container .btn {
   font-weight: 600;
+}
+
+.alert-success-email {
+  background-color: #188713cc !important;
 }
 
 .catechism-blurb {
@@ -1019,7 +1027,7 @@
     display: block;
     left: 0;
     top: 0;
-    content: "";
+    content: '';
   }
 }
 
@@ -1029,7 +1037,7 @@
     display: none;
   }
 
-  &[filter-color="orange"] {
+  &[filter-color='orange'] {
     @include linear-gradient(rgba($black-color, 0.2), rgba(224, 23, 3, 0.6));
   }
 }
@@ -1221,14 +1229,14 @@
   }
 }
 
-[data-background-color="orange"] {
+[data-background-color='orange'] {
   background-color: $orange-bg;
 }
-[data-background-color="black"] {
+[data-background-color='black'] {
   background-color: $black-color;
 }
 
-[data-background-color]:not([data-background-color="gray"]) {
+[data-background-color]:not([data-background-color='gray']) {
   color: $white-color;
 
   .title,
@@ -1287,13 +1295,13 @@
     color: $white-color;
   }
 
-  .checkbox input[type="checkbox"]:disabled + label,
-  .radio input[type="radio"]:disabled + label {
+  .checkbox input[type='checkbox']:disabled + label,
+  .radio input[type='radio']:disabled + label {
     color: $white-color;
   }
 
-  .radio input[type="radio"]:not(:disabled):hover + label::after,
-  .radio input[type="radio"]:checked + label::after {
+  .radio input[type='radio']:not(:disabled):hover + label::after,
+  .radio input[type='radio']:checked + label::after {
     background-color: $white-color;
     border-color: $white-color;
   }
@@ -1302,7 +1310,7 @@
   @include input-coloured-bg($opacity-5, $white-color, $white-color, $transparent-bg, $opacity-1, $opacity-2);
 
   //buttons
-  .btn[class*="btn-outline-"] {
+  .btn[class*='btn-outline-'] {
     background-color: $transparent-bg;
     border-color: $opacity-5;
     color: $white-color;

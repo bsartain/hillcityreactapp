@@ -1,10 +1,10 @@
-import ReactGA from "react-ga";
+import ReactGA from 'react-ga';
 export const esvApi = async (verse) => {
   const url = `https://api.esv.org/v3/passage/html/?q=${verse}&include-footnotes=false&include-audio-link=false&include-headings=false&include-short-copyright=false`;
 
   const response = await fetch(url, {
     headers: {
-      Authorization: "Token 8ea1a445b74a5d683af4d71f322ae221e2ac682c",
+      Authorization: 'Token 8ea1a445b74a5d683af4d71f322ae221e2ac682c',
     },
   });
   const bibleJson = await response.json();
@@ -23,15 +23,15 @@ export const nextSundaysDate = () => {
   const mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
   const yyyy = targetDate.getFullYear();
 
-  const dateString = mm + "/" + dd + "/" + yyyy;
+  const dateString = mm + '/' + dd + '/' + yyyy;
   return dateString;
 };
 
 export const formatDate = (dateString) => {
-  const d = new Date(dateString);
-  const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
-  const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
-  const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  const d = new Date(dateString.replace(/-/g, '/'));
+  const ye = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(d);
+  const mo = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(d);
+  const da = new Intl.DateTimeFormat('en-US', { day: '2-digit' }).format(d);
   const formattedDate = `${mo} ${da}, ${ye}`;
   return formattedDate;
 };
