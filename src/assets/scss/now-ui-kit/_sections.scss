@@ -228,6 +228,22 @@
   }
 }
 
+.sermon-podcast-blurb {
+  margin-bottom: 35px;
+}
+
+.podcast-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  i {
+    font-size: 50px;
+    margin-right: 10px;
+    margin-top: 15px;
+    color: #caac5e;
+  }
+}
+
 .special-announcement-container {
   .modal-body {
     p {
