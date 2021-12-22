@@ -1,33 +1,33 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from 'react';
 
-import PageHeader from "components/Headers/PageHeader.js";
-import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
-import { formatDate } from "utils/utils";
+import PageHeader from 'components/Headers/PageHeader.js';
+import SpinnerFullPage from 'components/Spinner/SpinnerFullPage';
+import { formatDate } from 'utils/utils';
 
-import { useObserver } from "mobx-react";
-import { runInAction } from "mobx";
-import { StoreContext } from "stores/StoreContext";
-import { esvApi } from "utils/utils";
-import { RefTagger } from "react-reftagger";
-import { useHistory } from "react-router-dom";
-import Meta from "components/Meta";
+import { useObserver } from 'mobx-react';
+import { runInAction } from 'mobx';
+import { StoreContext } from 'stores/StoreContext';
+import { esvApi } from 'utils/utils';
+import { RefTagger } from 'react-reftagger';
+import { useHistory } from 'react-router-dom';
+import Meta from 'components/Meta';
 
 function SingleSermon(props) {
   const store = useContext(StoreContext);
   const [biblePassage, setBiblePassage] = useState([]);
   const history = useHistory();
-  const urlId = history.location.pathname.split("/").pop();
+  const urlId = history.location.pathname.split('/').pop();
 
   useEffect(() => {
     async function fetchSingleSermonData() {
       window.scrollTo(0, 0);
-      const response = await fetch("https://hillcitysc.com/wp-json/hc/v1/hc-sermons");
+      const response = await fetch('https://hillcitysc.com/wp-json/hc/v1/hc-sermons');
       const json = await response.json();
       await json
         .filter((item) => item.id === parseInt(urlId))
         .map((item) => {
           return runInAction(() => {
-            store.sermonStoreTwo.singleSermonData = item;
+            store.sermonStore.singleSermonData = item;
           });
         });
       const biblePassage = await json.filter((item) => item.id === parseInt(urlId)).map((item) => item.bible_passage);
@@ -36,14 +36,14 @@ function SingleSermon(props) {
     }
     fetchSingleSermonData();
 
-    document.body.classList.add("index-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('index-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     return function cleanup() {
-      document.body.classList.remove("index-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('index-page');
+      document.body.classList.remove('sidebar-collapse');
     };
-  }, [history.location.pathname, store.sermonStore, urlId, store.sermonStoreTwo]);
+  }, [history.location.pathname, urlId, store.sermonStore]);
 
   const getMediaPlayer = async () => {
     runInAction(() => {
@@ -55,16 +55,16 @@ function SingleSermon(props) {
   return useObserver(() => (
     <>
       <div className="wrapper page-content-container single-sermon-container">
-        {store.sermonStoreTwo.sermonData.length === 0 ? (
+        {store.sermonStore.sermonData.length === 0 ? (
           <SpinnerFullPage />
         ) : (
-          store.sermonStoreTwo.sermonData
+          store.sermonStore.sermonData
             .filter((item) => item.id === parseInt(urlId))
             .map((singleSermon) => {
               return (
                 <div key={singleSermon.id}>
                   <Meta title={singleSermon.title} description={singleSermon.sermon_series[0].name} image={singleSermon.featured_image.large} url={history.location.pathname} />
-                  <RefTagger noSearchTagNames={["h1", "h2", "h3", "h4", "h5"]} bibleVersion={"ESV"} />
+                  <RefTagger noSearchTagNames={['h1', 'h2', 'h3', 'h4', 'h5']} bibleVersion={'ESV'} />
                   <PageHeader headerData={null} sermonHeaderData={singleSermon} />
                   <div className="page-content-title">
                     <p>{formatDate(singleSermon.date)}</p>
@@ -80,7 +80,7 @@ function SingleSermon(props) {
                     <div>
                       <p>
                         <span className="item-detail">Preacher: </span>
-                        {singleSermon.preacher.map((item) => item.name)}{" "}
+                        {singleSermon.preacher.map((item) => item.name)}{' '}
                       </p>
                     </div>
                     <div>
@@ -100,7 +100,7 @@ function SingleSermon(props) {
                       getMediaPlayer();
                     }}
                   >
-                    <i className={"now-ui-icons media-1_button-play"}></i>
+                    <i className={'now-ui-icons media-1_button-play'}></i>
                   </div>
                   <hr />
                   <div className="container single-sermon-bible-container">

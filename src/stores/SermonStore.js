@@ -1,12 +1,14 @@
 export function SermonStore() {
   return {
     sermonData: [],
+    sermonFilterData: [],
     sermonPreacher: [],
     sermonSeries: [],
     sermonBibleBooks: [],
-    selectedPreacherId: "",
-    selectedSeriesId: "",
-    selectedBookId: "",
-    singleSermonData: null,
+    selectedPreacherId: '',
+    selectedSeriesId: '',
+    selectedBookId: '',
+    singleSermonData: [],
+    sermonsEmpty: false,
   };
 }

@@ -232,6 +232,54 @@
   margin-bottom: 35px;
 }
 
+.latest-sermon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 250px;
+  color: #ffffff;
+  .fas {
+    font-size: 50px;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    cursor: pointer;
+  }
+  hr {
+    background: #ffffff;
+    width: 100px;
+  }
+  .latest-sermon-content {
+    z-index: 10;
+    text-align: center;
+  }
+  .latest-sermon-opacity-background {
+    position: absolute;
+    background-color: #000000;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+  }
+  h2 {
+    color: #ffffff;
+  }
+  p {
+    margin-bottom: 0;
+    color: #ffffff;
+    text-transform: capitalize;
+    font-size: 1.1em;
+  }
+  h5:last-child {
+    margin-bottom: 10px;
+  }
+}
+
 .podcast-icons {
   display: flex;
   align-items: center;

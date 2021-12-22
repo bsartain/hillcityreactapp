@@ -1,10 +1,10 @@
 /*eslint-disable*/
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 
-import { useObserver } from "mobx-react";
-import { StoreContext } from "stores/StoreContext";
-import { runInAction } from "mobx";
-import { getPagesData, getHomePageData, getSermonDataServiceTwo, getSermonPreacher, getSermonSeries, getSermonBibleBooks } from "services/services";
+import { useObserver } from 'mobx-react';
+import { StoreContext } from 'stores/StoreContext';
+import { runInAction } from 'mobx';
+import { getPagesData, getHomePageData, getSermonDataServiceTwo, getSermonPreacher, getSermonSeries, getSermonBibleBooks } from 'services/services';
 
 function DarkFooter() {
   const store = useContext(StoreContext);
@@ -28,10 +28,10 @@ function DarkFooter() {
     homePageData();
 
     async function sermonDataTwo() {
-      const sermonDataResponse = await getSermonDataServiceTwo("https://hillcitysc.com/wp-json/hc/v1/hc-sermons");
+      const sermonDataResponse = await getSermonDataServiceTwo('https://hillcitysc.com/wp-json/hc/v1/hc-sermons');
       runInAction(() => {
-        store.sermonStoreTwo.sermonData = sermonDataResponse;
-        store.sermonStoreTwo.sermonFilterData = sermonDataResponse;
+        store.sermonStore.sermonData = sermonDataResponse;
+        store.sermonStore.sermonFilterData = sermonDataResponse;
       });
     }
     sermonDataTwo();
@@ -39,7 +39,7 @@ function DarkFooter() {
     async function preachers() {
       const sermonPreacherDataResponse = await getSermonPreacher();
       runInAction(() => {
-        store.sermonStoreTwo.sermonPreacher = sermonPreacherDataResponse;
+        store.sermonStore.sermonPreacher = sermonPreacherDataResponse;
       });
     }
     preachers();
@@ -47,7 +47,7 @@ function DarkFooter() {
     async function sermonSeries() {
       const sermonSeriesDataResponse = await getSermonSeries();
       runInAction(() => {
-        store.sermonStoreTwo.sermonSeries = sermonSeriesDataResponse;
+        store.sermonStore.sermonSeries = sermonSeriesDataResponse;
       });
     }
     sermonSeries();
@@ -55,13 +55,13 @@ function DarkFooter() {
     async function bibleBooks() {
       const sermonBibleBooksDataResponse = await getSermonBibleBooks();
       runInAction(() => {
-        store.sermonStoreTwo.sermonBibleBooks = sermonBibleBooksDataResponse;
+        store.sermonStore.sermonBibleBooks = sermonBibleBooksDataResponse;
       });
     }
     bibleBooks();
 
     async function specialAnnouncement() {
-      fetch("https://hillcitysc.com/wp-json/acf/v3/posts/8857")
+      fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857')
         .then((res) => {
           return res.json();
         })
@@ -74,7 +74,7 @@ function DarkFooter() {
     specialAnnouncement();
 
     async function getFooterContent() {
-      fetch("https://hillcitysc.com/wp-json/acf/v3/posts/9262")
+      fetch('https://hillcitysc.com/wp-json/acf/v3/posts/9262')
         .then((res) => {
           return res.json();
         })

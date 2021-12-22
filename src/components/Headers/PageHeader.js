@@ -1,9 +1,9 @@
 /*eslint-disable*/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Container } from "reactstrap";
-import { useHistory, Link } from "react-router-dom";
-import { toJS } from "mobx";
+import { Container } from 'reactstrap';
+import { useHistory, Link } from 'react-router-dom';
+import { toJS } from 'mobx';
 
 function PageHeader({ headerData, sermonHeaderData }) {
   let setImage;
@@ -12,12 +12,12 @@ function PageHeader({ headerData, sermonHeaderData }) {
   const str = history.location.pathname;
   const urlStringPart = str.substr(0, 15);
 
-  if (headerData !== null) {
-    setImage = headerData.better_featured_image.source_url;
+  if (headerData) {
+    setImage = headerData.better_featured_image.media_details.sizes.medium_large.source_url;
     setTitle = headerData.title.rendered;
-  } else if (sermonHeaderData) {
+  } else if (sermonHeaderData && !headerData) {
     setImage = sermonHeaderData.featured_image.large;
-    setTitle = "Sermons";
+    setTitle = sermonHeaderData.title && str !== '/sermons' ? sermonHeaderData.title : 'SERMONS';
   }
 
   let pageHeader = React.createRef();
@@ -30,7 +30,7 @@ function PageHeader({ headerData, sermonHeaderData }) {
           <div
             className="page-header-image"
             style={{
-              backgroundImage: "url(" + setImage + ")",
+              backgroundImage: 'url(' + setImage + ')',
             }}
             ref={pageHeader}
           ></div>
@@ -43,12 +43,12 @@ function PageHeader({ headerData, sermonHeaderData }) {
                 <h5>HILL CITY CHURCH</h5>
                 <hr className="hr-one" />
                 <h1 dangerouslySetInnerHTML={{ __html: setTitle }} />
-                {urlStringPart === "/single-sermon/" ? (
-                  <Link to="/sermons" className="btn btn-outline-primary" style={{ color: "#ffffff" }}>
+                {urlStringPart === '/single-sermon/' ? (
+                  <Link to="/sermons" className="btn btn-outline-primary" style={{ color: '#ffffff' }}>
                     BACK TO SERMONS
                   </Link>
                 ) : null}
-                <div className="page-header-arrow" onClick={() => window.scrollTo({ top: 926, behavior: "smooth" })}>
+                <div className="page-header-arrow" onClick={() => window.scrollTo({ top: 926, behavior: 'smooth' })}>
                   <i className="now-ui-icons  arrows-1_minimal-down"></i>
                 </div>
               </div>
@@ -59,6 +59,6 @@ function PageHeader({ headerData, sermonHeaderData }) {
     </>
   );
 }
-import { formatDiagnostic } from "typescript";
+import { formatDiagnostic } from 'typescript';
 
 export default PageHeader;

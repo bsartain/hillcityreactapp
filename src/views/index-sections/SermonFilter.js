@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
-import { StoreContext } from "stores/StoreContext";
-import { useObserver } from "mobx-react";
-import Spinner from "components/Spinner/Spinner";
-import { getSermonDataServiceTwo } from "services/services";
+import React, { useContext, useState } from 'react';
+import { StoreContext } from 'stores/StoreContext';
+import { useObserver } from 'mobx-react';
+import Spinner from 'components/Spinner/Spinner';
+import { getSermonDataServiceTwo } from 'services/services';
+import { runInAction } from 'mobx';
 
-const sermonUrl = new URL("https://hillcitysc.com/wp-json/hc/v1/hc-sermons");
+const sermonUrl = new URL('https://hillcitysc.com/wp-json/hc/v1/hc-sermons');
 
 export default function SermonFilter() {
   const store = useContext(StoreContext);
@@ -13,7 +14,7 @@ export default function SermonFilter() {
   const preacherList = [];
   const seriesList = [];
   const bibleBookList = [];
-  store.sermonStoreTwo.sermonFilterData.forEach((item) => {
+  store.sermonStore.sermonFilterData.forEach((item) => {
     if (item.preacher) {
       item.preacher.map((item) => {
         return preacherList.push(item.name);
@@ -40,37 +41,41 @@ export default function SermonFilter() {
   let valueSlug;
 
   const formatValueToSlug = (value) => {
-    return value.toLowerCase().replace(" ", "-");
+    return value.toLowerCase().replace(' ', '-');
   };
 
   const handleChange = async (e) => {
     setLoading(true);
-    if (e.target.id === "preacher") {
+    if (e.target.id === 'preacher') {
       valueSlug = await formatValueToSlug(e.target.value);
-      sermonUrl.searchParams.delete("preacher");
+      sermonUrl.searchParams.delete('preacher');
       if (valueSlug) {
-        sermonUrl.searchParams.append("preacher", `${valueSlug}`);
+        sermonUrl.searchParams.append('preacher', `${valueSlug}`);
       }
-    } else if (e.target.id === "sermon_series") {
+    } else if (e.target.id === 'sermon_series') {
       valueSlug = await formatValueToSlug(e.target.value);
-      sermonUrl.searchParams.delete("series");
+      sermonUrl.searchParams.delete('series');
       if (valueSlug) {
-        sermonUrl.searchParams.append("series", `${valueSlug}`);
+        sermonUrl.searchParams.append('series', `${valueSlug}`);
       }
-    } else if (e.target.id === "bible_book") {
+    } else if (e.target.id === 'bible_book') {
       valueSlug = await formatValueToSlug(e.target.value);
-      sermonUrl.searchParams.delete("book");
+      sermonUrl.searchParams.delete('book');
       if (valueSlug) {
-        sermonUrl.searchParams.append("book", `${valueSlug}`);
+        sermonUrl.searchParams.append('book', `${valueSlug}`);
       }
     }
 
     const response = await getSermonDataServiceTwo(sermonUrl.href);
     if (response.length === 0) {
-      store.sermonStoreTwo.sermonsEmpty = true;
+      runInAction(() => {
+        store.sermonStore.sermonsEmpty = true;
+      });
     } else {
-      store.sermonStoreTwo.sermonsEmpty = false;
-      store.sermonStoreTwo.sermonData = response;
+      runInAction(() => {
+        store.sermonStore.sermonsEmpty = false;
+        store.sermonStore.sermonData = response;
+      });
     }
     setLoading(false);
   };
