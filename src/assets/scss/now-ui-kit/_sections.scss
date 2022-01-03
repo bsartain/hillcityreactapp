@@ -904,6 +904,24 @@
   }
 }
 
+.small-group-cards {
+  .card-title {
+    color: #757575;
+  }
+  small {
+    font-weight: bold;
+  }
+  a {
+    font-size: 45px;
+  }
+  .fa-microphone {
+    font-size: 45px;
+    color: #caac5e;
+    margin-left: 25px;
+    cursor: pointer;
+  }
+}
+
 .single-sermon-container {
   hr {
     border-top: 1px solid #757575;
@@ -914,11 +932,13 @@
     justify-content: center;
     @media (max-width: 768px) {
       flex-direction: column;
-      align-items: center;
-      width: 290px;
+      align-items: left;
+      width: 350px;
+      text-align: center;
     }
     div {
       margin-right: 15px;
+      margin-bottom: 5px;
       p {
         font-size: 15px;
         color: #caac5e;
@@ -931,6 +951,11 @@
         }
       }
     }
+  }
+  .pdf-small-group-icon {
+    font-size: 25px;
+    vertical-align: middle;
+    margin-left: 5px;
   }
   .single-sermon-play-button {
     display: flex;

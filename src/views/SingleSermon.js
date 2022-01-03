@@ -74,7 +74,6 @@ function SingleSermon(props) {
                         __html: singleSermon.title,
                       }}
                     />
-                    <hr className="page-content-hr" />
                   </div>
                   <div className="single-sermon-details container">
                     <div>
@@ -93,6 +92,16 @@ function SingleSermon(props) {
                         <span className="item-detail">Passage:</span> {singleSermon.bible_passage}
                       </p>
                     </div>
+                    {singleSermon.small_group_questions ? (
+                      <div>
+                        <p>
+                          <span className="item-detail">Small Group Questions:</span>{' '}
+                          <a href={singleSermon.small_group_questions} target="_blank" rel="noreferrer">
+                            <i className="far fa-file-pdf pdf-small-group-icon"></i>
+                          </a>
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                   <div
                     className="container single-sermon-play-button"

@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react';
 
-import PageHeader from "components/Headers/PageHeader.js";
-import SpinnerFullPage from "components/Spinner/SpinnerFullPage";
+import PageHeader from 'components/Headers/PageHeader.js';
+import SpinnerFullPage from 'components/Spinner/SpinnerFullPage';
 
-import { useObserver } from "mobx-react";
-import { StoreContext } from "stores/StoreContext";
-import { useHistory } from "react-router-dom";
-import { googleAnalyticsTrackPage } from "utils/utils";
-import Meta from "components/Meta";
+import { useObserver } from 'mobx-react';
+import { StoreContext } from 'stores/StoreContext';
+import { useHistory } from 'react-router-dom';
+import { googleAnalyticsTrackPage } from 'utils/utils';
+import Meta from 'components/Meta';
+import SmallGroupsCards from 'components/SmallGroupsCards';
 
 function SmallGroups() {
   const store = useContext(StoreContext);
@@ -16,14 +17,14 @@ function SmallGroups() {
   useEffect(() => {
     googleAnalyticsTrackPage(history.location.pathname);
 
-    document.body.classList.add("index-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('index-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("index-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('index-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, [history.location.pathname]);
   return useObserver(() => (
@@ -44,6 +45,7 @@ function SmallGroups() {
                     <hr className="page-content-hr" />
                   </div>
                   <div className="container" dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+                  <SmallGroupsCards />
                 </div>
               );
             })
