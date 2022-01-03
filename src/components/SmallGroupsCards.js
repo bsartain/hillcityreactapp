@@ -25,7 +25,7 @@ function SmallGroupsCards() {
   }, [history.location.pathname]);
 
   const formatDate = (date) => {
-    const currentDate = new Date(date);
+    const currentDate = new Date(date.replace(/-/g, '/'));
     const formattedDate = currentDate.toDateString();
     return formattedDate;
   };
