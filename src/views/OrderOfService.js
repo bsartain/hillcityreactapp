@@ -1,11 +1,11 @@
-import React, { useEffect, useState, forwardRef } from "react";
+import React, { useEffect, useState, forwardRef } from 'react';
 
-import { Link } from "react-router-dom";
-import { esvApi } from "utils/utils";
+import { Link } from 'react-router-dom';
+import { esvApi } from 'utils/utils';
 
-import { NavItem, NavLink, Nav, TabContent, TabPane } from "reactstrap";
-import catechismData from "data/catechismData";
-import ReactGA from "react-ga";
+import { NavItem, NavLink, Nav, TabContent, TabPane } from 'reactstrap';
+import catechismData from 'data/catechismData';
+import ReactGA from 'react-ga';
 
 export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   const [orderOfServiceData, setOrderOfServiceData] = useState([]);
@@ -16,11 +16,11 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   const [scriptureReading, setScriptureReading] = useState([]);
 
   const [benediction, setBenediction] = useState([]);
-  const [iconPills, setIconPills] = useState("1");
+  const [iconPills, setIconPills] = useState('1');
 
   useEffect(() => {
     const call = async () => {
-      const response = await fetch("https://hillcitysc.com/wp-json/acf/v3/posts/8857");
+      const response = await fetch('https://hillcitysc.com/wp-json/acf/v3/posts/8857');
       const data = await response.json();
       setOrderOfServiceData([data.acf]);
       esvApi(data.acf.call_to_worship_verse).then((data) => setCallToWorship(data.passages));
@@ -36,12 +36,12 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
     let contentDiv = <div className="order-service-div" dangerouslySetInnerHTML={{ __html: content }} />;
     let header = title;
 
-    if (title === "Catechism") {
+    if (title === 'Catechism') {
       return (
         <div className="scripture-reading-container">
-          <h3 style={{ marginBottom: "0px" }}>Catechism Question {content}</h3>
+          <h3 style={{ marginBottom: '0px' }}>Catechism Question {content}</h3>
           <p className="catechism-blurb">
-            All questions are from the{" "}
+            All questions are from the{' '}
             <a href="http://newcitycatechism.com/" target="_blank" rel="noopener noreferrer">
               New City Catechism
             </a>
@@ -65,7 +65,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           <hr className="order-service-hr" />
         </div>
       );
-    } else if (title === "Announcements") {
+    } else if (title === 'Announcements') {
       return (
         <div>
           {content.map((item, index) => {
@@ -101,11 +101,11 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           })}
         </div>
       );
-    } else if (title === "Offertory") {
+    } else if (title === 'Offertory') {
       const gaClickGiveButton = () => {
         ReactGA.event({
-          category: "Live Stream Page",
-          action: "User clicked the give button",
+          category: 'Live Stream Page',
+          action: 'User clicked the give button',
         });
       };
       return (
@@ -122,21 +122,22 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </div>
       );
     } else if (title === "Children's Sermon") {
-      if (content === "yes") {
+      if (content === 'yes') {
         return (
           <div>
-            <h3 className="children-sermon">{title}</h3>;
+            <h3 className="children-sermon">{title}</h3>
+            <br />
             <hr className="order-service-hr" />
           </div>
         );
       }
-    } else if (title === "prayerRequests" || title === "") {
+    } else if (title === 'prayerRequests' || title === '') {
       title = null;
       return content.map((item, index) => {
         return (
           <div key={index}>
-            <h3 style={{ marginBottom: "15px" }}>
-              <span style={{ color: "#caac5e" }}>{item.request_type}: </span>
+            <h3 style={{ marginBottom: '15px' }}>
+              <span style={{ color: '#caac5e' }}>{item.request_type}: </span>
               {item.title}
             </h3>
             <p>
@@ -147,17 +148,17 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           </div>
         );
       });
-    } else if (title === "Scripture Reading" || title === "Call To Worship" || title === "Confession of Sin" || title === "Assurance of Grace" || title === "Benediction") {
+    } else if (title === 'Scripture Reading' || title === 'Call To Worship' || title === 'Confession of Sin' || title === 'Assurance of Grace' || title === 'Benediction') {
       return (
         <div className="scripture-reading-container">
           <h3>{title}</h3>
-          {title === "Confession of Sin" ? (
+          {title === 'Confession of Sin' ? (
             <p>
               This is the time in our service where we confess our sins before God. Cleansing and freedom begin with being honest with our sins and failures before God so that He can restore us back
               to Joy and peace. Take a few moments to confess sin before God. You can use this scripture to help you do that.
             </p>
           ) : null}
-          {title === "Assurance of Grace" ? (
+          {title === 'Assurance of Grace' ? (
             <p>You cannot out sin God's grace. The power of the cross is such that Jesus made His love and forgiveness more powerful toward you than your offenses toward Him.</p>
           ) : null}
           {content.map((item, index) => {
@@ -170,12 +171,12 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           <hr className="order-service-hr" />
         </div>
       );
-    } else if (title === "Special Reading") {
+    } else if (title === 'Special Reading') {
       if (content) {
         return content.map((item, index) => {
           if (item.special_reading_title && item.special_reading_content) {
             return (
-              <div key={index} style={{ marginTop: "50px" }}>
+              <div key={index} style={{ marginTop: '50px' }}>
                 <h3>{item.special_reading_title}</h3>
                 <div dangerouslySetInnerHTML={{ __html: item.special_reading_content }} />
                 <hr className="order-service-hr" />
@@ -219,14 +220,14 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
       <Nav role="tablist" tabs>
         <NavItem>
           <NavLink
-            className={iconPills === "1" ? "active" : ""}
+            className={iconPills === '1' ? 'active' : ''}
             href="#pablo"
             onClick={(e) => {
               e.preventDefault();
-              setIconPills("1");
+              setIconPills('1');
               ReactGA.event({
-                category: "Live Stream Page",
-                action: "User clicked the Order of Service Tab",
+                category: 'Live Stream Page',
+                action: 'User clicked the Order of Service Tab',
               });
             }}
           >
@@ -238,14 +239,14 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </NavItem>
         <NavItem>
           <NavLink
-            className={iconPills === "2" ? "active" : ""}
+            className={iconPills === '2' ? 'active' : ''}
             href="#pablo"
             onClick={(e) => {
               e.preventDefault();
-              setIconPills("2");
+              setIconPills('2');
               ReactGA.event({
-                category: "Live Stream Page",
-                action: "User clicked the calendar Tab",
+                category: 'Live Stream Page',
+                action: 'User clicked the calendar Tab',
               });
             }}
           >
@@ -257,14 +258,14 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
         </NavItem>
         <NavItem>
           <NavLink
-            className={iconPills === "3" ? "active" : ""}
+            className={iconPills === '3' ? 'active' : ''}
             href="#pablo"
             onClick={(e) => {
               e.preventDefault();
-              setIconPills("3");
+              setIconPills('3');
               ReactGA.event({
-                category: "Live Stream Page",
-                action: "User clicked the Prayer Requests Tab",
+                category: 'Live Stream Page',
+                action: 'User clicked the Prayer Requests Tab',
               });
             }}
           >
@@ -275,7 +276,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           </NavLink>
         </NavItem>
       </Nav>
-      <TabContent activeTab={"iconPills" + iconPills} className="tab-pane-swipe">
+      <TabContent activeTab={'iconPills' + iconPills} className="tab-pane-swipe">
         <TabPane tabId="iconPills1">
           <div className="print-order-service" ref={ref}>
             {orderOfServiceData.length === 0
@@ -284,34 +285,34 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
                 orderOfServiceData.map((item) => {
                   // eslint-disable-next-line no-unused-vars
                   for (const property in item) {
-                    specialReading = setContent("Special Reading", item["special_reading_fields"]);
-                    callToWorshipVerse = setContent("Call To Worship", callToWorship);
-                    songOne = setContent(`Song - ${item["song_one_title"]}`, item["song_one_lyrics"]);
-                    confessionOfSinVerse = setContent("Confession of Sin", confessionOfSins);
-                    assuranceOfGraceVerse = setContent("Assurance of Grace", assuranceOfGrace);
-                    offertory = setContent("Offertory", null);
-                    songTwo = setContent(`Song - ${item["song_two_title"]}`, item["song_two_lyrics"]);
-                    scriptureVerses = setContent("Scripture Reading", scriptureReading);
-                    preacherTitle = setContent(`Sermon: ${item["preacher"]}`, null);
-                    catechism = setContent("Catechism", item["catechism_question_number"]);
-                    songThree = setContent(`Song - ${item["song_three_title"]}`, item["song_three_lyrics"]);
-                    benedictionContent = setContent("Benediction", benediction);
-                    miscellaneousContent = setContent(null, item["miscellaneous_info"]);
-                    announcements = setContent("Announcements", item["announcements_section"]);
-                    prayerRequests = setContent("prayerRequests", item["prayer_requests_section"]);
-                    childrensSermon = setContent("Children's Sermon", item["childrens_sermon"]);
+                    specialReading = setContent('Special Reading', item['special_reading_fields']);
+                    callToWorshipVerse = setContent('Call To Worship', callToWorship);
+                    songOne = setContent(`Song - ${item['song_one_title']}`, item['song_one_lyrics']);
+                    confessionOfSinVerse = setContent('Confession of Sin', confessionOfSins);
+                    assuranceOfGraceVerse = setContent('Assurance of Grace', assuranceOfGrace);
+                    offertory = setContent('Offertory', null);
+                    songTwo = setContent(`Song - ${item['song_two_title']}`, item['song_two_lyrics']);
+                    scriptureVerses = setContent('Scripture Reading', scriptureReading);
+                    preacherTitle = setContent(`Sermon: ${item['preacher']}`, null);
+                    catechism = setContent('Catechism', item['catechism_question_number']);
+                    songThree = setContent(`Song - ${item['song_three_title']}`, item['song_three_lyrics']);
+                    benedictionContent = setContent('Benediction', benediction);
+                    miscellaneousContent = setContent(null, item['miscellaneous_info']);
+                    announcements = setContent('Announcements', item['announcements_section']);
+                    prayerRequests = setContent('prayerRequests', item['prayer_requests_section']);
+                    childrensSermon = setContent("Children's Sermon", item['childrens_sermon']);
                   }
                 })}
             <div className="print-order-service" ref={ref}>
               {printLogo ? (
                 <div
                   style={{
-                    display: "flex",
-                    margin: "25px 0px",
-                    justifyContent: "center",
-                    borderBottom: "1px solid #eeeeee",
-                    paddingBottom: "39px",
-                    marginBottom: "39px",
+                    display: 'flex',
+                    margin: '25px 0px',
+                    justifyContent: 'center',
+                    borderBottom: '1px solid #eeeeee',
+                    paddingBottom: '39px',
+                    marginBottom: '39px',
                   }}
                 >
                   <img src="https://hillcitysc.com/wp-content/uploads/2021/02/HC-print-masthead-logo-e1612377440345.png" alt="Hill City Church: Rock Hill SC" />
