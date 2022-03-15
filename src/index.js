@@ -15,42 +15,43 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import ReactDOM from "react-dom";
-import { Route, Switch, HashRouter, Redirect } from "react-router-dom";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Route, Switch, HashRouter, Redirect } from 'react-router-dom';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 // styles for this kit
-import "assets/css/bootstrap.min.css";
-import "assets/scss/now-ui-kit.scss?v=1.4.0";
-import "assets/demo/demo.css?v=1.4.0";
-import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
+import 'assets/css/bootstrap.min.css';
+import 'assets/scss/now-ui-kit.scss?v=1.4.0';
+import 'assets/demo/demo.css?v=1.4.0';
+import 'assets/demo/nucleo-icons-page-styles.css?v=1.4.0';
 // pages for this kit
-import Index from "views/Index.js";
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-import About from "views/About";
-import Gospel from "views/Gospel";
-import Faith from "views/Faith";
-import Contact from "views/Contact";
-import LiveStream from "views/LiveStream";
-import Give from "views/Give";
-import Sermons from "views/Sermons";
-import SingleSermon from "views/SingleSermon";
-import DarkFooter from "components/Footers/DarkFooter.js";
-import MediaDrawer from "components/Footers/MediaDrawer";
-import PaymentSuccess from "views/PaymentSuccess";
-import PaymentFailed from "views/PaymentFailed";
-import ConnectionSignup from "views/ConnectionSignup";
-import Devotional from "views/Devotional";
-import PlanVisit from "views/PlanVisit";
-import SmallGroups from "views/SmallGroups";
+import Index from 'views/Index.js';
+import IndexNavbar from 'components/Navbars/IndexNavbar.js';
+import NucleoIcons from 'views/NucleoIcons.js';
+import LandingPage from 'views/examples/LandingPage.js';
+import ProfilePage from 'views/examples/ProfilePage.js';
+import About from 'views/About';
+import Gospel from 'views/Gospel';
+import Faith from 'views/Faith';
+import Contact from 'views/Contact';
+import LiveStream from 'views/LiveStream';
+import Give from 'views/Give';
+import Sermons from 'views/Sermons';
+import SingleSermon from 'views/SingleSermon';
+import DarkFooter from 'components/Footers/DarkFooter.js';
+import MediaDrawer from 'components/Footers/MediaDrawer';
+import PaymentSuccess from 'views/PaymentSuccess';
+import PaymentFailed from 'views/PaymentFailed';
+import ConnectionSignup from 'views/ConnectionSignup';
+import Devotional from 'views/Devotional';
+import PlanVisit from 'views/PlanVisit';
+import SmallGroups from 'views/SmallGroups';
+import Donate from 'views/Donate';
 
-import { StoreProvider } from "stores/StoreContext";
-import ReactGA from "react-ga";
-import { createBrowserHistory } from "history";
+import { StoreProvider } from 'stores/StoreContext';
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 // Initialize google analytics page view tracking using react router dom
@@ -59,11 +60,11 @@ history.listen((location) => {
   ReactGA.pageview(location.pathname);
 });
 
-ReactGA.initialize("UA-142492876-1", {
+ReactGA.initialize('UA-142492876-1', {
   debug: false,
   titleCase: false,
   gaOptions: {
-    userId: "tozw6yxn",
+    userId: 'tozw6yxn',
   },
 });
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -92,6 +93,7 @@ ReactDOM.render(
           <Route path="/devotional" render={(props) => <Devotional {...props} />} />
           <Route path="/plan-your-visit" render={(props) => <PlanVisit {...props} />} />
           <Route path="/small-groups" render={(props) => <SmallGroups {...props} />} />
+          <Route path="/donate" render={(props) => <Donate {...props} />} />
           <Redirect to="/" />
           <Redirect from="/" to="/" />
         </Switch>
@@ -100,7 +102,7 @@ ReactDOM.render(
       <MediaDrawer />
     </HashRouter>
   </StoreProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
