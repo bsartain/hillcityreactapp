@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // reactstrap components
-import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from "reactstrap";
+import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from 'reactstrap';
 
-import { useObserver } from "mobx-react";
-import SpecialAnnouncement from "views/SpecialAnnouncement";
+import { useObserver } from 'mobx-react';
+import SpecialAnnouncement from 'views/SpecialAnnouncement';
 
 function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = useState("navbar-transparent");
+  const [navbarColor, setNavbarColor] = useState('navbar-transparent');
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const [logo, setLogo] = useState("https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png");
+  const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png');
 
   useEffect(() => {
     const updateNavbarColor = () => {
       if (document.documentElement.scrollTop > 399 || document.body.scrollTop > 399) {
-        setNavbarColor("navbar-white");
-        setLogo("https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png");
+        setNavbarColor('navbar-white');
+        setLogo('https://hillcitysc.com/wp-content/uploads/2019/10/HC-masthead-logo.png');
       } else if (document.documentElement.scrollTop < 400 || document.body.scrollTop < 400) {
-        setNavbarColor("navbar-transparent");
-        setLogo("https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png");
+        setNavbarColor('navbar-transparent');
+        setLogo('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png');
       }
     };
-    window.addEventListener("scroll", updateNavbarColor);
+    window.addEventListener('scroll', updateNavbarColor);
     return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
+      window.removeEventListener('scroll', updateNavbarColor);
     };
   }, []);
 
   return useObserver(() => (
     <>
       <SpecialAnnouncement />
-      <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
+      <Navbar className={'fixed-top ' + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/">
@@ -39,7 +39,7 @@ function IndexNavbar() {
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
-                document.documentElement.classList.toggle("nav-open");
+                document.documentElement.classList.toggle('nav-open');
                 setCollapseOpen(!collapseOpen);
               }}
               aria-expanded={collapseOpen}
@@ -98,7 +98,7 @@ function IndexNavbar() {
                 </Link>
               </NavItem>
               <NavItem>
-                <Link to="/give" className="nav-link">
+                <Link to="/donate" className="nav-link">
                   Give
                 </Link>
               </NavItem>

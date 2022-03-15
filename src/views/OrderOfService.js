@@ -1,6 +1,5 @@
 import React, { useEffect, useState, forwardRef } from 'react';
 
-import { Link } from 'react-router-dom';
 import { esvApi } from 'utils/utils';
 
 import { NavItem, NavLink, Nav, TabContent, TabPane } from 'reactstrap';
@@ -115,10 +114,7 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
           <p>
             We do this as an expression of joy and gratitude, not obligation. Below you'll find a link to our giving page. If you are a member of Hill City Church please give joyously and generously.
           </p>
-          {/* <Link to="/give" className="btn btn-primary" onClick={() => gaClickGiveButton()}>
-            Give Online
-          </Link> */}
-          <a href="https://hillcitysc.churchcenter.com/giving?open-in-church-center-modal=true" className="btn btn-primary btn-lg">
+          <a href="https://hillcitysc.churchcenter.com/giving?open-in-church-center-modal=true" className="btn btn-primary btn-lg" onClick={() => gaClickGiveButton()}>
             Give Online
           </a>
           <hr className="order-service-hr" />
