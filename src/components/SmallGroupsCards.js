@@ -42,7 +42,7 @@ function SmallGroupsCards() {
   const setQuestionCard = (page) => {
     if (page.small_group_questions) {
       return (
-        <div className="card">
+        <div className="card small-group">
           <img src={page.featured_image.large} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{page.title}</h5>
