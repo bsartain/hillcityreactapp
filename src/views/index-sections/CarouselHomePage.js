@@ -52,7 +52,6 @@ const CarouselHomePage = ({ headerData }) => {
       return (
         <>
           <h1 dangerouslySetInnerHTML={{ __html: headerData.homepage_title }} />
-          {console.log('STUFF: ', headerData)}
           {headerData.homepage_button_link && headerData.homepage_button_link_text ? (
             <Link to={headerData.homepage_button_link} className="btn btn-outline-primary" style={{ color: '#ffffff', marginBottom: '38px', fontWeight: '600' }}>
               {headerData.homepage_button_link_text}
