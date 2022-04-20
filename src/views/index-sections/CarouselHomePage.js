@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Carousel, CarouselItem } from "reactstrap";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Carousel, CarouselItem } from 'reactstrap';
 
 const CarouselHomePage = ({ headerData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -25,11 +25,11 @@ const CarouselHomePage = ({ headerData }) => {
           <CarouselItem className="custom-tag" tag="div" key={index} onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)}>
             <div
               style={{
-                backgroundImage: "url(" + item.slides + ")",
-                backgroundSize: "cover",
-                height: "100%",
-                width: "100%",
-                backgroundPosition: "center",
+                backgroundImage: 'url(' + item.slides + ')',
+                backgroundSize: 'cover',
+                height: '100%',
+                width: '100%',
+                backgroundPosition: 'center',
               }}
             ></div>
           </CarouselItem>
@@ -43,13 +43,23 @@ const CarouselHomePage = ({ headerData }) => {
       return (
         <div>
           <h1>Join Our Live Stream</h1>
-          <Link to="/live-stream" className="btn btn-outline-primary" style={{ color: "#ffffff", marginBottom: "38px", fontWeight: "600" }}>
+          <Link to="/live-stream" className="btn btn-outline-primary" style={{ color: '#ffffff', marginBottom: '38px', fontWeight: '600' }}>
             JOIN LIVESTREAM
           </Link>
         </div>
       );
     } else {
-      return <h1 dangerouslySetInnerHTML={{ __html: headerData.homepage_title }} />;
+      return (
+        <>
+          <h1 dangerouslySetInnerHTML={{ __html: headerData.homepage_title }} />
+          {console.log('STUFF: ', headerData)}
+          {headerData.homepage_button_link && headerData.homepage_button_link_text ? (
+            <Link to={headerData.homepage_button_link} className="btn btn-outline-primary" style={{ color: '#ffffff', marginBottom: '38px', fontWeight: '600' }}>
+              {headerData.homepage_button_link_text}
+            </Link>
+          ) : null}
+        </>
+      );
     }
   };
 
@@ -61,7 +71,7 @@ const CarouselHomePage = ({ headerData }) => {
           <hr className="hr-one" />
           {setHeaderText()}
           <h6 dangerouslySetInnerHTML={{ __html: headerData.homepage_excerpt }} />
-          <div className="page-header-arrow-home-page" onClick={() => window.scrollTo({ top: 926, behavior: "smooth" })}>
+          <div className="page-header-arrow-home-page" onClick={() => window.scrollTo({ top: 926, behavior: 'smooth' })}>
             <i className="now-ui-icons  arrows-1_minimal-down"></i>
           </div>
         </div>

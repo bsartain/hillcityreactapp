@@ -48,6 +48,7 @@ import Devotional from 'views/Devotional';
 import PlanVisit from 'views/PlanVisit';
 import SmallGroups from 'views/SmallGroups';
 import Donate from 'views/Donate';
+import Audrey from 'views/Audrey';
 
 import { StoreProvider } from 'stores/StoreContext';
 import ReactGA from 'react-ga';
@@ -94,6 +95,7 @@ ReactDOM.render(
           <Route path="/plan-your-visit" render={(props) => <PlanVisit {...props} />} />
           <Route path="/small-groups" render={(props) => <SmallGroups {...props} />} />
           <Route path="/donate" render={(props) => <Donate {...props} />} />
+          <Route path="/audrey" render={(props) => <Audrey {...props} />} />
           <Redirect to="/" />
           <Redirect from="/" to="/" />
         </Switch>
