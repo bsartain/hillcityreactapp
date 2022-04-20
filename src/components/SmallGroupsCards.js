@@ -43,7 +43,10 @@ function SmallGroupsCards() {
     if (page.small_group_questions) {
       return (
         <div className="card small-group">
-          <img src={page.featured_image.large} className="card-img-top" alt="..." />
+          <div
+            className="card-background"
+            style={{ backgroundImage: 'url(' + page.featured_image.large + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '200px', backgroundPosition: 'center' }}
+          ></div>
           <div className="card-body">
             <h5 className="card-title">{page.title}</h5>
             <p className="card-subtitle mb-2 text-muted">
