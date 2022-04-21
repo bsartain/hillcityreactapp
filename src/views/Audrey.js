@@ -27,6 +27,13 @@ function Audrey() {
       document.body.classList.remove('sidebar-collapse');
     };
   }, [history.location.pathname]);
+
+  const html_entity_decode = (title) => {
+    var element = document.createElement('div');
+    element.innerHTML = title;
+    return element.innerHTML;
+  };
+
   return useObserver(() => (
     <>
       <div className="wrapper page-content-container">
@@ -52,7 +59,7 @@ function Audrey() {
                     style={{ marginTop: '-50px' }}
                   ></iframe>
                   <div className="page-content-title">
-                    <h2 className="container">{page.title.rendered}</h2>
+                    <h2 className="container">{html_entity_decode(page.title.rendered)}</h2>
                     <hr className="page-content-hr" />
                   </div>
                   <div className="container" dangerouslySetInnerHTML={{ __html: page.content.rendered }} />;
