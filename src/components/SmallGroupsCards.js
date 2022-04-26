@@ -69,11 +69,13 @@ function SmallGroupsCards() {
           {store.pagesStore.pagesData.length === 0
             ? null
             : store.sermonStore.sermonData.map((page, index) => {
-                return (
-                  <div key={index} className="col-md-4">
-                    {setQuestionCard(page)}
-                  </div>
-                );
+                if (page.small_group_questions) {
+                  return (
+                    <div key={index} className="col-md-4">
+                      {setQuestionCard(page)}
+                    </div>
+                  );
+                }
               })}
         </div>
       </div>
