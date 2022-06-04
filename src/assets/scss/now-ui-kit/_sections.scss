@@ -23,8 +23,9 @@
 }
 
 .font-adjust {
-  display: none;
   font-size: 20px;
+  background: transparent;
+  border: none;
   @media (max-width: 768px) {
     display: block;
     margin-right: 10px;
@@ -36,7 +37,8 @@
 
 .font-adjust:hover {
   box-shadow: none;
-  color: #333333 !important;
+  background: transparent;
+  color: inherit;
 }
 
 .font-adjust:focus {

@@ -16,7 +16,7 @@
     "moment": "2.26.0",
     "node-sass": "^6.0.1",
     "nouislider": "14.5.0",
-    "react": "16.13.1",
+    "react": "17.0.2",
     "react-bootstrap-switch": "15.5.3",
     "react-colorful": "^5.5.1",
     "react-datetime": "2.16.3",

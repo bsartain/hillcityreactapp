@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 // reactstrap components
-import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container, PopoverBody, UncontrolledPopover, Button } from 'reactstrap';
+import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container, PopoverBody, UncontrolledPopover } from 'reactstrap';
 import { runInAction } from 'mobx';
 import { StoreContext } from 'stores/StoreContext';
 import { useObserver } from 'mobx-react';
@@ -49,9 +49,9 @@ function IndexNavbar() {
               <img src={logo} className="hc-logo" alt="Hill City Church | Rock Hill SC" />
             </NavbarBrand>
 
-            <Button className="font-adjust" id="PopoverClick" type="button">
+            <button className="font-adjust" id="PopoverClick" type="button">
               {history.location.pathname === '/live-stream' ? 'Aa' : null}
-            </Button>
+            </button>
 
             <button
               className="navbar-toggler navbar-toggler"
