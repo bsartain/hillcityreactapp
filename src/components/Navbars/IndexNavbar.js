@@ -46,7 +46,7 @@ function IndexNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand to="/">
-              <img src={logo} className="hc-logo" alt="Hill City Church: Rock Hill SC" />
+              <img src={logo} className="hc-logo" alt="Hill City Church | Rock Hill SC" />
             </NavbarBrand>
 
             <Button className="font-adjust" id="PopoverClick" type="button">
