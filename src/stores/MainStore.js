@@ -1,4 +1,4 @@
-import { getSermonDataServiceTwo } from "services/services";
+import { getSermonDataServiceTwo } from 'services/services';
 
 export function MainStore() {
   return {
@@ -18,5 +18,6 @@ export function MainStore() {
     },
     orderOfServiceData: [],
     isSpecialAnnouncement: false,
+    customFont: [{ customFontSize: 16, customFontColor: '#737373' }],
   };
 }

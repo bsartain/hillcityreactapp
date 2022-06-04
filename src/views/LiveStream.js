@@ -165,7 +165,7 @@ function LiveStream() {
                       />
                       <ConnectCard />
                     </div>
-                    {store.pagesStore.orderOfServiceData.length === 0 ? <SpinnerFullPage /> : <OrderOfService ref={ref} printLogo={printLogo} />}
+                    {store.pagesStore.orderOfServiceData.length === 0 ? <SpinnerFullPage /> : <OrderOfService ref={ref} printLogo={printLogo} customFont={store.pagesStore.customFont[0]} />}
                   </div>
                 </div>
               );

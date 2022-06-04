@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 // reactstrap components
-import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from 'reactstrap';
-
+import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container, PopoverBody, UncontrolledPopover, Button } from 'reactstrap';
+import { runInAction } from 'mobx';
+import { StoreContext } from 'stores/StoreContext';
 import { useObserver } from 'mobx-react';
 import SpecialAnnouncement from 'views/SpecialAnnouncement';
+import { HexColorPicker } from 'react-colorful';
+import { useHistory } from 'react-router';
 
 function IndexNavbar() {
+  const history = useHistory();
+  const store = useContext(StoreContext);
   const [navbarColor, setNavbarColor] = useState('navbar-transparent');
   const [collapseOpen, setCollapseOpen] = useState(false);
   const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png');
 
   useEffect(() => {
+    console.log('EFFECT: ');
     const updateNavbarColor = () => {
       if (document.documentElement.scrollTop > 399 || document.body.scrollTop > 399) {
         setNavbarColor('navbar-white');
@@ -27,6 +33,12 @@ function IndexNavbar() {
     };
   }, []);
 
+  const adjustFontSize = (increase, store) => {
+    runInAction(() => {
+      increase === 'increment' ? (store.customFontSize = store.customFontSize + 1) : (store.customFontSize = store.customFontSize - 1);
+    });
+  };
+
   return useObserver(() => (
     <>
       <SpecialAnnouncement />
@@ -36,6 +48,11 @@ function IndexNavbar() {
             <NavbarBrand to="/">
               <img src={logo} className="hc-logo" alt="Hill City Church: Rock Hill SC" />
             </NavbarBrand>
+
+            <Button className="font-adjust" id="PopoverClick" type="button">
+              {history.location.pathname === '/live-stream' ? 'Aa' : null}
+            </Button>
+
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
@@ -50,6 +67,38 @@ function IndexNavbar() {
               <span className="navbar-toggler-bar bottom-bar"></span>
             </button>
           </div>
+          <UncontrolledPopover placement="bottom" target="PopoverClick" trigger="click">
+            <PopoverBody>
+              <h3 className="font-adjust-header">Adjust Font</h3>
+              <div className="font-adjust-buttons">
+                <div className="small-a" onClick={() => adjustFontSize('decrement', store.pagesStore.customFont[0])}>
+                  A
+                </div>
+                <div className="big-a" onClick={() => adjustFontSize('increment', store.pagesStore.customFont[0])}>
+                  A
+                </div>
+              </div>
+              <HexColorPicker
+                color={store.pagesStore.customFont[0].customFontColor}
+                onChange={(e) => {
+                  runInAction(() => {
+                    store.pagesStore.customFont[0].customFontColor = e;
+                  });
+                }}
+              />
+              <button
+                className="big-a btn btn-primary btn-block reset-button"
+                onClick={() =>
+                  runInAction(() => {
+                    store.pagesStore.customFont[0].customFontSize = 16;
+                    store.pagesStore.customFont[0].customFontColor = '#737373';
+                  })
+                }
+              >
+                RESET
+              </button>
+            </PopoverBody>
+          </UncontrolledPopover>
           <Collapse className="justify-content-end" isOpen={collapseOpen} navbar>
             <Nav navbar>
               <NavItem>

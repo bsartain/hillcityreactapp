@@ -40,26 +40,24 @@ function SmallGroupsCards() {
   };
 
   const setQuestionCard = (page) => {
-    if (page.small_group_questions) {
-      return (
-        <div className="card small-group">
-          <div
-            className="card-background"
-            style={{ backgroundImage: 'url(' + page.featured_image.large + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '200px', backgroundPosition: 'center' }}
-          ></div>
-          <div className="card-body">
-            <h5 className="card-title">{page.title}</h5>
-            <p className="card-subtitle mb-2 text-muted">
-              <small>{formatDate(page.date)}</small>
-            </p>
-            <a href={page.small_group_questions} className="card-link" target="_blank" rel="noreferrer">
-              <i className="fas fa-file-pdf"></i>
-            </a>
-            <i className="fas fa-microphone" onClick={(e) => openLatestSermon(page, e)}></i>
-          </div>
+    return (
+      <div className="card small-group">
+        <div
+          className="card-background"
+          style={{ backgroundImage: 'url(' + page.featured_image.large + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '200px', backgroundPosition: 'center' }}
+        ></div>
+        <div className="card-body">
+          <h5 className="card-title">{page.title}</h5>
+          <p className="card-subtitle mb-2 text-muted">
+            <small>{formatDate(page.date)}</small>
+          </p>
+          <a href={page.small_group_questions} className="card-link" target="_blank" rel="noreferrer">
+            <i className="fas fa-file-pdf"></i>
+          </a>
+          <i className="fas fa-microphone" onClick={(e) => openLatestSermon(page, e)}></i>
         </div>
-      );
-    }
+      </div>
+    );
   };
 
   return useObserver(() => (
@@ -68,15 +66,15 @@ function SmallGroupsCards() {
         <div className="row">
           {store.pagesStore.pagesData.length === 0
             ? null
-            : store.sermonStore.sermonData.map((page, index) => {
-                if (page.small_group_questions) {
+            : store.sermonStore.sermonData
+                .filter((page) => page.small_group_questions)
+                .map((page, index) => {
                   return (
                     <div key={index} className="col-md-4">
                       {setQuestionCard(page)}
                     </div>
                   );
-                }
-              })}
+                })}
         </div>
       </div>
     </>

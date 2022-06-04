@@ -5,8 +5,9 @@ import { esvApi } from 'utils/utils';
 import { NavItem, NavLink, Nav, TabContent, TabPane } from 'reactstrap';
 import catechismData from 'data/catechismData';
 import ReactGA from 'react-ga';
+import { useObserver } from 'mobx-react';
 
-export const OrderOfService = forwardRef(({ printLogo }, ref) => {
+export const OrderOfService = forwardRef(({ printLogo, customFont }, ref) => {
   const [orderOfServiceData, setOrderOfServiceData] = useState([]);
 
   const [callToWorship, setCallToWorship] = useState([]);
@@ -214,8 +215,26 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
   let prayerRequests;
   let childrensSermon;
 
-  return (
+  return useObserver(() => (
     <div className="order-service-container">
+      <style>
+        {`.scripture-reading-container p {
+              font-size: ${customFont.customFontSize}px;
+              color: ${customFont.customFontColor}!important;
+            }
+          .order-service-div p {
+              font-size: ${customFont.customFontSize}px;
+              color: ${customFont.customFontColor}!important;
+            }
+          .announcements-tab p {
+              font-size: ${customFont.customFontSize}px;
+              color: ${customFont.customFontColor}!important;
+            }
+          .prayer-requests-tab p {
+              font-size: ${customFont.customFontSize}px;
+              color: ${customFont.customFontColor}!important;
+            }`}
+      </style>
       <Nav role="tablist" tabs>
         <NavItem>
           <NavLink
@@ -342,9 +361,13 @@ export const OrderOfService = forwardRef(({ printLogo }, ref) => {
             </div>
           </div>
         </TabPane>
-        <TabPane tabId="iconPills2">{announcements}</TabPane>
-        <TabPane tabId="iconPills3">{prayerRequests}</TabPane>
+        <TabPane tabId="iconPills2" className="announcements-tab">
+          {announcements}
+        </TabPane>
+        <TabPane tabId="iconPills3" className="prayer-requests-tab">
+          {prayerRequests}
+        </TabPane>
       </TabContent>
     </div>
-  );
+  ));
 });
