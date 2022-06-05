@@ -220,19 +220,19 @@ export const OrderOfService = forwardRef(({ printLogo, customFont }, ref) => {
       <style>
         {`.scripture-reading-container p {
               font-size: ${customFont.customFontSize}px;
-              color: ${customFont.customFontColor}!important;
+              color: ${customFont.customFontColor};
             }
           .order-service-div p {
               font-size: ${customFont.customFontSize}px;
-              color: ${customFont.customFontColor}!important;
+              color: ${customFont.customFontColor};
             }
           .announcements-tab p {
               font-size: ${customFont.customFontSize}px;
-              color: ${customFont.customFontColor}!important;
+              color: ${customFont.customFontColor};
             }
           .prayer-requests-tab p {
               font-size: ${customFont.customFontSize}px;
-              color: ${customFont.customFontColor}!important;
+              color: ${customFont.customFontColor};
             }`}
       </style>
       <Nav role="tablist" tabs>
