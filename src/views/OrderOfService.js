@@ -233,7 +233,13 @@ export const OrderOfService = forwardRef(({ printLogo, customFont }, ref) => {
           .prayer-requests-tab p {
               font-size: ${customFont.customFontSize}px;
               color: ${customFont.customFontColor};
-            }`}
+            }
+          body{
+            background: ${customFont.darkMode ? '#323232' : ''}
+            }
+          h1, h2, h3, h4, h5, h6{
+            color: ${customFont.customHeaderColor}
+          }`}
       </style>
       <Nav role="tablist" tabs>
         <NavItem>

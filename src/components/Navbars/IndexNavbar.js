@@ -86,12 +86,41 @@ function IndexNavbar() {
                   });
                 }}
               />
+              <div className="screen-mode-container">
+                <div
+                  className="dark-mode-icon"
+                  onClick={() =>
+                    runInAction(() => {
+                      store.pagesStore.customFont[0].darkMode = true;
+                      store.pagesStore.customFont[0].customFontColor = '#cccccc';
+                      store.pagesStore.customFont[0].customHeaderColor = '#cccccc';
+                    })
+                  }
+                >
+                  <i className="now-ui-icons text_align-left"></i>
+                </div>
+                <div
+                  className="light-mode-icon"
+                  onClick={() =>
+                    runInAction(() => {
+                      store.pagesStore.customFont[0].customFontSize = 16;
+                      store.pagesStore.customFont[0].customFontColor = '#737373';
+                      store.pagesStore.customFont[0].darkMode = false;
+                      store.pagesStore.customFont[0].customHeaderColor = '#535353';
+                    })
+                  }
+                >
+                  <i className="now-ui-icons text_align-left"></i>
+                </div>
+              </div>
               <button
                 className="big-a btn btn-primary btn-block reset-button"
                 onClick={() =>
                   runInAction(() => {
                     store.pagesStore.customFont[0].customFontSize = 16;
                     store.pagesStore.customFont[0].customFontColor = '#737373';
+                    store.pagesStore.customFont[0].darkMode = false;
+                    store.pagesStore.customFont[0].customHeaderColor = '#535353';
                   })
                 }
               >

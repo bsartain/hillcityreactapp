@@ -18,6 +18,6 @@ export function MainStore() {
     },
     orderOfServiceData: [],
     isSpecialAnnouncement: false,
-    customFont: [{ customFontSize: 16, customFontColor: '#737373' }],
+    customFont: [{ customFontSize: 16, customFontColor: '#737373', customHeaderColor: '#535353', darkMode: false }],
   };
 }
