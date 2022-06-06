@@ -67,7 +67,7 @@ function IndexNavbar() {
               <span className="navbar-toggler-bar bottom-bar"></span>
             </button>
           </div>
-          <UncontrolledPopover placement="bottom" target="PopoverClick" trigger="click">
+          <UncontrolledPopover placement="bottom" target="PopoverClick" trigger="legacy">
             <PopoverBody>
               <h3 className="font-adjust-header">Adjust Font</h3>
               <div className="font-adjust-buttons">
