@@ -8,6 +8,7 @@ import { useObserver } from 'mobx-react';
 import SpecialAnnouncement from 'views/SpecialAnnouncement';
 import { HexColorPicker } from 'react-colorful';
 import { useHistory } from 'react-router';
+import ReactGA from 'react-ga';
 
 function IndexNavbar() {
   const history = useHistory();
@@ -17,7 +18,6 @@ function IndexNavbar() {
   const [logo, setLogo] = useState('https://hillcitysc.com/wp-content/uploads/2021/02/HC-masthead-logo-white.png');
 
   useEffect(() => {
-    console.log('EFFECT: ');
     const updateNavbarColor = () => {
       if (document.documentElement.scrollTop > 399 || document.body.scrollTop > 399) {
         setNavbarColor('navbar-white');
@@ -36,6 +36,13 @@ function IndexNavbar() {
   const adjustFontSize = (increase, store) => {
     runInAction(() => {
       increase === 'increment' ? (store.customFontSize = store.customFontSize + 1) : (store.customFontSize = store.customFontSize - 1);
+    });
+  };
+
+  const gaClickGiveButton = (param) => {
+    ReactGA.event({
+      category: 'Live Stream Page',
+      action: param,
     });
   };
 
@@ -71,10 +78,22 @@ function IndexNavbar() {
             <PopoverBody>
               <h3 className="font-adjust-header">Adjust Font</h3>
               <div className="font-adjust-buttons">
-                <div className="small-a" onClick={() => adjustFontSize('decrement', store.pagesStore.customFont[0])}>
+                <div
+                  className="small-a"
+                  onClick={() => {
+                    adjustFontSize('decrement', store.pagesStore.customFont[0]);
+                    gaClickGiveButton('User decreased Font Size');
+                  }}
+                >
                   A
                 </div>
-                <div className="big-a" onClick={() => adjustFontSize('increment', store.pagesStore.customFont[0])}>
+                <div
+                  className="big-a"
+                  onClick={() => {
+                    adjustFontSize('increment', store.pagesStore.customFont[0]);
+                    gaClickGiveButton('User increased Font Size');
+                  }}
+                >
                   A
                 </div>
               </div>
@@ -84,45 +103,49 @@ function IndexNavbar() {
                   runInAction(() => {
                     store.pagesStore.customFont[0].customFontColor = e;
                   });
+                  gaClickGiveButton('User changed text color');
                 }}
               />
               <div className="screen-mode-container">
                 <div
                   className="dark-mode-icon"
-                  onClick={() =>
+                  onClick={() => {
                     runInAction(() => {
                       store.pagesStore.customFont[0].darkMode = true;
                       store.pagesStore.customFont[0].customFontColor = '#cccccc';
                       store.pagesStore.customFont[0].customHeaderColor = '#cccccc';
-                    })
-                  }
+                    });
+                    gaClickGiveButton('User selected Dark Mode');
+                  }}
                 >
                   <i className="now-ui-icons text_align-left"></i>
                 </div>
                 <div
                   className="light-mode-icon"
-                  onClick={() =>
+                  onClick={() => {
                     runInAction(() => {
                       store.pagesStore.customFont[0].customFontSize = 16;
                       store.pagesStore.customFont[0].customFontColor = '#737373';
                       store.pagesStore.customFont[0].darkMode = false;
                       store.pagesStore.customFont[0].customHeaderColor = '#535353';
-                    })
-                  }
+                    });
+                    gaClickGiveButton('User selected Light Mode');
+                  }}
                 >
                   <i className="now-ui-icons text_align-left"></i>
                 </div>
               </div>
               <button
                 className="big-a btn btn-primary btn-block reset-button"
-                onClick={() =>
+                onClick={() => {
                   runInAction(() => {
                     store.pagesStore.customFont[0].customFontSize = 16;
                     store.pagesStore.customFont[0].customFontColor = '#737373';
                     store.pagesStore.customFont[0].darkMode = false;
                     store.pagesStore.customFont[0].customHeaderColor = '#535353';
-                  })
-                }
+                  });
+                  gaClickGiveButton('User reset font settings');
+                }}
               >
                 RESET
               </button>
