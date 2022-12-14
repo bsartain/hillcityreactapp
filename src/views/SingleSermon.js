@@ -11,6 +11,7 @@ import { esvApi } from 'utils/utils';
 import { RefTagger } from 'react-reftagger';
 import { useHistory } from 'react-router-dom';
 import Meta from 'components/Meta';
+import ReactGA from 'react-ga';
 
 function SingleSermon(props) {
   const store = useContext(StoreContext);
@@ -49,6 +50,17 @@ function SingleSermon(props) {
     runInAction(() => {
       store.pagesStore.mediaPlayerIsDisplayed = true;
       store.pagesStore.isPlaying = true;
+    });
+  };
+
+  const setGASermon = (singleSermon) => {
+    ReactGA.event({
+      category: 'Sermons',
+      action: 'User clicked play button on sermon',
+      sermonTitle: singleSermon.title,
+      sermonId: singleSermon.id,
+      sermonPreacher: singleSermon.preacher.length > 0 ? singleSermon.preacher[0].name : null,
+      sermonSeries: singleSermon.sermon_series.length > 0 ? singleSermon.sermon_series[0].name : null,
     });
   };
 
@@ -107,6 +119,7 @@ function SingleSermon(props) {
                     className="container single-sermon-play-button"
                     onClick={() => {
                       getMediaPlayer();
+                      setGASermon(singleSermon);
                     }}
                   >
                     <i className={'now-ui-icons media-1_button-play'}></i>
