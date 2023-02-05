@@ -112,7 +112,7 @@ function LiveStream() {
             .filter((page) => page.id === 8857)
             .map((page, index) => {
               const youtubeLink = page.acf.youtube_link;
-              const parsedLink = youtubeLink.substring(17);
+              const parsedLink = youtubeLink.substring(29);
               return (
                 <div key={index}>
                   <Meta title={page.title.rendered} description={page.content.rendered} image={page.better_featured_image.source_url} url={window.location.href} />
@@ -128,7 +128,7 @@ function LiveStream() {
                       <iframe
                         width="100%"
                         height="500"
-                        src={`https://www.youtube.com/embed/${parsedLink}`}
+                        src={`https://www.youtube.com/embed/${parsedLink}?feature=share`}
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
