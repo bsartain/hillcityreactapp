@@ -19,6 +19,9 @@ function SingleSermon(props) {
   const history = useHistory();
   const urlId = history.location.pathname.split('/').pop();
 
+  ReactGA.set({ page: history.location.pathname });
+  ReactGA.pageview(history.location.pathname);
+
   useEffect(() => {
     async function fetchSingleSermonData() {
       window.scrollTo(0, 0);
